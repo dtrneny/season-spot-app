@@ -10,10 +10,28 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # localization
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
 
 flutter:
+  generate: true
+
+  fonts:
+    - family: Manrope
+      fonts:
+        - asset: assets/fonts/manrope/Manrope-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/manrope/Manrope-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/manrope/Manrope-Bold.ttf
+          weight: 700
+
   uses-material-design: true
