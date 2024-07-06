@@ -1,4 +1,4 @@
-package com.example.season_spot
+package com.app.dtrneny.season_spot
 
 import io.flutter.embedding.android.FlutterActivity
 
