@@ -21,6 +21,7 @@ dependencies:
 
   # utilities
   flutter_native_splash: ^2.4.0
+  flutter_launcher_icons: "^0.13.1"
 
 dev_dependencies:
   flutter_test:
@@ -41,3 +42,8 @@ flutter:
           weight: 700
 
   uses-material-design: true
+
+scripts:
+  gen:
+    icon: "dart run flutter_launcher_icons -f launcher_icon.yaml"
+    splash: "dart run flutter_native_splash:create --path=native_splash.yaml"

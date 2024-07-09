@@ -2,7 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:season_spot/core/utils/localization.dart';
+import 'package:season_spot/core/localization/localization.dart';
 
 class TestingPage extends StatelessWidget {
   void testingFunction() async {
