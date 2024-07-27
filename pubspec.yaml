@@ -6,6 +6,11 @@ version: 0.1.0
 environment:
   sdk: '>=3.4.3 <4.0.0'
 
+scripts:
+  gen:
+    icon: "dart run flutter_launcher_icons -f launcher_icon.yaml"
+    splash: "dart run flutter_native_splash:create --path=native_splash.yaml"
+
 dependencies:
   flutter:
     sdk: flutter
@@ -18,10 +23,20 @@ dependencies:
   # firebase
   firebase_core: ^3.1.1
   cloud_firestore: ^5.0.2
+  firebase_auth: ^5.1.2
 
   # utilities
   flutter_native_splash: ^2.4.0
   flutter_launcher_icons: "^0.13.1"
+
+  # inversion of control
+  get_it: ^7.7.0
+
+  # streams
+  rxdart: ^0.28.0
+
+  # routing
+  go_router: ^14.2.0
 
 dev_dependencies:
   flutter_test:
@@ -42,8 +57,3 @@ flutter:
           weight: 700
 
   uses-material-design: true
-
-scripts:
-  gen:
-    icon: "dart run flutter_launcher_icons -f launcher_icon.yaml"
-    splash: "dart run flutter_native_splash:create --path=native_splash.yaml"
