@@ -1,7 +1,7 @@
 
 
-import 'package:season_spot/core/locator.dart';
-import 'package:season_spot/core/native_splash.dart';
+import 'package:season_spot/common/locator.dart';
+import 'package:season_spot/common/native_splash.dart';
 import 'package:season_spot/common/services/firebase/firebase_service.dart';
 
 Future<void> initDependecies() async {

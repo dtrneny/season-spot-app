@@ -1,3 +1,12 @@
 {
-  "helloWorld": "Ahoj Světe"
+  "welcomeToSeasonSpot": "Vítejte v Season Spot",
+  "signInToYourAccount": "Přihlaste se k vašemu účtu.",
+  "email": "E-mail",
+  "enterAnEmail": "Zadejte e-mail",
+  "password": "Heslo",
+  "enterAPassword": "Zadejte heslo",
+  "forgotPassword": "Zapomenuté heslo?",
+  "signIn": "Přihlásit se",
+  "dontHaveAnAccount": "Nemáte existující účet?",
+  "signUpYourself": "Zaregistrujte se"
 }

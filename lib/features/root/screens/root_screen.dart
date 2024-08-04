@@ -11,7 +11,7 @@ class RootScreen extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () => context.go('/sign-in'),
-          child: const Text("Sign in"),
+          child: const Text("Season spot"),
         ),
       )
     );

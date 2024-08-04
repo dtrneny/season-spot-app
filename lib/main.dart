@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:season_spot/themes/themes.dart';
-import 'package:season_spot/core/dependencies.dart';
+import 'package:season_spot/common/dependencies.dart';
 import 'package:season_spot/common/routing/router.dart';
+import 'package:season_spot/theming/themes/dark_theme.dart';
+import 'package:season_spot/theming/themes/light_theme.dart';
 
 void main() async {
   await initDependecies();
@@ -15,8 +16,8 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      theme: Themes.lightTheme,
-      darkTheme: Themes.darkTheme,
+      theme: lightTheme,
+      darkTheme: darkTheme,
       themeMode: ThemeMode.system,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
