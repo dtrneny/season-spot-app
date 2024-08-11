@@ -1,13 +1,7 @@
 
-import 'package:rxdart/subjects.dart';
+import 'package:season_spot/common/locator.dart';
+import 'package:season_spot/common/services/auth/auth_service.dart';
 
 class SignInController {
-  final _counterStreamController = BehaviorSubject<int>.seeded(0);
-
-  Stream<int> get counterStream => _counterStreamController.stream;
-
-  void addToCounter(int addition) {
-    final newValue = _counterStreamController.value + addition;
-    _counterStreamController.add(newValue);
-  }
+  final auth = getIt.get<AuthService>();
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:season_spot/common/widgets/inputs/clickable_text.dart';
 import 'package:season_spot/common/widgets/inputs/password_input.dart';
 import 'package:season_spot/common/widgets/inputs/text_input.dart';
@@ -113,7 +114,10 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
         const SizedBox(height: AppPadding.p28),
         PrimaryButton(
-          onPressed: () => _signInController.addToCounter(1),
+          onPressed: () async => {
+            await _signInController.auth.signIn(emailController.text, passwordController.text),
+            if (context.mounted) { context.go('/home') }
+          },
           child: Text(context.translate.signIn),
         ),
         const SizedBox(height: AppPadding.p40),
