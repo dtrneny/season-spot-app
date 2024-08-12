@@ -8,5 +8,7 @@
   "forgotPassword": "Zapomenuté heslo?",
   "signIn": "Přihlásit se",
   "dontHaveAnAccount": "Nemáte existující účet?",
-  "signUpYourself": "Zaregistrujte se"
+  "signUpYourself": "Zaregistrujte se",
+  "pleaseEnterAValidEmail": "Prosím, zadejte platný e-mail.",
+  "pleaseDoNotLeaveThisFieldEmpty": "Prosím, nenechávejte toto pole prázdné."
 }

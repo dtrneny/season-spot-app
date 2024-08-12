@@ -1,5 +1,7 @@
 
 import 'package:flutter/material.dart';
+import 'package:season_spot/common/validation/validation.dart';
+import 'package:season_spot/common/validation/validation_rule.dart';
 import 'package:season_spot/theming/utils/theme_extensions.dart';
 import 'package:season_spot/theming/utils/app_rounding.dart';
 import 'package:season_spot/theming/utils/app_typography_sizing.dart';
@@ -7,12 +9,15 @@ import 'package:season_spot/theming/utils/app_typography_sizing.dart';
 class TextInput extends StatelessWidget {
   final TextEditingController controller;
   final String? hint;
-  
+  final AutovalidateMode? validationMode;
+  final List<ValidationRule<String>>? rules;
   
   const TextInput({
     super.key,
     required this.controller,
     this.hint,
+    this.validationMode = AutovalidateMode.onUserInteraction,
+    this.rules,
   });
 
   OutlineInputBorder getBorder(Color color) {
@@ -30,9 +35,17 @@ class TextInput extends StatelessWidget {
     );
   }
 
+  TextStyle getErrorTextStyle(Color color) {
+    return TextStyle(
+      fontSize: AppTypographySizing.small,
+      color: color,
+      fontWeight: FontWeight.w400,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: controller,
       style: getTextStyle(context.theme.base.secondaryColor),
       decoration: InputDecoration(
@@ -42,7 +55,15 @@ class TextInput extends StatelessWidget {
         hintStyle: getTextStyle(context.theme.base.neutral600),
         enabledBorder: getBorder(context.theme.base.neutral200),
         focusedBorder: getBorder(context.theme.base.neutral250),
-      ),        
+        errorBorder: getBorder(context.theme.base.error600),
+        focusedErrorBorder: getBorder(context.theme.base.error600),
+        errorStyle: getErrorTextStyle(context.theme.base.error600),
+      ),
+      autovalidateMode: validationMode,
+      validator: Validation.apply(
+        context,
+        rules ?? []
+      ),    
     );
   }
 }

@@ -8,5 +8,7 @@
   "forgotPassword": "Forgot password?",
   "signIn": "Sign In",
   "dontHaveAnAccount": "Don’t have an account?",
-  "signUpYourself": "Sign up"
+  "signUpYourself": "Sign up",
+  "pleaseEnterAValidEmail": "Please enter a valid email.",
+  "pleaseDoNotLeaveThisFieldEmpty": "Please do not leave this field empty."
 }
