@@ -10,6 +10,10 @@ class BaseThemeExtension extends ThemeExtension<BaseThemeExtension> {
   final Color neutral250;
   final Color neutral600;
   final Color error600;
+  final Color warning600;
+  final Color success600;
+  final Color info600;
+
 
   BaseThemeExtension({
     this.primaryColor = AppColors.primaryColor,
@@ -20,6 +24,10 @@ class BaseThemeExtension extends ThemeExtension<BaseThemeExtension> {
     this.neutral250 = AppColors.neutral250,
     this.neutral600 = AppColors.neutral600,
     this.error600 = AppColors.error600,
+    this.warning600 = AppColors.warning600,
+    this.success600 = AppColors.success600,
+    this.info600 = AppColors.info600,
+
   });
 
   @override
@@ -32,6 +40,9 @@ class BaseThemeExtension extends ThemeExtension<BaseThemeExtension> {
     Color? neutral250,
     Color? neutral600,
     Color? error600,
+    Color? warning600,
+    Color? success600,
+    Color? info600,
   }) {
     return BaseThemeExtension(
       primaryColor: primaryColor ?? this.primaryColor,
@@ -42,6 +53,9 @@ class BaseThemeExtension extends ThemeExtension<BaseThemeExtension> {
       neutral250: neutral250 ?? this.neutral250,
       neutral600: neutral600 ?? this.neutral600,
       error600: error600 ?? this.error600,
+      warning600: warning600 ?? this.warning600,
+      success600: success600 ?? this.success600,
+      info600: info600 ?? this.info600,
     );
   }
 
@@ -60,6 +74,9 @@ class BaseThemeExtension extends ThemeExtension<BaseThemeExtension> {
       neutral250: Color.lerp(neutral250, other.neutral250, t)!,
       neutral600: Color.lerp(neutral600, other.neutral600, t)!,
       error600: Color.lerp(error600, other.error600, t)!,
+      warning600: Color.lerp(warning600, other.warning600, t)!,
+      success600: Color.lerp(success600, other.success600, t)!,
+      info600: Color.lerp(info600, other.info600, t)!,
     );
   }
 }

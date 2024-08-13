@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:season_spot/common/error_handling/app_error.dart';
+import 'package:season_spot/common/error_handling/error_presentation_enum.dart';
+import 'package:season_spot/common/helpers/index.dart';
+import 'package:season_spot/common/toast/toast_type_enum.dart';
+import 'package:season_spot/common/validation/rules/error_message_rule.dart';
+import 'package:season_spot/common/validation/rules/email_validation_rule.dart';
 import 'package:season_spot/common/widgets/inputs/clickable_text.dart';
 import 'package:season_spot/common/widgets/inputs/password_input.dart';
 import 'package:season_spot/common/widgets/inputs/text_input.dart';
@@ -24,6 +30,35 @@ class _SignInScreenState extends State<SignInScreen> {
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  String? emailErrorMessage;
+
+  Future<void> signIn() async {
+    setState(() => emailErrorMessage = null);
+    final result = await _signInController.auth.signIn(emailController.text, passwordController.text);
+
+    final _ = switch (result) {
+      Success() => handleSignInSuccess(),
+      Failure(:final exception) => handleSignInFailure(exception),
+    };
+  }
+
+  void handleSignInSuccess() {
+    context.go('/home');
+  }
+
+  void handleSignInFailure(AppError error) {
+    if (error.presentation == ErrorPresentation.toast) {
+      _signInController.toast.showToast(error.getLocalizedMessage(context), type: ToastType.error);
+      return;
+    }
+    setState(() => emailErrorMessage = error.getLocalizedMessage(context));
+  }
+
+  void clearSignInErrorOnChange() {
+    if (emailErrorMessage == null) { return; }
+    setState(() => emailErrorMessage = null);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +125,12 @@ class _SignInScreenState extends State<SignInScreen> {
           label: context.translate.email,
           child: TextInput(
             controller: emailController,
+            onChanged: (_) => clearSignInErrorOnChange(),
             hint: context.translate.enterAnEmail,
+            rules: [
+              EmailValidationRule(),
+              ErrorMessageRule(message: emailErrorMessage),
+            ],
           ),
         ),
         const SizedBox(height: AppPadding.p20),
@@ -114,10 +154,7 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
         const SizedBox(height: AppPadding.p28),
         PrimaryButton(
-          onPressed: () async => {
-            await _signInController.auth.signIn(emailController.text, passwordController.text),
-            if (context.mounted) { context.go('/home') }
-          },
+          onPressed: () async => await signIn(),
           child: Text(context.translate.signIn),
         ),
         const SizedBox(height: AppPadding.p40),

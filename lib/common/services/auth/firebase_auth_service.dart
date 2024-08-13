@@ -1,5 +1,9 @@
 
-import 'package:season_spot/common/models/user/auth_user.dart';
+import 'package:season_spot/common/error_handling/app_error.dart';
+import 'package:season_spot/common/error_handling/errors/email_in_use_error.dart';
+import 'package:season_spot/common/error_handling/errors/index.dart';
+import 'package:season_spot/common/helpers/index.dart';
+import 'package:season_spot/common/models/app_user/app_user.dart';
 import 'package:season_spot/common/services/auth/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -9,13 +13,26 @@ class FirebaseAuthService implements AuthService {
   const FirebaseAuthService(this._firebaseAuth);
 
   @override
-  Future<AuthUser?> signIn(String email, String password) async {
-    final userCredentials = await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
-    final user = userCredentials.user;
+  Future<Result<AppUser, AppError>> signIn(String email, String password) async {
+    try {
+      final userCredentials = await _firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      final user = userCredentials.user;
 
-    if (user == null || user.email == null) { return null; }
+      if (user == null) { return Failure(AppError()); }
 
-    return AuthUser.fromUser(user);
+      return Success(AppUser.fromUser(user));
+
+    } on Exception catch(e) {
+      if (e is! FirebaseAuthException) { return Failure(AppError()); }
+
+      switch (e.code) {
+        case "invalid-credential": return Failure(InvalidCredentialsError());
+        default: return Failure(AppError());
+      }      
+    }
   }
 
   @override
@@ -25,20 +42,33 @@ class FirebaseAuthService implements AuthService {
   }
 
   @override
-  Future<AuthUser?> signUp(String email, String password) async {
-    final userCredentials = await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
-    final user = userCredentials.user;
+  Future<Result<AppUser, AppError>> signUp(String email, String password) async {
+    try {
+      final userCredentials = await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      final user = userCredentials.user;
 
-    if (user == null || user.email == null) { return null; }
+      if (user == null) { return Failure(AppError()); }
 
-    return AuthUser.fromUser(user);
+      return Success(AppUser.fromUser(user));
+
+    } on Exception catch(e) {
+      if (e is! FirebaseAuthException) { return Failure(AppError()); }
+
+      switch (e.code) {
+        case "email-already-exists": return Failure(EmailInUseError());
+        default: return Failure(AppError());
+      }      
+    }
   }
 
   @override
-  Future<AuthUser?> getCurrentUser() async {
+  Future<AppUser?> getCurrentUser() async {
     final user = _firebaseAuth.currentUser;
     if (user == null || user.email == null) { return null; }
 
-    return AuthUser.fromUser(user);
+    return AppUser.fromUser(user);
   }
 }

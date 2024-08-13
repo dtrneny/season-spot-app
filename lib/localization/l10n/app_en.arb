@@ -10,5 +10,8 @@
   "dontHaveAnAccount": "Don’t have an account?",
   "signUpYourself": "Sign up",
   "pleaseEnterAValidEmail": "Please enter a valid email.",
-  "pleaseDoNotLeaveThisFieldEmpty": "Please do not leave this field empty."
+  "pleaseDoNotLeaveThisFieldEmpty": "Please do not leave this field empty.",
+  "anErrorOccurredPleaseTryAgainLater": "An error occurred. Please try again later.",
+  "invalidCredentialsPleaseTryAgain": "Invalid credentials. Please try again.",
+  "thisEmailAlreadyExistsPleaseTryADifferentOne": "This email already exists. Please try a different one."
 }

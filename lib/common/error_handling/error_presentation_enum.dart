@@ -1,0 +1,4 @@
+
+enum ErrorPresentation {
+  toast, text
+}

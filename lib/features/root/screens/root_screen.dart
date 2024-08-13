@@ -9,10 +9,15 @@ class RootScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: ElevatedButton(
-          onPressed: () => context.go('/sign-in'),
-          child: const Text("Season spot"),
-        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () => context.go('/sign-in'),
+              child: const Text("Season spot"),
+            ),
+          ],
+        )
       )
     );
   }

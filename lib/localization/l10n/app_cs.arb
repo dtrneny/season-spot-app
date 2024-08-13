@@ -10,5 +10,8 @@
   "dontHaveAnAccount": "Nemáte existující účet?",
   "signUpYourself": "Zaregistrujte se",
   "pleaseEnterAValidEmail": "Prosím, zadejte platný e-mail.",
-  "pleaseDoNotLeaveThisFieldEmpty": "Prosím, nenechávejte toto pole prázdné."
+  "pleaseDoNotLeaveThisFieldEmpty": "Prosím, nenechávejte toto pole prázdné.",
+  "anErrorOccurredPleaseTryAgainLater": "Došlo k chybě. Zkuste to prosím znovu později.",
+  "invalidCredentialsPleaseTryAgain": "Neplatné údaje. Zkuste to prosím znovu.",
+  "thisEmailAlreadyExistsPleaseTryADifferentOne": "Tento e-mail již existuje. Prosím, zkuste jiný."
 }

@@ -75,6 +75,7 @@ class _PasswordInputState extends State<PasswordInput> {
           ),
           onPressed: () => setState(() => isTextObscured = !isTextObscured), 
         ),
+        errorMaxLines: 2,
       ),
       autovalidateMode: widget.validationMode,
       validator: Validation.apply(

@@ -29,7 +29,8 @@ class PrimaryButton extends StatelessWidget {
           fontFamily: 'Poppins',
           fontSize: AppTypographySizing.base,
           fontWeight: FontWeight.w500,
-        )
+        ),
+        elevation: 0,
       ),
       child: child,
     );

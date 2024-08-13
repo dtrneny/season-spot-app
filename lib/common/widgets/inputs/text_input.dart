@@ -11,6 +11,7 @@ class TextInput extends StatelessWidget {
   final String? hint;
   final AutovalidateMode? validationMode;
   final List<ValidationRule<String>>? rules;
+  final Function(String)? onChanged;
   
   const TextInput({
     super.key,
@@ -18,6 +19,7 @@ class TextInput extends StatelessWidget {
     this.hint,
     this.validationMode = AutovalidateMode.onUserInteraction,
     this.rules,
+    this.onChanged,
   });
 
   OutlineInputBorder getBorder(Color color) {
@@ -47,6 +49,9 @@ class TextInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      onChanged: (value) => {
+        if (onChanged != null) { onChanged!(value), }
+      },
       style: getTextStyle(context.theme.base.secondaryColor),
       decoration: InputDecoration(
         hintText: hint,
@@ -58,6 +63,7 @@ class TextInput extends StatelessWidget {
         errorBorder: getBorder(context.theme.base.error600),
         focusedErrorBorder: getBorder(context.theme.base.error600),
         errorStyle: getErrorTextStyle(context.theme.base.error600),
+        errorMaxLines: 2,
       ),
       autovalidateMode: validationMode,
       validator: Validation.apply(
