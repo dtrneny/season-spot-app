@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:season_spot/theming/utils/app_colors.dart';
-import 'package:season_spot/theming/base_theme_extension.dart';
+import 'package:season_spot/theming/index.dart';
 
 final ThemeData darkTheme = ThemeData(
   primaryColor: AppColors.primaryColor,

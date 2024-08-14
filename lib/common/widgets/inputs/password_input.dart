@@ -1,12 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:season_spot/common/validation/validation.dart';
-import 'package:season_spot/common/validation/validation_rule.dart';
-import 'package:season_spot/theming/utils/app_icons.dart';
-import 'package:season_spot/theming/utils/theme_extensions.dart';
-import 'package:season_spot/theming/utils/app_rounding.dart';
-import 'package:season_spot/theming/utils/app_typography_sizing.dart';
+import 'package:season_spot/common/validation/index.dart';
+import 'package:season_spot/theming/index.dart';
 
 class PasswordInput extends StatefulWidget {
   final TextEditingController controller;

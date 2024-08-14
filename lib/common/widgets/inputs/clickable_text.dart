@@ -1,8 +1,7 @@
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:season_spot/theming/utils/theme_extensions.dart';
-import 'package:season_spot/theming/utils/app_typography_sizing.dart';
+import 'package:season_spot/theming/index.dart';
 
 class ClickableText extends StatelessWidget {
   final String text;

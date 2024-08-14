@@ -1,7 +1,6 @@
 
 import 'package:rxdart/subjects.dart';
-import 'package:season_spot/common/toast/toast_message.dart';
-import 'package:season_spot/common/toast/toast_type_enum.dart';
+import 'package:season_spot/common/toast/index.dart';
 
 class ToastController {
   final _snackBarStreamController = BehaviorSubject<ToastMessage>();

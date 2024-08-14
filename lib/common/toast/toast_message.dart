@@ -1,5 +1,6 @@
 
-import 'package:season_spot/common/toast/toast_type_enum.dart';
+
+import 'package:season_spot/common/toast/index.dart';
 
 class ToastMessage {
   final String message;

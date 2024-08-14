@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:season_spot/theming/utils/app_colors.dart';
+import 'package:season_spot/theming/index.dart';
 
 class BaseThemeExtension extends ThemeExtension<BaseThemeExtension> {
   final Color primaryColor;
