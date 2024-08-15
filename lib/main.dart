@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:season_spot/common/dependencies.dart';
-import 'package:season_spot/common/routing/router.dart';
-import 'package:season_spot/common/widgets/misc/toast_wrapper.dart';
-import 'package:season_spot/theming/themes/dark_theme.dart';
-import 'package:season_spot/theming/themes/light_theme.dart';
+import 'package:season_spot/config/dependencies.dart';
+import 'package:season_spot/config/routing/router.dart';
+import 'package:season_spot/shared/widgets/misc/toast_wrapper.dart';
+import 'package:season_spot/core/theming/index.dart';
 
 void main() async {
   await initDependecies();
