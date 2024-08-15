@@ -23,7 +23,7 @@ class ClickableText extends StatelessWidget {
           color: context.theme.base.primaryColor,
         ),
         recognizer: TapGestureRecognizer()
-          ..onTap = () => onPressed,
+          ..onTap = onPressed,
       )
     );
   }

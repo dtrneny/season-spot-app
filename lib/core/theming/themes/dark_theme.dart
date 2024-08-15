@@ -12,5 +12,8 @@ final ThemeData darkTheme = ThemeData(
   textSelectionTheme: const TextSelectionThemeData(
     cursorColor: AppColors.secondaryColor
   ),
+  appBarTheme: const AppBarTheme(
+    backgroundColor: AppColors.neutral100,
+  ),
 );
 

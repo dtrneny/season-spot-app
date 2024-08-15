@@ -12,4 +12,7 @@ final lightTheme = ThemeData(
   textSelectionTheme: const TextSelectionThemeData(
     cursorColor: AppColors.secondaryColor
   ),
+  appBarTheme: const AppBarTheme(
+    backgroundColor: AppColors.neutral100,
+  ),
 );

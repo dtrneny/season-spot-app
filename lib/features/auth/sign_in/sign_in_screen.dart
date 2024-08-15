@@ -9,9 +9,10 @@ import 'package:season_spot/core/validation/index.dart';
 import 'package:season_spot/shared/widgets/inputs/clickable_text.dart';
 import 'package:season_spot/shared/widgets/inputs/password_input.dart';
 import 'package:season_spot/shared/widgets/inputs/text_input.dart';
+import 'package:season_spot/shared/widgets/misc/base_screen.dart';
 import 'package:season_spot/shared/widgets/misc/form_item.dart';
 import 'package:season_spot/shared/widgets/inputs/primary_button.dart';
-import 'package:season_spot/features/auth/controllers/sign_in_controller.dart';
+import 'package:season_spot/features/auth/sign_in/sign_in_controller.dart';
 import 'package:season_spot/core/localization/localization.dart';
 import 'package:season_spot/core/theming/index.dart';
 
@@ -59,22 +60,19 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold( 
-      body: Padding( 
-        padding: const EdgeInsets.symmetric(horizontal: 20.0), 
-        child: Center( 
-          child: SingleChildScrollView( 
-            child: Column( 
-              mainAxisAlignment: MainAxisAlignment.start, 
-              mainAxisSize: MainAxisSize.max, 
-              children: [
-                _buildHeader(),
-                const SizedBox(height: AppPadding.p40),
-                _buildForm(),
-                const SizedBox(height: 10.0),
-                _buildActions(context),
-              ],
-            ), 
+    return BaseScreen(
+      child: Center(
+        child: SingleChildScrollView( 
+          child: Column( 
+            mainAxisAlignment: MainAxisAlignment.start, 
+            mainAxisSize: MainAxisSize.max, 
+            children: [
+              _buildHeader(),
+              const SizedBox(height: AppPadding.p40),
+              _buildForm(),
+              const SizedBox(height: 10.0),
+              _buildActions(context),
+            ],
           ), 
         ), 
       ), 
@@ -149,7 +147,7 @@ class _SignInScreenState extends State<SignInScreen> {
           alignment: Alignment.centerRight,
           child: ClickableText(text: context.translate.forgotPassword, onPressed: () {}),
         ),
-        const SizedBox(height: AppPadding.p28),
+        const SizedBox(height: AppPadding.p40),
         PrimaryButton(
           onPressed: () async => await signIn(),
           child: Text(context.translate.signIn),
@@ -166,7 +164,10 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
             ),
             const SizedBox(width: 3.0),
-            ClickableText(text: context.translate.signUpYourself, onPressed: () {})
+            ClickableText(
+              text: context.translate.signUpYourself,
+              onPressed: () => context.push('/sign-up')
+            )
           ],
         )
       ],

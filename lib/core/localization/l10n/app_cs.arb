@@ -13,5 +13,14 @@
   "pleaseDoNotLeaveThisFieldEmpty": "Prosím, nenechávejte toto pole prázdné.",
   "anErrorOccurredPleaseTryAgainLater": "Došlo k chybě. Zkuste to prosím znovu později.",
   "invalidCredentialsPleaseTryAgain": "Neplatné údaje. Zkuste to prosím znovu.",
-  "thisEmailAlreadyExistsPleaseTryADifferentOne": "Tento e-mail již existuje. Prosím, zkuste jiný."
+  "thisEmailAlreadyExistsPleaseTryADifferentOne": "Tento e-mail již existuje. Prosím, zkuste jiný.",
+  "signUp": "Nový účet",
+  "firstname": "Křestní jméno",
+  "firstnamePlaceholder": "Jan",
+  "lastnamePlaceholder": "Novák",
+  "emailPlaceholder": "jan.novak@domena.cz",
+  "lastname": "Příjmení",
+  "confirmationPassword": "Potvrzení hesla",
+  "confirmPassword": "Potvrdit heslo",
+  "createAnAccount": "Vytvořit účet"
 }

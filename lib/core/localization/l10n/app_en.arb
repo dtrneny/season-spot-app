@@ -13,5 +13,14 @@
   "pleaseDoNotLeaveThisFieldEmpty": "Please do not leave this field empty.",
   "anErrorOccurredPleaseTryAgainLater": "An error occurred. Please try again later.",
   "invalidCredentialsPleaseTryAgain": "Invalid credentials. Please try again.",
-  "thisEmailAlreadyExistsPleaseTryADifferentOne": "This email already exists. Please try a different one."
+  "thisEmailAlreadyExistsPleaseTryADifferentOne": "This email already exists. Please try a different one.",
+  "signUp": "Sign Up",
+  "firstname": "Firstname",
+  "firstnamePlaceholder": "John",
+  "lastnamePlaceholder": "Doe",
+  "emailPlaceholder": "john.doe@domain.com",
+  "lastname": "Lastname",
+  "confirmationPassword": "Confirmation Password",
+  "confirmPassword": "Confirm password",
+  "createAnAccount": "Create an account"
 }
