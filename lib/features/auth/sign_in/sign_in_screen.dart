@@ -26,13 +26,22 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   final SignInController _signInController = SignInController();
 
+  final _formKey = GlobalKey<FormState>();
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   String? emailErrorMessage;
+  bool shouldSkipValidation = false;
 
   Future<void> signIn() async {
-    setState(() => emailErrorMessage = null);
+    if (emailErrorMessage != null) {
+      setState(() { emailErrorMessage = null; shouldSkipValidation = true; });
+    }
+    if (!shouldSkipValidation && !_formKey.currentState!.validate()) { return; }    
+
+    shouldSkipValidation = false;
+    
     final result = await _signInController.auth.signIn(emailController.text, passwordController.text);
 
     final _ = switch (result) {
@@ -56,6 +65,13 @@ class _SignInScreenState extends State<SignInScreen> {
   void clearSignInErrorOnChange() {
     if (emailErrorMessage == null) { return; }
     setState(() => emailErrorMessage = null);
+  }
+
+  void resetFormState() {
+    if (emailErrorMessage != null) {
+      setState(() => emailErrorMessage = null);
+    }
+    _formKey.currentState!.reset();
   }
 
   @override
@@ -114,29 +130,36 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   Widget _buildForm() {
-    return Column(
-      children: [
-        FormItem(
-          label: context.translate.email,
-          child: TextInput(
-            controller: emailController,
-            onChanged: (_) => clearSignInErrorOnChange(),
-            hint: context.translate.enterAnEmail,
-            rules: [
-              EmailValidationRule(),
-              ErrorMessageRule(message: emailErrorMessage),
-            ],
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          FormItem(
+            label: context.translate.email,
+            child: TextInput(
+              controller: emailController,
+              onChanged: (_) => clearSignInErrorOnChange(),
+              hint: context.translate.enterAnEmail,
+              rules: [
+                EmailValidationRule(),
+                RequiredValidationRule(),
+                ErrorMessageRule(message: emailErrorMessage),
+              ],
+            ),
           ),
-        ),
-        const SizedBox(height: AppPadding.p20),
-        FormItem(
-          label: context.translate.password,
-          child: PasswordInput(
-            controller: passwordController,
-            hint: context.translate.enterAPassword,
+          const SizedBox(height: AppPadding.p20),
+          FormItem(
+            label: context.translate.password,
+            child: PasswordInput(
+              controller: passwordController,
+              hint: context.translate.enterAPassword,
+              rules: [
+                RequiredValidationRule(),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
