@@ -7,7 +7,6 @@ import 'package:season_spot/core/error_handling/errors/index.dart';
 import 'package:season_spot/core/helpers/index.dart';
 import 'package:season_spot/core/localization/localization.dart';
 import 'package:season_spot/core/theming/index.dart';
-import 'package:season_spot/core/validation/rules/equality_validation_rule.dart';
 import 'package:season_spot/core/validation/rules/index.dart';
 import 'package:season_spot/features/auth/sign_up/sign_up_controller.dart';
 import 'package:season_spot/shared/models/index.dart';

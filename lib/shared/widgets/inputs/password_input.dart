@@ -23,16 +23,16 @@ class PasswordInput extends StatefulWidget {
 }
 
 class _PasswordInputState extends State<PasswordInput> {
-  bool isTextObscured = false;
+  bool _isTextObscured = false;
 
-  OutlineInputBorder getBorder(Color color) {
+  OutlineInputBorder _getBorder(Color color) {
     return OutlineInputBorder(
       borderSide: BorderSide(color: color, width: 1),
       borderRadius: BorderRadius.circular(AppRounding.base),
     );
   }
 
-  TextStyle getTextStyle(Color color) {
+  TextStyle _getTextStyle(Color color) {
     return TextStyle(
       fontSize: AppTypographySizing.base,
       color: color,
@@ -40,7 +40,7 @@ class _PasswordInputState extends State<PasswordInput> {
     );
   }
 
-  TextStyle getErrorTextStyle(Color color) {
+  TextStyle _getErrorTextStyle(Color color) {
     return TextStyle(
       fontSize: AppTypographySizing.small,
       color: color,
@@ -52,24 +52,24 @@ class _PasswordInputState extends State<PasswordInput> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
-      style: getTextStyle(context.theme.base.secondaryColor),
-      obscureText: !isTextObscured,
+      style: _getTextStyle(context.theme.base.secondaryColor),
+      obscureText: !_isTextObscured,
       decoration: InputDecoration(
         hintText: widget.hint,
         filled: true,
         fillColor: context.theme.base.neutral200,
-        hintStyle: getTextStyle(context.theme.base.neutral600),
-        enabledBorder: getBorder(context.theme.base.neutral200),
-        focusedBorder: getBorder(context.theme.base.neutral250),
-        errorBorder: getBorder(context.theme.base.error600),
-        focusedErrorBorder: getBorder(context.theme.base.error600),
-        errorStyle: getErrorTextStyle(context.theme.base.error600),
+        hintStyle: _getTextStyle(context.theme.base.neutral600),
+        enabledBorder: _getBorder(context.theme.base.neutral200),
+        focusedBorder: _getBorder(context.theme.base.neutral250),
+        errorBorder: _getBorder(context.theme.base.error600),
+        focusedErrorBorder: _getBorder(context.theme.base.error600),
+        errorStyle: _getErrorTextStyle(context.theme.base.error600),
         suffixIcon: IconButton( 
           icon: SvgPicture.asset(
-            isTextObscured ? AppIcons.eyeSlash : AppIcons.eye,
+            _isTextObscured ? AppIcons.eyeSlash : AppIcons.eye,
             colorFilter: ColorFilter.mode(context.theme.base.neutral600, BlendMode.srcIn),
           ),
-          onPressed: () => setState(() => isTextObscured = !isTextObscured), 
+          onPressed: () => setState(() => _isTextObscured = !_isTextObscured), 
         ),
         errorMaxLines: 2,
       ),
