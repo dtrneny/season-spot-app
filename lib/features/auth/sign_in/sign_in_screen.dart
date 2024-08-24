@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:season_spot/core/error_handling/app_error.dart';
-import 'package:season_spot/core/error_handling/error_presentation_enum.dart';
+import 'package:season_spot/core/error_handling/errors/index.dart';
 import 'package:season_spot/core/helpers/index.dart';
 import 'package:season_spot/shared/toast/index.dart';
 import 'package:season_spot/core/validation/index.dart';
@@ -28,21 +28,21 @@ class _SignInScreenState extends State<SignInScreen> {
 
   final _formKey = GlobalKey<FormState>();
 
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
-  String? emailErrorMessage;
-  bool shouldSkipValidation = false;
+  String? _emailErrorMessage;
+  bool _shouldSkipValidation = false;
 
   Future<void> signIn() async {
-    if (emailErrorMessage != null) {
-      setState(() { emailErrorMessage = null; shouldSkipValidation = true; });
+    if (_emailErrorMessage != null) {
+      setState(() { _emailErrorMessage = null; _shouldSkipValidation = true; });
     }
-    if (!shouldSkipValidation && !_formKey.currentState!.validate()) { return; }    
+    if (!_shouldSkipValidation && !_formKey.currentState!.validate()) { return; }    
 
-    shouldSkipValidation = false;
+    _shouldSkipValidation = false;
     
-    final result = await _signInController.auth.signIn(emailController.text, passwordController.text);
+    final result = await _signInController.signIn(_emailController.text, _passwordController.text);
 
     final _ = switch (result) {
       Success() => handleSignInSuccess(),
@@ -55,21 +55,22 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   void handleSignInFailure(AppError error) {
-    if (error.presentation == ErrorPresentation.toast) {
-      _signInController.toast.showToast(error.getLocalizedMessage(context), type: ToastType.error);
+    if (error is InvalidCredentialsError) {
+      setState(() => _emailErrorMessage = error.getLocalizedMessage(context));
       return;
     }
-    setState(() => emailErrorMessage = error.getLocalizedMessage(context));
+
+    _signInController.toast.showToast(error.getLocalizedMessage(context), type: ToastType.error);
   }
 
   void clearSignInErrorOnChange() {
-    if (emailErrorMessage == null) { return; }
-    setState(() => emailErrorMessage = null);
+    if (_emailErrorMessage == null) { return; }
+    setState(() => _emailErrorMessage = null);
   }
 
   void resetFormState() {
-    if (emailErrorMessage != null) {
-      setState(() => emailErrorMessage = null);
+    if (_emailErrorMessage != null) {
+      setState(() => _emailErrorMessage = null);
     }
     _formKey.currentState!.reset();
   }
@@ -137,13 +138,13 @@ class _SignInScreenState extends State<SignInScreen> {
           FormItem(
             label: context.translate.email,
             child: TextInput(
-              controller: emailController,
+              controller: _emailController,
               onChanged: (_) => clearSignInErrorOnChange(),
               hint: context.translate.enterAnEmail,
               rules: [
-                EmailValidationRule(),
                 RequiredValidationRule(),
-                ErrorMessageRule(message: emailErrorMessage),
+                EmailValidationRule(),
+                ErrorMessageRule(message: _emailErrorMessage),
               ],
             ),
           ),
@@ -151,7 +152,7 @@ class _SignInScreenState extends State<SignInScreen> {
           FormItem(
             label: context.translate.password,
             child: PasswordInput(
-              controller: passwordController,
+              controller: _passwordController,
               hint: context.translate.enterAPassword,
               rules: [
                 RequiredValidationRule(),
