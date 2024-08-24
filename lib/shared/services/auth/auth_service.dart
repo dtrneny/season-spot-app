@@ -6,6 +6,6 @@ import 'package:season_spot/shared/models/index.dart';
 abstract class AuthService {
   Future<Result<AppUser, AppError>> signIn(String email, String password);
   Future<void> signOut();
-  Future<Result<AppUser, AppError>> signUp(String email, String password);
+  Future<AppUser?> signUp(String email, String password);
   Future<AppUser?> getCurrentUser();
 }

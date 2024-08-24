@@ -41,26 +41,16 @@ class FirebaseAuthService implements AuthService {
   }
 
   @override
-  Future<Result<AppUser, AppError>> signUp(String email, String password) async {
-    try {
-      final userCredentials = await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      final user = userCredentials.user;
+  Future<AppUser?> signUp(String email, String password) async {
+    final userCredentials = await _firebaseAuth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    final user = userCredentials.user;
 
-      if (user == null) { return Failure(AppError()); }
+    if (user == null) { return null; }
 
-      return Success(AppUser.fromUser(user));
-
-    } on Exception catch(e) {
-      if (e is! FirebaseAuthException) { return Failure(AppError()); }
-
-      switch (e.code) {
-        case "email-already-exists": return Failure(EmailInUseError());
-        default: return Failure(AppError());
-      }      
-    }
+    return AppUser.fromUser(user);
   }
 
   @override

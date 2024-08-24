@@ -22,5 +22,6 @@
   "lastname": "Příjmení",
   "confirmationPassword": "Potvrzení hesla",
   "confirmPassword": "Potvrdit heslo",
-  "createAnAccount": "Vytvořit účet"
+  "createAnAccount": "Vytvořit účet",
+  "passwordsHaveToMatch": "Hesla se musí shodovat."
 }

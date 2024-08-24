@@ -2,9 +2,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:season_spot/core/error_handling/app_error.dart';
+import 'package:season_spot/core/error_handling/errors/index.dart';
+import 'package:season_spot/core/helpers/index.dart';
 import 'package:season_spot/core/localization/localization.dart';
 import 'package:season_spot/core/theming/index.dart';
-import 'package:season_spot/core/validation/rules/email_validation_rule.dart';
+import 'package:season_spot/core/validation/rules/equality_validation_rule.dart';
+import 'package:season_spot/core/validation/rules/index.dart';
+import 'package:season_spot/features/auth/sign_up/sign_up_controller.dart';
+import 'package:season_spot/shared/models/index.dart';
+import 'package:season_spot/shared/toast/toast_type_enum.dart';
 import 'package:season_spot/shared/widgets/index.dart';
 import 'package:season_spot/shared/widgets/misc/base_screen.dart';
 import 'package:season_spot/shared/widgets/misc/screen_content.dart';
@@ -18,12 +25,54 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final SignUpController _signUpController = SignUpController();
 
-  final fisrtnameController = TextEditingController();
-  final lastnameController = TextEditingController();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final confPasswordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
+  final _firstnameController = TextEditingController();
+  final _lastnameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confPasswordController = TextEditingController();
+
+  String? _emailErrorMessage;
+  bool _shouldSkipValidation = false;
+
+  Future<void> signUp() async {
+    if (_emailErrorMessage != null) {
+      setState(() { _emailErrorMessage = null; _shouldSkipValidation = true; });
+    }
+    if (!_shouldSkipValidation && !_formKey.currentState!.validate()) { return; }    
+
+    _shouldSkipValidation = false;
+
+    final result = await _signUpController.signUp(
+      UserAccount(
+        firstname: _firstnameController.text,
+        lastname: _lastnameController.text,
+        email: _emailController.text,
+      ),
+      _passwordController.text
+    );
+
+    final _ = switch (result) {
+      Success() => handleSignUpSuccess(),
+      Failure(:final exception) => handleSignUpFailure(exception),
+    };
+  }
+
+  void handleSignUpSuccess() {
+    context.pop();
+  }
+
+  void handleSignUpFailure(AppError error) {
+    if (error is EmailInUseError) {
+      setState(() => _emailErrorMessage = error.getLocalizedMessage(context));
+      return;
+    }
+
+    _signUpController.toast.showToast(error.getLocalizedMessage(context), type: ToastType.error);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +96,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               _buildForm(),
               const SizedBox(height: AppPadding.p60),
               _buildActions(),
+              const SizedBox(height: AppPadding.p60),
             ],
           ), 
         )
@@ -55,57 +105,78 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Widget _buildForm() {
-    return Column(
-      children: [
-        FormItem(
-          label: context.translate.firstname,
-          child: TextInput(
-            controller: fisrtnameController,
-            hint: context.translate.firstnamePlaceholder,
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          FormItem(
+            label: context.translate.firstname,
+            child: TextInput(
+              controller: _firstnameController,
+              hint: context.translate.firstnamePlaceholder,
+              rules: [
+                RequiredValidationRule(),
+              ],
+            ),
           ),
-        ),
-        const SizedBox(height: AppPadding.p20),
-        FormItem(
-          label: context.translate.lastname,
-          child: TextInput(
-            controller: lastnameController,
-            hint: context.translate.lastnamePlaceholder,
+          const SizedBox(height: AppPadding.p20),
+          FormItem(
+            label: context.translate.lastname,
+            child: TextInput(
+              controller: _lastnameController,
+              hint: context.translate.lastnamePlaceholder,
+              rules: [
+                RequiredValidationRule(),
+              ],
+            ),
           ),
-        ),
-        const SizedBox(height: AppPadding.p20),
-        FormItem(
-          label: context.translate.email,
-          child: TextInput(
-            controller: emailController,
-            hint: context.translate.emailPlaceholder,
-            rules: [
-              EmailValidationRule(),
-            ],
+          const SizedBox(height: AppPadding.p20),
+          FormItem(
+            label: context.translate.email,
+            child: TextInput(
+              controller: _emailController,
+              hint: context.translate.emailPlaceholder,
+              rules: [
+                RequiredValidationRule(),
+                EmailValidationRule(),
+                ErrorMessageRule(message: _emailErrorMessage),
+              ],
+            ),
           ),
-        ),
-        const SizedBox(height: AppPadding.p20),
-        FormItem(
-          label: context.translate.password,
-          child: PasswordInput(
-            controller: passwordController,
-            hint: context.translate.enterAPassword,
+          const SizedBox(height: AppPadding.p20),
+          FormItem(
+            label: context.translate.password,
+            child: PasswordInput(
+              controller: _passwordController,
+              hint: context.translate.enterAPassword,
+              rules: [
+                RequiredValidationRule(),
+              ],
+            ),
           ),
-        ),
-        const SizedBox(height: AppPadding.p20),
-        FormItem(
-          label: context.translate.confirmationPassword,
-          child: PasswordInput(
-            controller: confPasswordController,
-            hint: context.translate.confirmPassword,
+          const SizedBox(height: AppPadding.p20),
+          FormItem(
+            label: context.translate.confirmationPassword,
+            child: PasswordInput(
+              controller: _confPasswordController,
+              hint: context.translate.confirmPassword,
+              rules: [
+                RequiredValidationRule(),
+                EqualityValidationRule(
+                  comparedValueBuilder: () => _passwordController.text,
+                  customMessage: context.translate.passwordsHaveToMatch,
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
   Widget _buildActions() {
     return PrimaryButton(
-      onPressed: () {},
+      onPressed: signUp,
       child: Text(context.translate.createAnAccount),
     );
   }
