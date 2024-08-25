@@ -2,19 +2,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:season_spot/core/error_handling/app_error.dart';
-import 'package:season_spot/core/error_handling/errors/index.dart';
+import 'package:season_spot/core/error_handling/index.dart';
 import 'package:season_spot/core/helpers/index.dart';
 import 'package:season_spot/core/localization/localization.dart';
 import 'package:season_spot/core/theming/index.dart';
-import 'package:season_spot/core/validation/rules/index.dart';
+import 'package:season_spot/core/validation/index.dart';
 import 'package:season_spot/features/auth/sign_up/sign_up_controller.dart';
 import 'package:season_spot/shared/models/index.dart';
 import 'package:season_spot/shared/toast/toast_type_enum.dart';
 import 'package:season_spot/shared/widgets/index.dart';
-import 'package:season_spot/shared/widgets/misc/base_screen.dart';
-import 'package:season_spot/shared/widgets/misc/screen_content.dart';
-import 'package:season_spot/shared/widgets/typography/screen_title.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({ super.key });

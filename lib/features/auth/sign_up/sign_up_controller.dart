@@ -1,8 +1,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:season_spot/config/locator.dart';
-import 'package:season_spot/core/error_handling/app_error.dart';
-import 'package:season_spot/core/error_handling/errors/email_in_use_error.dart';
+import 'package:season_spot/core/error_handling/index.dart';
 import 'package:season_spot/core/helpers/index.dart';
 import 'package:season_spot/shared/models/index.dart';
 import 'package:season_spot/shared/repositories/firestore/firestore_repository_impl.dart';
