@@ -2,11 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:season_spot/core/theming/index.dart';
 
-class PrimaryButton extends StatelessWidget {
+class BaseButton extends StatelessWidget {
   final Widget child;
   final VoidCallback onPressed;
   
-  const PrimaryButton({
+  const BaseButton({
     super.key,
     required this.child,
     required this.onPressed,
@@ -30,7 +30,7 @@ class PrimaryButton extends StatelessWidget {
         ),
         elevation: 0,
       ),
-      child: child,
+      child: child
     );
   }
 }

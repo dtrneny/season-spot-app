@@ -10,8 +10,9 @@ import 'package:season_spot/shared/widgets/inputs/clickable_text.dart';
 import 'package:season_spot/shared/widgets/inputs/password_input.dart';
 import 'package:season_spot/shared/widgets/inputs/text_input.dart';
 import 'package:season_spot/shared/widgets/misc/base_screen.dart';
+import 'package:season_spot/shared/widgets/misc/button_spinner.dart';
 import 'package:season_spot/shared/widgets/misc/form_item.dart';
-import 'package:season_spot/shared/widgets/inputs/primary_button.dart';
+import 'package:season_spot/shared/widgets/inputs/base_button.dart';
 import 'package:season_spot/features/auth/sign_in/sign_in_controller.dart';
 import 'package:season_spot/core/localization/localization.dart';
 import 'package:season_spot/core/theming/index.dart';
@@ -33,12 +34,17 @@ class _SignInScreenState extends State<SignInScreen> {
 
   String? _emailErrorMessage;
   bool _shouldSkipValidation = false;
+  bool _signingIn = false;
 
   Future<void> signIn() async {
+    setState(() => _signingIn = true);
     if (_emailErrorMessage != null) {
       setState(() { _emailErrorMessage = null; _shouldSkipValidation = true; });
     }
-    if (!_shouldSkipValidation && !_formKey.currentState!.validate()) { return; }    
+    if (!_shouldSkipValidation && !_formKey.currentState!.validate()) {
+      setState(() => _signingIn = false);
+      return;
+    }    
 
     _shouldSkipValidation = false;
     
@@ -48,6 +54,8 @@ class _SignInScreenState extends State<SignInScreen> {
       Success() => handleSignInSuccess(),
       Failure(:final exception) => handleSignInFailure(exception),
     };
+
+    setState(() => _signingIn = false);
   }
 
   void handleSignInSuccess() {
@@ -172,9 +180,11 @@ class _SignInScreenState extends State<SignInScreen> {
           child: ClickableText(text: context.translate.forgotPassword, onPressed: () {}),
         ),
         const SizedBox(height: AppPadding.p40),
-        PrimaryButton(
+        BaseButton(
           onPressed: () async => await signIn(),
-          child: Text(context.translate.signIn),
+          child: _signingIn
+            ? const ButtonSpinner()
+            : Text(context.translate.signIn),
         ),
         const SizedBox(height: AppPadding.p40),
         Row(
