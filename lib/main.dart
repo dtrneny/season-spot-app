@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:season_spot/config/dependencies.dart';
+import 'package:season_spot/config/locator.dart';
 import 'package:season_spot/config/routing/router.dart';
+import 'package:season_spot/shared/services/auth/auth_service.dart';
 import 'package:season_spot/shared/widgets/misc/toast_wrapper.dart';
 import 'package:season_spot/core/theming/index.dart';
 
 void main() async {
   await initDependecies();
-  runApp(const MainApp());
+  final auth = getIt.get<AuthService>();
+
+  runApp(MainApp(
+    router: AppRouter(authService: auth).router
+  ));
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  final GoRouter router;
+
+  const MainApp({super.key, required this.router});
 
   @override
   Widget build(BuildContext context) {

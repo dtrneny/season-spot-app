@@ -41,7 +41,7 @@ class FirebaseAuthServiceImpl implements AuthService {
   }
 
   @override
-  Future<AppUser?> getCurrentUser() async {
+  AppUser? getCurrentUser() {
     final user = _firebaseAuth.currentUser;
     if (user == null || user.email == null) { return null; }
 
