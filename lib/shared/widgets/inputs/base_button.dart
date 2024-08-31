@@ -29,6 +29,7 @@ class BaseButton extends StatelessWidget {
           fontWeight: FontWeight.w500,
         ),
         elevation: 0,
+        shadowColor: Colors.transparent,
       ),
       child: child
     );

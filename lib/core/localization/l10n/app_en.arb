@@ -23,5 +23,9 @@
   "confirmationPassword": "Confirmation Password",
   "confirmPassword": "Confirm password",
   "createAnAccount": "Create an account",
-  "passwordsHaveToMatch": "Passwords have to match."
+  "passwordsHaveToMatch": "Passwords have to match.",
+  "discoverLocalFarmersAndFreshProduce": "Discover local farmers and fresh produce",
+  "recommendations": "Recommendations",
+  "gettingStarted": "Getting started",
+  "dashboardGettingStartedText": "Start selling the things you grow, collect or create today. Just create a vendor shop and offer your local produce."
 }

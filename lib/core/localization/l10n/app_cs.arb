@@ -23,5 +23,9 @@
   "confirmationPassword": "Potvrzení hesla",
   "confirmPassword": "Potvrdit heslo",
   "createAnAccount": "Vytvořit účet",
-  "passwordsHaveToMatch": "Hesla se musí shodovat."
+  "passwordsHaveToMatch": "Hesla se musí shodovat.",
+  "discoverLocalFarmersAndFreshProduce": "Objevujte místní farmáře a čerstvé produkty",
+  "recommendations": "Doporučení",
+  "gettingStarted": "Na začátek",
+  "dashboardGettingStartedText": "Začněte dnes prodávat věci, které pěstujete, sbíráte nebo vytváříte. Stačí si vytvořit obchod pro prodejce a nabízet své místní produkty."
 }
