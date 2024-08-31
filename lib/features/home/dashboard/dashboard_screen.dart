@@ -1,7 +1,6 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:season_spot/core/localization/localization.dart';
 import 'package:season_spot/core/theming/index.dart';
@@ -31,7 +30,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return BaseScreen(
-      appBar: _buildAppBar(),
+      appBar: const BaseAppBar(),
       child: SingleChildScrollView( 
         child: Column( 
           mainAxisAlignment: MainAxisAlignment.start, 
@@ -52,42 +51,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  AppBar _buildAppBar() {
-    return AppBar(
-      leading: Padding(
-        padding: const EdgeInsets.only(left: AppPadding.p16),
-        child: Center(
-          child: IconButton(
-            icon: SvgPicture.asset(
-              AppIcons.burger,
-              colorFilter: ColorFilter.mode(context.theme.base.secondaryColor, BlendMode.srcIn),
-            ),
-            onPressed: null,         
-          ),
-        ),
-      ),
-      actions: [
-        Padding(
-          padding: const EdgeInsets.only(right: AppPadding.p16),
-          child: IconButton(
-            icon: SvgPicture.asset(
-              AppIcons.bell,
-              colorFilter: ColorFilter.mode(context.theme.base.secondaryColor, BlendMode.srcIn),
-            ),
-            onPressed: null,
-          ),
-        ),
-      ],
-    );
-  }
-
   Widget _buildDateInformation() {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        SvgPicture.asset(
-          AppIcons.calendar,
-          colorFilter: ColorFilter.mode(context.theme.base.neutral600, BlendMode.srcIn),
+        BaseIcon(
+          icon: AppIcons.calendar,
+          color: context.theme.base.neutral600
         ),
         const SizedBox(width: 8.0),
         Text(
@@ -129,9 +99,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ),
               ),
               const SizedBox(width: AppPadding.p16),
-              SvgPicture.asset(
-                AppIcons.arrowRight,
-                colorFilter: ColorFilter.mode(context.theme.base.complementaryColor, BlendMode.srcIn),
+              BaseIcon(
+                icon: AppIcons.arrowRight,
+                color: context.theme.base.complementaryColor
               ),
             ],
           ),

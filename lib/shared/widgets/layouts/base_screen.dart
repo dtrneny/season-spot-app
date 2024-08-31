@@ -3,7 +3,7 @@ import 'package:season_spot/core/theming/index.dart';
 
 class BaseScreen extends StatelessWidget {
   final Widget child;
-  final AppBar? appBar;
+  final PreferredSizeWidget? appBar;
 
   const BaseScreen({ super.key, required this.child, this.appBar });
 

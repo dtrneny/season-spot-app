@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:season_spot/core/theming/index.dart';
+import 'package:season_spot/shared/widgets/index.dart';
 
 class BaseIconButton extends StatelessWidget {
   const BaseIconButton({ super.key });
@@ -18,9 +18,9 @@ class BaseIconButton extends StatelessWidget {
         elevation: 0,
         shadowColor: Colors.transparent,
       ),
-      child: SvgPicture.asset(
-        AppIcons.search,
-        colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+      child: const BaseIcon(
+        icon: AppIcons.search,
+        color: Colors.white
       ),
     );
   }

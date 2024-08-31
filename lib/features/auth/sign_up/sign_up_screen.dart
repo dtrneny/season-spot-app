@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:season_spot/core/error_handling/index.dart';
 import 'package:season_spot/core/helpers/index.dart';
@@ -82,9 +81,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
       appBar: AppBar(
         title: ScreenTitle(title: context.translate.signUp),
         leading: IconButton(
-          icon: SvgPicture.asset(
-            AppIcons.arrowLeft,
-            colorFilter: ColorFilter.mode(context.theme.base.secondaryColor, BlendMode.srcIn),
+          icon: BaseIcon(
+            icon: AppIcons.arrowLeft,
+            color: context.theme.base.secondaryColor,
           ),
           onPressed: () => context.pop(),
         ),

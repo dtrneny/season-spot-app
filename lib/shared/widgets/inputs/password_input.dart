@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:season_spot/core/validation/index.dart';
 import 'package:season_spot/core/theming/index.dart';
+import 'package:season_spot/shared/widgets/index.dart';
 
 class PasswordInput extends StatefulWidget {
   final TextEditingController controller;
@@ -65,9 +65,9 @@ class _PasswordInputState extends State<PasswordInput> {
         focusedErrorBorder: _getBorder(context.theme.base.error600),
         errorStyle: _getErrorTextStyle(context.theme.base.error600),
         suffixIcon: IconButton( 
-          icon: SvgPicture.asset(
-            _isTextObscured ? AppIcons.eyeSlash : AppIcons.eye,
-            colorFilter: ColorFilter.mode(context.theme.base.neutral600, BlendMode.srcIn),
+          icon: BaseIcon(
+            icon: _isTextObscured ? AppIcons.eyeSlash : AppIcons.eye,
+            color: context.theme.base.neutral600
           ),
           onPressed: () => setState(() => _isTextObscured = !_isTextObscured), 
         ),

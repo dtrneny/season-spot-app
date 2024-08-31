@@ -5,8 +5,11 @@ export 'inputs/clickable_text.dart';
 export 'inputs/password_input.dart';
 export 'inputs/text_input.dart';
 
+export 'layouts/base_app_bar.dart';
+export 'layouts/base_screen.dart';
+
 export 'misc/base_chip.dart';
-export 'misc/base_screen.dart';
+export 'misc/base_icon.dart';
 export 'misc/button_spinner.dart';
 export 'misc/form_item.dart';
 export 'misc/indicator_dots.dart';
