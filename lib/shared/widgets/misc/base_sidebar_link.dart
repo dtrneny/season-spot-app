@@ -7,14 +7,14 @@ class BaseSidebarLink extends StatelessWidget {
   final AppIcons icon;
   final String label;
   final VoidCallback onPressed;
-  final bool? active;
+  final bool? isActive;
 
   const BaseSidebarLink({
     super.key,
     required this.icon,
     required this.label,
     required this.onPressed,
-    this.active = false,
+    this.isActive = false,
   });
 
   @override
@@ -33,7 +33,7 @@ class BaseSidebarLink extends StatelessWidget {
               children: [
                 BaseIcon(
                   icon: icon,
-                  color: active != null && active!
+                  color: isActive != null && isActive!
                     ? context.theme.base.primaryColor
                     : context.theme.base.secondaryColor,
                   width: 20.0,
@@ -42,7 +42,7 @@ class BaseSidebarLink extends StatelessWidget {
                 Text(
                   label,
                   style: TextStyle(
-                    color: active != null && active!
+                    color: isActive != null && isActive!
                       ? context.theme.base.primaryColor
                       : context.theme.base.secondaryColor,
                     fontWeight: FontWeight.w400,

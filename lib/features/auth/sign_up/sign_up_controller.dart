@@ -11,7 +11,6 @@ import 'package:season_spot/shared/toast/toast_controller.dart';
 class SignUpController {
   final _auth = getIt.get<AuthService>();
   final _userAccountRepository = getIt.get<FirestoreRepositoryImpl<UserAccount>>();
-
   final toast = getIt.get<ToastController>();
 
   Future<Result<bool, AppError>> signUp(UserAccount data, String password) async {

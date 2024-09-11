@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 class ButtonSpinner extends StatelessWidget {
-const ButtonSpinner({ super.key });
+  const ButtonSpinner({ super.key });
 
   @override
   Widget build(BuildContext context){

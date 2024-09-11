@@ -29,7 +29,7 @@ class _SignInScreenState extends State<SignInScreen> {
   bool _shouldSkipValidation = false;
   bool _signingIn = false;
 
-  Future<void> signIn() async {
+  Future<void> _signIn() async {
     setState(() => _signingIn = true);
     if (_emailErrorMessage != null) {
       setState(() { _emailErrorMessage = null; _shouldSkipValidation = true; });
@@ -44,18 +44,18 @@ class _SignInScreenState extends State<SignInScreen> {
     final result = await _signInController.signIn(_emailController.text, _passwordController.text);
 
     final _ = switch (result) {
-      Success() => handleSignInSuccess(),
-      Failure(:final exception) => handleSignInFailure(exception),
+      Success() => _handleSignInSuccess(),
+      Failure(:final exception) => _handleSignInFailure(exception),
     };
 
     setState(() => _signingIn = false);
   }
 
-  void handleSignInSuccess() {
+  void _handleSignInSuccess() {
     context.go('/dashboard');
   }
 
-  void handleSignInFailure(AppError error) {
+  void _handleSignInFailure(AppError error) {
     if (error is InvalidCredentialsError) {
       setState(() => _emailErrorMessage = error.getLocalizedMessage(context));
       return;
@@ -64,16 +64,9 @@ class _SignInScreenState extends State<SignInScreen> {
     _signInController.toast.showToast(error.getLocalizedMessage(context), type: ToastType.error);
   }
 
-  void clearSignInErrorOnChange() {
+  void _clearSignInErrorOnChange() {
     if (_emailErrorMessage == null) { return; }
     setState(() => _emailErrorMessage = null);
-  }
-
-  void resetFormState() {
-    if (_emailErrorMessage != null) {
-      setState(() => _emailErrorMessage = null);
-    }
-    _formKey.currentState!.reset();
   }
 
   @override
@@ -140,7 +133,7 @@ class _SignInScreenState extends State<SignInScreen> {
             label: context.translate.email,
             child: TextInput(
               controller: _emailController,
-              onChanged: (_) => clearSignInErrorOnChange(),
+              onChanged: (_) => _clearSignInErrorOnChange(),
               hint: context.translate.enterAnEmail,
               rules: [
                 RequiredValidationRule(),
@@ -174,7 +167,7 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
         const SizedBox(height: AppPadding.p40),
         BaseButton(
-          onPressed: () async => await signIn(),
+          onPressed: _signIn,
           child: _signingIn
             ? const ButtonSpinner()
             : Text(context.translate.signIn),

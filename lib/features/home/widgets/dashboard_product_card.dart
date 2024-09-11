@@ -1,12 +1,9 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:season_spot/core/theming/index.dart';
 import 'package:season_spot/shared/widgets/misc/base_chip.dart';
 
 class DashboardProductCard extends StatelessWidget {
-  // TODO: later rework to model
   final String imageUrl;
   final String title;
   final String description;

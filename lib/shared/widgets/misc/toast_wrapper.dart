@@ -49,30 +49,29 @@ class _ToastWrapperState extends State<ToastWrapper> {
       ToastType.secondary => (context.theme.base.neutral250, context.theme.base.secondaryColor),
     };
 
-    return  SnackBar(
-        content: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(AppRounding.base),
-            color: colors.$1,
-          ),
-          child: Text(
-            toast.message,
-            style: TextStyle(
-              color: colors.$2,
-            ),
+    return SnackBar(
+      content: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(AppRounding.base),
+          color: colors.$1,
+        ),
+        child: Text(
+          toast.message,
+          style: TextStyle(
+            color: colors.$2,
           ),
         ),
-        behavior: SnackBarBehavior.floating,
-        dismissDirection: DismissDirection.up,
-        margin: EdgeInsets.only(
-          bottom: MediaQuery.of(context).size.height - 175,
-          left: 10,
-          right: 10
-        ),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-      );
-
+      ),
+      behavior: SnackBarBehavior.floating,
+      dismissDirection: DismissDirection.up,
+      margin: EdgeInsets.only(
+        bottom: MediaQuery.of(context).size.height - 175,
+        left: 10,
+        right: 10
+      ),
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+    );
   }
 }

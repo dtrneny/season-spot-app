@@ -5,7 +5,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:season_spot/core/error_handling/index.dart';
 import 'package:season_spot/core/helpers/index.dart';
-import 'package:season_spot/core/helpers/layouts.dart';
 import 'package:season_spot/core/localization/localization.dart';
 import 'package:season_spot/core/theming/index.dart';
 import 'package:season_spot/shared/models/index.dart';
@@ -74,7 +73,7 @@ class _RootLayoutState extends State<RootLayout> {
 
     final _ = switch (result) {
       Success(:final value) => setState(() => _userAccount = value),
-      Failure(:final exception) => _handleExceptionToast(exception),
+      Failure(:final exception) => _handleFailure(exception),
     };
   }
 
@@ -83,11 +82,11 @@ class _RootLayoutState extends State<RootLayout> {
 
     final _ = switch (result) {
       Success(:final value) => _handleSignOut(value),
-      Failure(:final exception) => _handleExceptionToast(exception),
+      Failure(:final exception) => _handleFailure(exception),
     };
   }
 
-  void _handleExceptionToast(AppError error) {
+  void _handleFailure(AppError error) {
     _rootLayoutController.toast.showToast(error.getLocalizedMessage(context), type: ToastType.error);
   }
 
@@ -150,7 +149,7 @@ class _RootLayoutState extends State<RootLayout> {
               icon: link.icon,
               label: link.label,
               onPressed: () => _navigate(link.route),
-              active: GoRouterState.of(context).uri.toString() == link.route,
+              isActive: GoRouterState.of(context).uri.toString() == link.route,
             )),
             const SizedBox(height: AppPadding.p20),
             const BaseDivider(),

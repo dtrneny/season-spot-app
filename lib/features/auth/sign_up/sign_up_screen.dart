@@ -33,7 +33,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool _shouldSkipValidation = false;
   bool _signingUp = false;
 
-  Future<void> signUp() async {
+  Future<void> _signUp() async {
     setState(() => _signingUp = true);
     if (_emailErrorMessage != null) {
       setState(() { _emailErrorMessage = null; _shouldSkipValidation = true; });
@@ -55,18 +55,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
 
     final _ = switch (result) {
-      Success() => handleSignUpSuccess(),
-      Failure(:final exception) => handleSignUpFailure(exception),
+      Success() => _handleSignUpSuccess(),
+      Failure(:final exception) => _handleSignUpFailure(exception),
     };
 
     setState(() => _signingUp = false);
   }
 
-  void handleSignUpSuccess() {
+  void _handleSignUpSuccess() {
     context.pop();
   }
 
-  void handleSignUpFailure(AppError error) {
+  void _handleSignUpFailure(AppError error) {
     if (error is EmailInUseError) {
       setState(() => _emailErrorMessage = error.getLocalizedMessage(context));
       return;
@@ -177,7 +177,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Widget _buildActions() {
     return BaseButton(
-      onPressed: signUp,
+      onPressed: _signUp,
       child: _signingUp
         ? const ButtonSpinner()
         : Text(context.translate.createAnAccount),
