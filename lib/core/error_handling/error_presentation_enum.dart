@@ -1,4 +1,1 @@
-
-enum ErrorPresentation {
-  toast, text
-}
+enum ErrorPresentation { toast, text }

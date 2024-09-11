@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:season_spot/core/validation/index.dart';
 import 'package:season_spot/core/theming/index.dart';
@@ -9,7 +8,7 @@ class TextInput extends StatelessWidget {
   final AutovalidateMode? validationMode;
   final List<ValidationRule<String>>? rules;
   final void Function(String)? onChanged;
-  
+
   const TextInput({
     super.key,
     required this.controller,
@@ -46,9 +45,7 @@ class TextInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      onChanged: (value) => {
-        if (onChanged != null) { onChanged!(value), }
-      },
+      onChanged: (value) => {if (onChanged != null) onChanged!(value)},
       style: _getTextStyle(context.theme.base.secondaryColor),
       decoration: InputDecoration(
         hintText: hint,
@@ -63,10 +60,7 @@ class TextInput extends StatelessWidget {
         errorMaxLines: 2,
       ),
       autovalidateMode: validationMode,
-      validator: Validation.apply(
-        context,
-        rules ?? []
-      ),    
+      validator: Validation.apply(context, rules ?? []),
     );
   }
 }

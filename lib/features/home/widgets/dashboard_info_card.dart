@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:season_spot/core/theming/index.dart';
@@ -7,10 +6,14 @@ class DashboardInfoCard extends StatelessWidget {
   final Widget child;
   final VoidCallback onPressed;
 
-  const DashboardInfoCard({ super.key, required this.child, required this.onPressed });
+  const DashboardInfoCard({
+    super.key,
+    required this.child,
+    required this.onPressed,
+  });
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(AppRounding.medium),
       child: InkWell(

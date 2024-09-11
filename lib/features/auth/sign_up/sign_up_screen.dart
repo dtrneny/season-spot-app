@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:season_spot/core/error_handling/index.dart';
@@ -12,7 +11,7 @@ import 'package:season_spot/shared/toast/toast_type_enum.dart';
 import 'package:season_spot/shared/widgets/index.dart';
 
 class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({ super.key });
+  const SignUpScreen({super.key});
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -36,12 +35,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Future<void> _signUp() async {
     setState(() => _signingUp = true);
     if (_emailErrorMessage != null) {
-      setState(() { _emailErrorMessage = null; _shouldSkipValidation = true; });
+      setState(() {
+        _emailErrorMessage = null;
+        _shouldSkipValidation = true;
+      });
     }
     if (!_shouldSkipValidation && !_formKey.currentState!.validate()) {
       setState(() => _signingUp = false);
       return;
-    }    
+    }
 
     _shouldSkipValidation = false;
 
@@ -51,7 +53,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         lastname: _lastnameController.text,
         email: _emailController.text,
       ),
-      _passwordController.text
+      _passwordController.text,
     );
 
     final _ = switch (result) {
@@ -72,7 +74,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
       return;
     }
 
-    _signUpController.toast.showToast(error.getLocalizedMessage(context), type: ToastType.error);
+    _signUpController.toast.showToast(
+      error.getLocalizedMessage(context),
+      type: ToastType.error,
+    );
   }
 
   @override
@@ -89,19 +94,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
       ),
       child: ScreenContent(
-        child: SingleChildScrollView( 
-          child: Column( 
-            mainAxisAlignment: MainAxisAlignment.start, 
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              _buildForm(),
-              const SizedBox(height: AppPadding.p60),
-              _buildActions(),
-              const SizedBox(height: AppPadding.p60),
-            ],
-          ), 
-        )
-      ), 
+          child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            _buildForm(),
+            const SizedBox(height: AppPadding.p60),
+            _buildActions(),
+            const SizedBox(height: AppPadding.p60),
+          ],
+        ),
+      )),
     );
   }
 
@@ -179,8 +183,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return BaseButton(
       onPressed: _signUp,
       child: _signingUp
-        ? const ButtonSpinner()
-        : Text(context.translate.createAnAccount),
+          ? const ButtonSpinner()
+          : Text(context.translate.createAnAccount),
     );
   }
 }

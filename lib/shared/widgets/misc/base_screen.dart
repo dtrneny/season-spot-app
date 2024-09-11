@@ -12,19 +12,19 @@ class BaseScreen extends StatelessWidget {
     required this.child,
     this.appBar,
     this.drawer,
-    this.scaffoldKey
+    this.scaffoldKey,
   });
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
       appBar: appBar,
       drawer: drawer,
-      body: Padding( 
-        padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20), 
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
         child: child,
-      ), 
+      ),
     );
   }
 }

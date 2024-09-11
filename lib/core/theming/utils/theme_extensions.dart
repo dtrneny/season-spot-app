@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:season_spot/core/theming/base_theme_extension.dart';
 
@@ -7,5 +6,6 @@ extension ThemeGetter on BuildContext {
 }
 
 extension AppThemeExtension on ThemeData {
-  BaseThemeExtension get base => extension<BaseThemeExtension>() ?? BaseThemeExtension();
+  BaseThemeExtension get base =>
+      extension<BaseThemeExtension>() ?? BaseThemeExtension();
 }

@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
@@ -17,5 +16,7 @@ void initGetIt() {
 
   getIt.registerSingleton<AuthService>(FirebaseAuthServiceImpl(firebaseAuth));
   getIt.registerSingleton(ToastController());
-  getIt.registerSingleton<FirestoreRepositoryImpl<UserAccount>>(UserAccountRepository(firestore));
+  getIt.registerSingleton<FirestoreRepositoryImpl<UserAccount>>(
+    UserAccountRepository(firestore),
+  );
 }

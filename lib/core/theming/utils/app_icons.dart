@@ -1,4 +1,3 @@
-
 enum AppIcons {
   arrowLeft('arrow-left.svg'),
   arrowRight('arrow-right.svg'),
@@ -14,7 +13,6 @@ enum AppIcons {
   settings('settings.svg'),
   signOut('sign-out.svg'),
   user('user.svg');
-
 
   final String fileName;
   static const String prefix = 'assets/icons/';

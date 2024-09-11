@@ -14,7 +14,6 @@ class BaseThemeExtension extends ThemeExtension<BaseThemeExtension> {
   final Color success600;
   final Color info600;
 
-
   BaseThemeExtension({
     this.primaryColor = AppColors.primaryColor,
     this.complementaryColor = AppColors.complementaryColor,
@@ -27,7 +26,6 @@ class BaseThemeExtension extends ThemeExtension<BaseThemeExtension> {
     this.warning600 = AppColors.warning600,
     this.success600 = AppColors.success600,
     this.info600 = AppColors.info600,
-
   });
 
   @override
@@ -60,14 +58,21 @@ class BaseThemeExtension extends ThemeExtension<BaseThemeExtension> {
   }
 
   @override
-  BaseThemeExtension lerp(covariant ThemeExtension<BaseThemeExtension>? other, double t) {
+  BaseThemeExtension lerp(
+    covariant ThemeExtension<BaseThemeExtension>? other,
+    double t,
+  ) {
     if (other is! BaseThemeExtension) {
       return this;
     }
 
     return BaseThemeExtension(
       primaryColor: Color.lerp(primaryColor, other.primaryColor, t)!,
-      complementaryColor: Color.lerp(complementaryColor, other.complementaryColor, t)!,
+      complementaryColor: Color.lerp(
+        complementaryColor,
+        other.complementaryColor,
+        t,
+      )!,
       secondaryColor: Color.lerp(secondaryColor, other.secondaryColor, t)!,
       neutral100: Color.lerp(neutral100, other.neutral100, t)!,
       neutral200: Color.lerp(neutral200, other.neutral200, t)!,

@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:season_spot/config/locator.dart';
@@ -8,7 +7,7 @@ import 'package:season_spot/core/theming/index.dart';
 class ToastWrapper extends StatefulWidget {
   final Widget child;
 
-  const ToastWrapper({ super.key, required this.child });
+  const ToastWrapper({super.key, required this.child});
 
   @override
   State<ToastWrapper> createState() => _ToastWrapperState();
@@ -23,7 +22,7 @@ class _ToastWrapperState extends State<ToastWrapper> {
     super.initState();
 
     _subscription = _toastController.snackBarStream.listen((toast) {
-      if (!mounted) { return; }
+      if (!mounted) return;
       final snackBar = _getSnackBar(toast);
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     });
@@ -46,7 +45,10 @@ class _ToastWrapperState extends State<ToastWrapper> {
       ToastType.warning => (context.theme.base.warning600, Colors.white),
       ToastType.error => (context.theme.base.error600, Colors.white),
       ToastType.success => (context.theme.base.success600, Colors.white),
-      ToastType.secondary => (context.theme.base.neutral250, context.theme.base.secondaryColor),
+      ToastType.secondary => (
+          context.theme.base.neutral250,
+          context.theme.base.secondaryColor
+        ),
     };
 
     return SnackBar(
@@ -68,7 +70,7 @@ class _ToastWrapperState extends State<ToastWrapper> {
       margin: EdgeInsets.only(
         bottom: MediaQuery.of(context).size.height - 175,
         left: 10,
-        right: 10
+        right: 10,
       ),
       elevation: 0,
       backgroundColor: Colors.transparent,

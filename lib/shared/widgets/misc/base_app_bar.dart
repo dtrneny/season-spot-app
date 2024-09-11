@@ -1,11 +1,14 @@
-
 import 'package:flutter/material.dart';
 
 class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget leadingAction;
   final Widget trailingAction;
 
-  const BaseAppBar({super.key, required this.leadingAction, required this.trailingAction});
+  const BaseAppBar({
+    super.key,
+    required this.leadingAction,
+    required this.trailingAction,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 16.0),
-          child: trailingAction
+          child: trailingAction,
         ),
       ],
     );

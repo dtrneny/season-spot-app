@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:season_spot/core/theming/index.dart';
 import 'package:season_spot/shared/widgets/index.dart';
@@ -18,7 +17,7 @@ class BaseSidebarLink extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(AppRounding.base),
       child: Material(
@@ -27,15 +26,20 @@ class BaseSidebarLink extends StatelessWidget {
           onTap: onPressed,
           splashColor: context.theme.base.secondaryColor.withOpacity(0.2),
           child: Padding(
-            padding: const EdgeInsets.only(left: AppPadding.p16, right: AppPadding.p16, top: 12, bottom: 12),
+            padding: const EdgeInsets.only(
+              left: AppPadding.p16,
+              right: AppPadding.p16,
+              top: 12,
+              bottom: 12,
+            ),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               children: [
                 BaseIcon(
                   icon: icon,
                   color: isActive != null && isActive!
-                    ? context.theme.base.primaryColor
-                    : context.theme.base.secondaryColor,
+                      ? context.theme.base.primaryColor
+                      : context.theme.base.secondaryColor,
                   width: 20.0,
                 ),
                 const SizedBox(width: AppPadding.p16),
@@ -43,10 +47,10 @@ class BaseSidebarLink extends StatelessWidget {
                   label,
                   style: TextStyle(
                     color: isActive != null && isActive!
-                      ? context.theme.base.primaryColor
-                      : context.theme.base.secondaryColor,
+                        ? context.theme.base.primaryColor
+                        : context.theme.base.secondaryColor,
                     fontWeight: FontWeight.w400,
-                    fontSize: AppTypographySizing.base
+                    fontSize: AppTypographySizing.base,
                   ),
                 ),
               ],

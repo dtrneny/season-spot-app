@@ -1,4 +1,3 @@
-
 import 'package:season_spot/shared/models/index.dart';
 
 abstract class AuthService {

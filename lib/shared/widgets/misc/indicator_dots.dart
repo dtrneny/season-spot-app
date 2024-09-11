@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:season_spot/core/theming/index.dart';
 
@@ -9,7 +8,7 @@ class IndicatorDots extends StatelessWidget {
   const IndicatorDots({
     super.key,
     required this.dotsCount,
-    required this.activeIndex
+    required this.activeIndex,
   });
 
   @override
@@ -25,8 +24,8 @@ class IndicatorDots extends StatelessWidget {
           height: 8.0,
           decoration: BoxDecoration(
             color: isActive
-              ? context.theme.base.primaryColor
-              : context.theme.base.neutral600,
+                ? context.theme.base.primaryColor
+                : context.theme.base.neutral600,
             borderRadius: isActive ? BorderRadius.circular(8.0) : null,
             shape: isActive ? BoxShape.rectangle : BoxShape.circle,
           ),

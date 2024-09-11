@@ -1,4 +1,3 @@
-
 import 'package:season_spot/core/theming/index.dart';
 
 class LinkItem {

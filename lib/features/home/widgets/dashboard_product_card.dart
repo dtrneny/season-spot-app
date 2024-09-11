@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:season_spot/core/theming/index.dart';
 import 'package:season_spot/shared/widgets/misc/base_chip.dart';
@@ -14,19 +13,19 @@ class DashboardProductCard extends StatelessWidget {
     required this.imageUrl,
     required this.title,
     required this.description,
-    required this.category
+    required this.category,
   });
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(AppRounding.medium),
       child: Stack(
         children: [
           _buildBackground(),
-          _buildCardContent()
+          _buildCardContent(),
         ],
-      )
+      ),
     );
   }
 
@@ -61,17 +60,17 @@ class DashboardProductCard extends StatelessWidget {
 
   Widget _buildBackground() {
     return ShaderMask(
-      shaderCallback: (bound) {
-        return  LinearGradient(
+      shaderCallback: (bound) => LinearGradient(
           end: FractionalOffset.topCenter,
           begin: FractionalOffset.bottomCenter,
           colors: [
             Colors.black.withOpacity(0.6),
             Colors.transparent,
           ],
-          stops: const [ 0.0, 1 ]
-        ).createShader(bound);
-      },
+          stops: const [
+            0.0,
+            1
+          ]).createShader(bound),
       blendMode: BlendMode.srcOver,
       child: Image.network(
         imageUrl,

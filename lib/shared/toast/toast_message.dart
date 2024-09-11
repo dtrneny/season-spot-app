@@ -1,5 +1,3 @@
-
-
 import 'package:season_spot/shared/toast/index.dart';
 
 class ToastMessage {
@@ -11,4 +9,3 @@ class ToastMessage {
     required this.type,
   });
 }
-

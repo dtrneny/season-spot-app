@@ -1,4 +1,3 @@
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -17,7 +16,6 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-
   final List<DashboardProduct> _productMock = getDashboardProductMock();
   int _activeProductIndex = 0;
 
@@ -29,9 +27,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView( 
-      child: Column( 
-        mainAxisAlignment: MainAxisAlignment.start, 
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -44,7 +42,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           const SizedBox(height: AppPadding.p28),
           _buildRecommendationsCarousel(),
         ],
-      ), 
+      ),
     );
   }
 
@@ -52,16 +50,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        BaseIcon(
-          icon: AppIcons.calendar,
-          color: context.theme.base.neutral600
-        ),
+        BaseIcon(icon: AppIcons.calendar, color: context.theme.base.neutral600),
         const SizedBox(width: 8.0),
         Text(
           _getFormattedDate(),
           style: TextStyle(
             color: context.theme.base.neutral600,
-            fontSize: AppTypographySizing.base
+            fontSize: AppTypographySizing.base,
           ),
         ),
       ],
@@ -72,7 +67,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Expanded(child: Heading1(title: context.translate.discoverLocalFarmersAndFreshProduce)),
+        Expanded(
+          child: Heading1(
+            title: context.translate.discoverLocalFarmersAndFreshProduce,
+          ),
+        ),
         const SizedBox(width: AppPadding.p28),
         const BaseIconButton(),
       ],
@@ -98,7 +97,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               const SizedBox(width: AppPadding.p16),
               BaseIcon(
                 icon: AppIcons.arrowRight,
-                color: context.theme.base.complementaryColor
+                color: context.theme.base.complementaryColor,
               ),
             ],
           ),
@@ -119,26 +118,30 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Column(
       children: [
         Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(child: Heading1(title: context.translate.recommendations)),
-              const SizedBox(width: AppPadding.p40),
-              IndicatorDots(dotsCount: _productMock.length, activeIndex: _activeProductIndex)
-            ],
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(child: Heading1(title: context.translate.recommendations)),
+            const SizedBox(width: AppPadding.p40),
+            IndicatorDots(
+              dotsCount: _productMock.length,
+              activeIndex: _activeProductIndex,
+            )
+          ],
+        ),
+        const SizedBox(height: AppPadding.p20),
+        CarouselSlider.builder(
+          itemCount: _productMock.length,
+          options: CarouselOptions(
+            height: 230,
+            enableInfiniteScroll: false,
+            padEnds: false,
+            onPageChanged: (index, reason) {
+              setState(() => _activeProductIndex = index);
+            },
           ),
-          const SizedBox(height: AppPadding.p20),
-          CarouselSlider.builder(
-            itemCount: _productMock.length,
-            options: CarouselOptions(
-              height: 230,
-              enableInfiniteScroll: false,
-              padEnds : false,
-              onPageChanged: (index, reason) {
-                setState(() => _activeProductIndex = index);
-              },
-            ),
-            itemBuilder: (context, index, realIndex)  => _buildProductCard(_productMock[index], index),
-          ),
+          itemBuilder: (context, index, realIndex) =>
+              _buildProductCard(_productMock[index], index),
+        ),
       ],
     );
   }
@@ -146,13 +149,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget _buildProductCard(DashboardProduct product, int index) {
     return Container(
       margin: index == 0
-        ? const EdgeInsets.only(right: AppPadding.p16)
-        : const EdgeInsets.symmetric(horizontal: AppPadding.p16),
+          ? const EdgeInsets.only(right: AppPadding.p16)
+          : const EdgeInsets.symmetric(horizontal: AppPadding.p16),
       child: DashboardProductCard(
         imageUrl: product.imageUrl,
         title: product.title,
         description: product.description,
-        category: product.category
+        category: product.category,
       ),
     );
   }

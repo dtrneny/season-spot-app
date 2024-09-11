@@ -1,4 +1,3 @@
-
 import 'package:season_spot/shared/models/app_user/app_user.dart';
 import 'package:season_spot/shared/services/auth/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,7 +15,9 @@ class FirebaseAuthServiceImpl implements AuthService {
     );
     final user = userCredentials.user;
 
-    if (user == null) { return null; }
+    if (user == null) {
+      return null;
+    }
 
     return AppUser.fromUser(user);
   }
@@ -35,7 +36,9 @@ class FirebaseAuthServiceImpl implements AuthService {
     );
     final user = userCredentials.user;
 
-    if (user == null) { return null; }
+    if (user == null) {
+      return null;
+    }
 
     return AppUser.fromUser(user);
   }
@@ -43,7 +46,9 @@ class FirebaseAuthServiceImpl implements AuthService {
   @override
   AppUser? getCurrentUser() {
     final user = _firebaseAuth.currentUser;
-    if (user == null || user.email == null) { return null; }
+    if (user == null || user.email == null) {
+      return null;
+    }
 
     return AppUser.fromUser(user);
   }

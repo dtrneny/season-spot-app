@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -15,7 +13,7 @@ import 'package:season_spot/shared/widgets/layouts/root_layout/root_layout_contr
 class RootLayout extends StatefulWidget {
   final Widget child;
 
-  const RootLayout({ super.key, required this.child });
+  const RootLayout({super.key, required this.child});
 
   @override
   State<RootLayout> createState() => _RootLayoutState();
@@ -30,37 +28,37 @@ class _RootLayoutState extends State<RootLayout> {
 
   List<LinkItem> _getLinks() {
     return [
-    LinkItem(
-      icon: AppIcons.dashboard,
-      label: context.translate.dashboard,
-      route: '/dashboard',
-    ),
-    LinkItem(
-      icon: AppIcons.user,
-      label: context.translate.vendorProfile,
-      route: '/vendor-profile',
-    ),
-    LinkItem(
-      icon: AppIcons.location,
-      label: context.translate.productMap,
-      route: '/product-map',
-    ),
-    LinkItem(
-      icon: AppIcons.flag,
-      label: context.translate.communityPlaces,
-      route: '/community-places',
-    ),
-    LinkItem(
-      icon: AppIcons.bell,
-      label: context.translate.notificationCenter,
-      route: '/notification-center',
-    ),
-    LinkItem(
-      icon: AppIcons.settings,
-      label: context.translate.settings,
-      route: '/settings',
-    ),
-  ];
+      LinkItem(
+        icon: AppIcons.dashboard,
+        label: context.translate.dashboard,
+        route: '/dashboard',
+      ),
+      LinkItem(
+        icon: AppIcons.user,
+        label: context.translate.vendorProfile,
+        route: '/vendor-profile',
+      ),
+      LinkItem(
+        icon: AppIcons.location,
+        label: context.translate.productMap,
+        route: '/product-map',
+      ),
+      LinkItem(
+        icon: AppIcons.flag,
+        label: context.translate.communityPlaces,
+        route: '/community-places',
+      ),
+      LinkItem(
+        icon: AppIcons.bell,
+        label: context.translate.notificationCenter,
+        route: '/notification-center',
+      ),
+      LinkItem(
+        icon: AppIcons.settings,
+        label: context.translate.settings,
+        route: '/settings',
+      ),
+    ];
   }
 
   void _navigate(String route) {
@@ -87,11 +85,14 @@ class _RootLayoutState extends State<RootLayout> {
   }
 
   void _handleFailure(AppError error) {
-    _rootLayoutController.toast.showToast(error.getLocalizedMessage(context), type: ToastType.error);
+    _rootLayoutController.toast
+        .showToast(error.getLocalizedMessage(context), type: ToastType.error);
   }
 
   void _handleSignOut(bool result) {
-    if (!result) { return; }
+    if (!result) {
+      return;
+    }
     _navigate('/sign-in');
   }
 
@@ -102,23 +103,20 @@ class _RootLayoutState extends State<RootLayout> {
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return BaseScreen(
       appBar: BaseAppBar(
         leadingAction: Center(
           child: IconButton(
             icon: BaseIcon(
-              icon: AppIcons.burger,
-              color: context.theme.base.secondaryColor
-            ),
+                icon: AppIcons.burger,
+                color: context.theme.base.secondaryColor),
             onPressed: () => _scaffoldKey.currentState?.openDrawer(),
           ),
         ),
         trailingAction: IconButton(
           icon: BaseIcon(
-            icon: AppIcons.bell,
-            color: context.theme.base.secondaryColor
-          ),
+              icon: AppIcons.bell, color: context.theme.base.secondaryColor),
           onPressed: () {},
         ),
       ),
@@ -129,40 +127,45 @@ class _RootLayoutState extends State<RootLayout> {
   }
 
   Drawer _rootDrawer() => Drawer(
-     child: Padding(
-       padding: const EdgeInsets.only(top: AppPadding.p60, left: AppPadding.p16, right: AppPadding.p28, bottom: AppPadding.p60),
-       child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SvgPicture.asset(
-              'assets/resources/season_spot_logo.svg',
-              height: 52, 
-              width: 52,
-            ),
-            const SizedBox(height: AppPadding.p20),
-            if (_userAccount != null) _buildUserAccountInfo(_userAccount!),
-            const BaseDivider(),
-            const SizedBox(height: AppPadding.p20),
-            ..._getLinks().map((link) => BaseSidebarLink(
-              icon: link.icon,
-              label: link.label,
-              onPressed: () => _navigate(link.route),
-              isActive: GoRouterState.of(context).uri.toString() == link.route,
-            )),
-            const SizedBox(height: AppPadding.p20),
-            const BaseDivider(),
-            const SizedBox(height: AppPadding.p20),
-            BaseSidebarLink(
-              icon: AppIcons.signOut,
-              label: context.translate.signOut,
-              onPressed: _signOut,
-            ),
-         ]
-       ),
-     )
-  );
+          child: Padding(
+        padding: const EdgeInsets.only(
+            top: AppPadding.p60,
+            left: AppPadding.p16,
+            right: AppPadding.p28,
+            bottom: AppPadding.p60),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SvgPicture.asset(
+                'assets/resources/season_spot_logo.svg',
+                height: 52,
+                width: 52,
+              ),
+              const SizedBox(height: AppPadding.p20),
+              if (_userAccount != null) _buildUserAccountInfo(_userAccount!),
+              const BaseDivider(),
+              const SizedBox(height: AppPadding.p20),
+              ..._getLinks().map(
+                (link) => BaseSidebarLink(
+                  icon: link.icon,
+                  label: link.label,
+                  onPressed: () => _navigate(link.route),
+                  isActive:
+                      GoRouterState.of(context).uri.toString() == link.route,
+                ),
+              ),
+              const SizedBox(height: AppPadding.p20),
+              const BaseDivider(),
+              const SizedBox(height: AppPadding.p20),
+              BaseSidebarLink(
+                icon: AppIcons.signOut,
+                label: context.translate.signOut,
+                onPressed: _signOut,
+              ),
+            ]),
+      ));
 
   Widget _buildUserAccountInfo(UserAccount account) {
     return Row(

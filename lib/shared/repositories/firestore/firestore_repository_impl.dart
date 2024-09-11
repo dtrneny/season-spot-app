@@ -1,14 +1,18 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:season_spot/core/helpers/index.dart';
 import 'package:season_spot/shared/repositories/firestore/firestore_repository.dart';
 
-abstract class FirestoreRepositoryImpl<T extends FirestoreSerializable> implements FirestoreRepository<T> {
+abstract class FirestoreRepositoryImpl<T extends FirestoreSerializable>
+    implements FirestoreRepository<T> {
   final FirebaseFirestore firestore;
   final String _collectionPath;
   final T Function(Map<String, dynamic> data, String id) _fromDocFactory;
 
-  FirestoreRepositoryImpl(this.firestore, this._collectionPath, this._fromDocFactory);
+  FirestoreRepositoryImpl(
+    this.firestore,
+    this._collectionPath,
+    this._fromDocFactory,
+  );
 
   @override
   Future<bool> create(T entity) async {
@@ -31,7 +35,9 @@ abstract class FirestoreRepositoryImpl<T extends FirestoreSerializable> implemen
     final result = await firestore.collection(_collectionPath).doc(id).get();
     final data = result.data();
 
-    if (data == null) { return null; }
+    if (data == null) {
+      return null;
+    }
 
     return _fromDocFactory(data, id);
   }

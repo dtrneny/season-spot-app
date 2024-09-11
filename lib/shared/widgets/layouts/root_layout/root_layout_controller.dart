@@ -1,4 +1,3 @@
-
 import 'package:season_spot/config/locator.dart';
 import 'package:season_spot/core/error_handling/index.dart';
 import 'package:season_spot/core/helpers/index.dart';
@@ -9,8 +8,8 @@ import 'package:season_spot/shared/toast/index.dart';
 
 class RootLayoutController {
   final _auth = getIt.get<AuthService>();
-  final _userAccountRepository = getIt.get<FirestoreRepositoryImpl<UserAccount>>();
-
+  final _userAccountRepository =
+      getIt.get<FirestoreRepositoryImpl<UserAccount>>();
   final toast = getIt.get<ToastController>();
 
   Future<Result<bool, AppError>> signOut() async {
@@ -18,14 +17,16 @@ class RootLayoutController {
       await _auth.signOut();
       return const Success(true);
     } on Exception {
-      return Failure(AppError());    
+      return Failure(AppError());
     }
   }
 
   Future<Result<UserAccount?, AppError>> getUserAccount() async {
     try {
       final user = _auth.getCurrentUser();
-      if (user == null) { return Failure(AppError()); }
+      if (user == null) {
+        return Failure(AppError());
+      }
 
       final account = await _userAccountRepository.getById(user.id);
       return Success(account);

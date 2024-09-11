@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:season_spot/config/locator.dart';
@@ -27,14 +26,13 @@ class AppRouter {
     return [
       GoRoute(
         path: '/sign-in',
-        redirect: (BuildContext context, GoRouterState state) => _authService.getCurrentUser() != null
-          ? '/dashboard'
-          : null,
-        builder: (context, state) => const SignInScreen()
+        redirect: (BuildContext context, GoRouterState state) =>
+            _authService.getCurrentUser() != null ? '/dashboard' : null,
+        builder: (context, state) => const SignInScreen(),
       ),
       GoRoute(
         path: '/sign-up',
-        builder: (context, state) => const SignUpScreen()
+        builder: (context, state) => const SignUpScreen(),
       ),
       ShellRoute(
         navigatorKey: _shellNavigatorKey,
@@ -43,7 +41,7 @@ class AppRouter {
           GoRoute(
             path: '/dashboard',
             pageBuilder: (context, state) => const NoTransitionPage(
-              child: DashboardScreen()
+              child: DashboardScreen(),
             ),
           ),
           GoRoute(
@@ -51,7 +49,7 @@ class AppRouter {
             pageBuilder: (context, state) => const NoTransitionPage(
               child: Center(
                 child: Text('Vendor profile'),
-              )
+              ),
             ),
           ),
           GoRoute(
@@ -59,7 +57,7 @@ class AppRouter {
             pageBuilder: (context, state) => const NoTransitionPage(
               child: Center(
                 child: Text('Product map'),
-              )
+              ),
             ),
           ),
           GoRoute(
@@ -67,23 +65,22 @@ class AppRouter {
             pageBuilder: (context, state) => const NoTransitionPage(
               child: Center(
                 child: Text('Community places'),
-              )
+              ),
             ),
           ),
           GoRoute(
             path: '/notification-center',
             pageBuilder: (context, state) => const NoTransitionPage(
-              child: Center(
-                child: Text('Notification center'),
-              )
-            ),
+                child: Center(
+              child: Text('Notification center'),
+            )),
           ),
           GoRoute(
             path: '/settings',
             pageBuilder: (context, state) => const NoTransitionPage(
               child: Center(
                 child: Text('Settings'),
-              )
+              ),
             ),
           ),
         ],

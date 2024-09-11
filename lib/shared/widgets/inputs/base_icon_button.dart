@@ -1,13 +1,12 @@
-
 import 'package:flutter/material.dart';
 import 'package:season_spot/core/theming/index.dart';
 import 'package:season_spot/shared/widgets/index.dart';
 
 class BaseIconButton extends StatelessWidget {
-  const BaseIconButton({ super.key });
+  const BaseIconButton({super.key});
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {},
       style: ElevatedButton.styleFrom(
@@ -18,10 +17,7 @@ class BaseIconButton extends StatelessWidget {
         elevation: 0,
         shadowColor: Colors.transparent,
       ),
-      child: const BaseIcon(
-        icon: AppIcons.search,
-        color: Colors.white
-      ),
+      child: const BaseIcon(icon: AppIcons.search, color: Colors.white),
     );
   }
 }

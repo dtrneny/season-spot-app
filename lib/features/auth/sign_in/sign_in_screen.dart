@@ -32,16 +32,20 @@ class _SignInScreenState extends State<SignInScreen> {
   Future<void> _signIn() async {
     setState(() => _signingIn = true);
     if (_emailErrorMessage != null) {
-      setState(() { _emailErrorMessage = null; _shouldSkipValidation = true; });
+      setState(() {
+        _emailErrorMessage = null;
+        _shouldSkipValidation = true;
+      });
     }
     if (!_shouldSkipValidation && !_formKey.currentState!.validate()) {
       setState(() => _signingIn = false);
       return;
-    }    
+    }
 
     _shouldSkipValidation = false;
-    
-    final result = await _signInController.signIn(_emailController.text, _passwordController.text);
+
+    final result = await _signInController.signIn(
+        _emailController.text, _passwordController.text);
 
     final _ = switch (result) {
       Success() => _handleSignInSuccess(),
@@ -61,11 +65,14 @@ class _SignInScreenState extends State<SignInScreen> {
       return;
     }
 
-    _signInController.toast.showToast(error.getLocalizedMessage(context), type: ToastType.error);
+    _signInController.toast
+        .showToast(error.getLocalizedMessage(context), type: ToastType.error);
   }
 
   void _clearSignInErrorOnChange() {
-    if (_emailErrorMessage == null) { return; }
+    if (_emailErrorMessage == null) {
+      return;
+    }
     setState(() => _emailErrorMessage = null);
   }
 
@@ -73,10 +80,10 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     return BaseScreen(
       child: Center(
-        child: SingleChildScrollView( 
-          child: Column( 
-            mainAxisAlignment: MainAxisAlignment.start, 
-            mainAxisSize: MainAxisSize.max, 
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
             children: [
               _buildHeader(),
               const SizedBox(height: AppPadding.p40),
@@ -84,9 +91,9 @@ class _SignInScreenState extends State<SignInScreen> {
               const SizedBox(height: 10.0),
               _buildActions(context),
             ],
-          ), 
-        ), 
-      ), 
+          ),
+        ),
+      ),
     );
   }
 
@@ -98,26 +105,24 @@ class _SignInScreenState extends State<SignInScreen> {
         children: [
           SvgPicture.asset(
             'assets/resources/season_spot_logo.svg',
-            height: 75, 
+            height: 75,
             width: 75,
           ),
           const SizedBox(height: AppPadding.p40),
           Text(
             context.translate.welcomeToSeasonSpot,
             style: TextStyle(
-              color: context.theme.base.secondaryColor,
-              fontWeight: FontWeight.w500,
-              fontSize: 24.0
-            ),
+                color: context.theme.base.secondaryColor,
+                fontWeight: FontWeight.w500,
+                fontSize: 24.0),
           ),
           const SizedBox(height: 5.0),
           Text(
             context.translate.signInToYourAccount,
             style: TextStyle(
-              color: context.theme.base.neutral600,
-              fontWeight: FontWeight.w400,
-              fontSize: 16.0
-            ),
+                color: context.theme.base.neutral600,
+                fontWeight: FontWeight.w400,
+                fontSize: 16.0),
           ),
         ],
       ),
@@ -163,14 +168,15 @@ class _SignInScreenState extends State<SignInScreen> {
       children: [
         Container(
           alignment: Alignment.centerRight,
-          child: ClickableText(text: context.translate.forgotPassword, onPressed: () {}),
+          child: ClickableText(
+              text: context.translate.forgotPassword, onPressed: () {}),
         ),
         const SizedBox(height: AppPadding.p40),
         BaseButton(
           onPressed: _signIn,
           child: _signingIn
-            ? const ButtonSpinner()
-            : Text(context.translate.signIn),
+              ? const ButtonSpinner()
+              : Text(context.translate.signIn),
         ),
         const SizedBox(height: AppPadding.p40),
         Row(
@@ -179,15 +185,13 @@ class _SignInScreenState extends State<SignInScreen> {
             Text(
               context.translate.dontHaveAnAccount,
               style: TextStyle(
-                fontSize: AppTypographySizing.small,
-                color: context.theme.base.neutral600
-              ),
+                  fontSize: AppTypographySizing.small,
+                  color: context.theme.base.neutral600),
             ),
             const SizedBox(width: 3.0),
             ClickableText(
-              text: context.translate.signUpYourself,
-              onPressed: () => context.push('/sign-up')
-            )
+                text: context.translate.signUpYourself,
+                onPressed: () => context.push('/sign-up'))
           ],
         )
       ],

@@ -1,11 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:season_spot/core/theming/index.dart';
 
 class FormItem extends StatelessWidget {
   final String label;
   final Widget child;
-  
+
   const FormItem({
     super.key,
     required this.label,

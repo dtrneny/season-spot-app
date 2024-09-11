@@ -1,4 +1,3 @@
-
 import 'package:flutter/widgets.dart';
 import 'package:season_spot/core/validation/validation_rule.dart';
 

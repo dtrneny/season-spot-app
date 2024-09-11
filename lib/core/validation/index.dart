@@ -1,4 +1,3 @@
-
 export 'rules/email_validation_rule.dart';
 export 'rules/equality_validation_rule.dart';
 export 'rules/error_message_rule.dart';

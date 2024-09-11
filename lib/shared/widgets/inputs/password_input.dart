@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:season_spot/core/validation/index.dart';
 import 'package:season_spot/core/theming/index.dart';
@@ -9,7 +8,7 @@ class PasswordInput extends StatefulWidget {
   final String? hint;
   final AutovalidateMode? validationMode;
   final List<ValidationRule<String>>? rules;
-  
+
   const PasswordInput({
     super.key,
     required this.controller,
@@ -64,20 +63,16 @@ class _PasswordInputState extends State<PasswordInput> {
         errorBorder: _getBorder(context.theme.base.error600),
         focusedErrorBorder: _getBorder(context.theme.base.error600),
         errorStyle: _getErrorTextStyle(context.theme.base.error600),
-        suffixIcon: IconButton( 
+        suffixIcon: IconButton(
           icon: BaseIcon(
-            icon: _isTextObscured ? AppIcons.eyeSlash : AppIcons.eye,
-            color: context.theme.base.neutral600
-          ),
-          onPressed: () => setState(() => _isTextObscured = !_isTextObscured), 
+              icon: _isTextObscured ? AppIcons.eyeSlash : AppIcons.eye,
+              color: context.theme.base.neutral600),
+          onPressed: () => setState(() => _isTextObscured = !_isTextObscured),
         ),
         errorMaxLines: 2,
       ),
       autovalidateMode: widget.validationMode,
-      validator: Validation.apply(
-        context,
-        widget.rules ?? []
-      ),  
+      validator: Validation.apply(context, widget.rules ?? []),
     );
   }
 }
