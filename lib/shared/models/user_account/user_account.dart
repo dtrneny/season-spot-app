@@ -1,5 +1,4 @@
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:season_spot/core/helpers/firestore_serializable.dart';
 
@@ -18,10 +17,7 @@ class UserAccount with _$UserAccount implements FirestoreSerializable<UserAccoun
 
   factory UserAccount.fromJson(Map<String, dynamic> json) => _$UserAccountFromJson(json);
 
-  @override
-  UserAccount fromDoc(DocumentSnapshot doc) {
-    final data = doc.data() as Map<String, dynamic>?;
-    if (data == null) { throw StateError('Missing data for document ID: ${doc.id}'); }
-    return UserAccount.fromJson(data).copyWith(id: doc.id);
-  } 
+  factory UserAccount.fromDoc(Map<String, dynamic> data, String id) {
+    return UserAccount.fromJson(data).copyWith(id: id);
+  }
 }
