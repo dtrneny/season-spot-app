@@ -52,7 +52,7 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   void handleSignInSuccess() {
-    context.go('/home');
+    context.go('/dashboard');
   }
 
   void handleSignInFailure(AppError error) {

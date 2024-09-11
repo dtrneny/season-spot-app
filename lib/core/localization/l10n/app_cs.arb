@@ -27,5 +27,12 @@
   "discoverLocalFarmersAndFreshProduce": "Objevujte místní farmáře a čerstvé produkty",
   "recommendations": "Doporučení",
   "gettingStarted": "Na začátek",
-  "dashboardGettingStartedText": "Začněte dnes prodávat věci, které pěstujete, sbíráte nebo vytváříte. Stačí si vytvořit obchod pro prodejce a nabízet své místní produkty."
+  "dashboardGettingStartedText": "Začněte dnes prodávat věci, které pěstujete, sbíráte nebo vytváříte. Stačí si vytvořit obchod pro prodejce a nabízet své místní produkty.",
+  "dashboard": "Přehled",
+  "vendorProfile": "Profil prodejce",
+  "productMap": "Mapa produktů",
+  "communityPlaces": "Komunitní místa",
+  "notificationCenter": "Centrum notifikací",
+  "settings": "Nastavení",
+  "signOut": "Odhlásit se"
 }

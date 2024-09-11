@@ -5,9 +5,16 @@ enum AppIcons {
   bell('bell.svg'),
   burger('burger.svg'),
   calendar('calendar.svg'),
+  dashboard('dashboard.svg'),
   eye('eye.svg'),
   eyeSlash('eye-slash.svg'),
-  search('search.svg');
+  flag('flag.svg'),
+  location('location.svg'),
+  search('search.svg'),
+  settings('settings.svg'),
+  signOut('sign-out.svg'),
+  user('user.svg');
+
 
   final String fileName;
   static const String prefix = 'assets/icons/';

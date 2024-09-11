@@ -29,25 +29,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BaseScreen(
-      appBar: const BaseAppBar(),
-      child: SingleChildScrollView( 
-        child: Column( 
-          mainAxisAlignment: MainAxisAlignment.start, 
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: AppPadding.p28),
-            _buildDateInformation(),
-            const SizedBox(height: AppPadding.p16),
-            _buildSearchHeader(),
-            const SizedBox(height: AppPadding.p28),
-            _buildGettingStartedCard(),
-            const SizedBox(height: AppPadding.p28),
-            _buildRecommendationsCarousel(),
-          ],
-        ), 
-      ),
+    return SingleChildScrollView( 
+      child: Column( 
+        mainAxisAlignment: MainAxisAlignment.start, 
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: AppPadding.p28),
+          _buildDateInformation(),
+          const SizedBox(height: AppPadding.p16),
+          _buildSearchHeader(),
+          const SizedBox(height: AppPadding.p28),
+          _buildGettingStartedCard(),
+          const SizedBox(height: AppPadding.p28),
+          _buildRecommendationsCarousel(),
+        ],
+      ), 
     );
   }
 
@@ -76,7 +73,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Expanded(child: Heading1(title: context.translate.discoverLocalFarmersAndFreshProduce)),
-        const SizedBox(width: AppPadding.p40),
+        const SizedBox(width: AppPadding.p28),
         const BaseIconButton(),
       ],
     );

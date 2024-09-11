@@ -16,5 +16,8 @@ final ThemeData darkTheme = ThemeData(
     backgroundColor: AppColors.neutral100,
     surfaceTintColor: AppColors.neutral100,
   ),
+  drawerTheme: const DrawerThemeData(
+    backgroundColor: AppColors.neutral100,
+  ),
 );
 
