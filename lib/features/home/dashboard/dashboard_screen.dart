@@ -1,11 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:season_spot/core/localization/localization.dart';
 import 'package:season_spot/core/theming/index.dart';
 import 'package:season_spot/features/home/dashboard_temp_mock.dart';
 import 'package:season_spot/features/home/widgets/dashboard_info_card.dart';
-import 'package:season_spot/features/home/widgets/dashboard_product_card.dart';
 import 'package:season_spot/shared/widgets/index.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -73,14 +73,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
         ),
         const SizedBox(width: AppPadding.p28),
-        const BaseIconButton(),
+        BaseIconButton(
+          onPressed: () => context.go('/product-map'),
+          icon: AppIcons.search,
+        ),
       ],
     );
   }
 
   Widget _buildGettingStartedCard() {
     return DashboardInfoCard(
-      onPressed: () {},
+      onPressed: () => context.go('/vendor-profile/add'),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -151,11 +154,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
       margin: index == 0
           ? const EdgeInsets.only(right: AppPadding.p16)
           : const EdgeInsets.symmetric(horizontal: AppPadding.p16),
-      child: DashboardProductCard(
+      child: ProductCard(
         imageUrl: product.imageUrl,
         title: product.title,
         description: product.description,
         category: product.category,
+        onPressed: () => context.push("/product/$index"),
       ),
     );
   }

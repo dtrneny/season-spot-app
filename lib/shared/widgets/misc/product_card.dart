@@ -2,29 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:season_spot/core/theming/index.dart';
 import 'package:season_spot/shared/widgets/misc/base_chip.dart';
 
-class DashboardProductCard extends StatelessWidget {
+class ProductCard extends StatelessWidget {
   final String imageUrl;
   final String title;
   final String description;
   final String category;
+  final VoidCallback onPressed;
 
-  const DashboardProductCard({
+  const ProductCard({
     super.key,
     required this.imageUrl,
     required this.title,
     required this.description,
     required this.category,
+    required this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(AppRounding.medium),
-      child: Stack(
-        children: [
-          _buildBackground(),
-          _buildCardContent(),
-        ],
+    return InkWell(
+      onTap: onPressed, // Add onPressed action here
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(AppRounding.medium),
+        child: Stack(
+          children: [
+            _buildBackground(),
+            _buildCardContent(),
+          ],
+        ),
       ),
     );
   }

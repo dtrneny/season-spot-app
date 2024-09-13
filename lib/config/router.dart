@@ -85,6 +85,26 @@ class AppRouter {
           ),
         ],
       ),
+      GoRoute(
+        path: '/vendor-profile/add',
+        pageBuilder: (context, state) => const NoTransitionPage(
+          child: Center(
+            child: Text('Vendor profile addition'),
+          ),
+        ),
+      ),
+      GoRoute(
+        path: '/product/:id',
+        pageBuilder: (context, state) {
+          final String id = state.pathParameters['id']!;
+
+          return NoTransitionPage(
+            child: Center(
+              child: Text("Product $id"),
+            ),
+          );
+        },
+      ),
     ];
   }
 }

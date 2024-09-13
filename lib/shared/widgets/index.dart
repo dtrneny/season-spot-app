@@ -1,4 +1,3 @@
-
 export 'inputs/base_button.dart';
 export 'inputs/base_icon_button.dart';
 export 'inputs/clickable_text.dart';
@@ -16,6 +15,7 @@ export 'misc/base_sidebar_link.dart';
 export 'misc/button_spinner.dart';
 export 'misc/form_item.dart';
 export 'misc/indicator_dots.dart';
+export 'misc/product_card.dart';
 export 'misc/screen_content.dart';
 export 'misc/toast_wrapper.dart';
 
