@@ -5,6 +5,7 @@ export 'inputs/password_input.dart';
 export 'inputs/text_input.dart';
 
 export 'layouts/root_layout/root_layout.dart';
+export 'layouts/page_form_layout/page_form_layout.dart';
 
 export 'misc/base_app_bar.dart';
 export 'misc/base_screen.dart';

@@ -126,46 +126,51 @@ class _RootLayoutState extends State<RootLayout> {
     );
   }
 
-  Drawer _rootDrawer() => Drawer(
-          child: Padding(
+  Drawer _rootDrawer() {
+    return Drawer(
+      child: Padding(
         padding: const EdgeInsets.only(
-            top: AppPadding.p60,
-            left: AppPadding.p16,
-            right: AppPadding.p28,
-            bottom: AppPadding.p60),
+          top: AppPadding.p60,
+          left: AppPadding.p16,
+          right: AppPadding.p28,
+          bottom: AppPadding.p60,
+        ),
         child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SvgPicture.asset(
-                'assets/resources/season_spot_logo.svg',
-                height: 52,
-                width: 52,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SvgPicture.asset(
+              'assets/resources/season_spot_logo.svg',
+              height: 52,
+              width: 52,
+            ),
+            const SizedBox(height: AppPadding.p20),
+            if (_userAccount != null) _buildUserAccountInfo(_userAccount!),
+            const BaseDivider(),
+            const SizedBox(height: AppPadding.p20),
+            ..._getLinks().map(
+              (link) => BaseSidebarLink(
+                icon: link.icon,
+                label: link.label,
+                onPressed: () => _navigate(link.route),
+                isActive:
+                    GoRouterState.of(context).uri.toString() == link.route,
               ),
-              const SizedBox(height: AppPadding.p20),
-              if (_userAccount != null) _buildUserAccountInfo(_userAccount!),
-              const BaseDivider(),
-              const SizedBox(height: AppPadding.p20),
-              ..._getLinks().map(
-                (link) => BaseSidebarLink(
-                  icon: link.icon,
-                  label: link.label,
-                  onPressed: () => _navigate(link.route),
-                  isActive:
-                      GoRouterState.of(context).uri.toString() == link.route,
-                ),
-              ),
-              const SizedBox(height: AppPadding.p20),
-              const BaseDivider(),
-              const SizedBox(height: AppPadding.p20),
-              BaseSidebarLink(
-                icon: AppIcons.signOut,
-                label: context.translate.signOut,
-                onPressed: _signOut,
-              ),
-            ]),
-      ));
+            ),
+            const SizedBox(height: AppPadding.p20),
+            const BaseDivider(),
+            const SizedBox(height: AppPadding.p20),
+            BaseSidebarLink(
+              icon: AppIcons.signOut,
+              label: context.translate.signOut,
+              onPressed: _signOut,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   Widget _buildUserAccountInfo(UserAccount account) {
     return Row(

@@ -34,5 +34,11 @@
   "communityPlaces": "Community places",
   "notificationCenter": "Notification center",
   "settings": "Settings",
-  "signOut": "Sign out"
+  "signOut": "Sign out",
+  "vendorAdditionFormDescription": "This form is used to create a seller profile, thanks to which it is possible to start displaying your products and things for sale.",
+  "createVendorProfile": "Create vendor profile",
+  "bussinessName": "Business name",
+  "bussinessNamePlaceholder": "John's garden",
+  "bussinessEmail": "Business email",
+  "bussinessEmailPlaceholder": "info@johns.garden.com"
 }

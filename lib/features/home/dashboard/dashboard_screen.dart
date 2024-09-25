@@ -83,7 +83,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Widget _buildGettingStartedCard() {
     return DashboardInfoCard(
-      onPressed: () => context.go('/vendor-profile/add'),
+      onPressed: () => context.push('/vendor-profile/add'),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:season_spot/config/locator.dart';
+import 'package:season_spot/core/localization/localization.dart';
 import 'package:season_spot/features/auth/sign_in/sign_in_screen.dart';
 import 'package:season_spot/features/auth/sign_up/sign_up_screen.dart';
 import 'package:season_spot/features/home/dashboard/dashboard_screen.dart';
+import 'package:season_spot/features/vendoring/vendor_addition/vendor_addition_screen.dart';
 import 'package:season_spot/shared/services/auth/auth_service.dart';
 import 'package:season_spot/shared/widgets/index.dart';
 
@@ -87,10 +89,9 @@ class AppRouter {
       ),
       GoRoute(
         path: '/vendor-profile/add',
-        pageBuilder: (context, state) => const NoTransitionPage(
-          child: Center(
-            child: Text('Vendor profile addition'),
-          ),
+        builder: (context, state) => PageFromLayout(
+          title: context.translate.vendorProfile,
+          child: const VendorAdditionScreen(),
         ),
       ),
       GoRoute(

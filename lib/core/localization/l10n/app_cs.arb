@@ -34,5 +34,11 @@
   "communityPlaces": "Komunitní místa",
   "notificationCenter": "Centrum notifikací",
   "settings": "Nastavení",
-  "signOut": "Odhlásit se"
+  "signOut": "Odhlásit se",
+  "vendorAdditionFormDescription": "Tento formulář slouží k vytvoření profilu prodejce, díky němuž je možné začít vystavovat své produkty a věci pro prodej.",
+  "createVendorProfile": "Založit profil prodejce",
+  "bussinessName": "Název společnosti",
+  "bussinessNamePlaceholder": "Janova zahrada",
+  "bussinessEmail": "E-mail společnosti",
+  "bussinessEmailPlaceholder": "info@janova.zahrada.cz"
 }
