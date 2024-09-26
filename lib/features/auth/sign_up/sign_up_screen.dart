@@ -82,30 +82,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BaseScreen(
-      appBar: AppBar(
-        title: ScreenTitle(title: context.translate.signUp),
-        leading: IconButton(
-          icon: BaseIcon(
-            icon: AppIcons.arrowLeft,
-            color: context.theme.base.secondaryColor,
-          ),
-          onPressed: () => context.pop(),
-        ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        _buildIntroductionText(),
+        const SizedBox(height: AppPadding.p20),
+        _buildForm(),
+        const SizedBox(height: AppPadding.p60),
+        _buildActions(),
+        const SizedBox(height: AppPadding.p60),
+      ],
+    );
+  }
+
+  Widget _buildIntroductionText() {
+    return Text(
+      context.translate.signUpFormDescription,
+      style: TextStyle(
+        fontSize: AppTypographySizing.base,
+        color: context.theme.base.neutral600,
       ),
-      child: ScreenContent(
-          child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            _buildForm(),
-            const SizedBox(height: AppPadding.p60),
-            _buildActions(),
-            const SizedBox(height: AppPadding.p60),
-          ],
-        ),
-      )),
     );
   }
 

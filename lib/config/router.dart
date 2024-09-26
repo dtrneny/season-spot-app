@@ -34,7 +34,10 @@ class AppRouter {
       ),
       GoRoute(
         path: '/sign-up',
-        builder: (context, state) => const SignUpScreen(),
+        builder: (context, state) => PageFromLayout(
+          title: context.translate.signUp,
+          child: const SignUpScreen(),
+        ),
       ),
       ShellRoute(
         navigatorKey: _shellNavigatorKey,

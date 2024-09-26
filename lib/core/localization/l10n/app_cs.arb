@@ -40,5 +40,6 @@
   "bussinessName": "Název společnosti",
   "bussinessNamePlaceholder": "Janova zahrada",
   "bussinessEmail": "E-mail společnosti",
-  "bussinessEmailPlaceholder": "info@janova.zahrada.cz"
+  "bussinessEmailPlaceholder": "info@janova.zahrada.cz",
+  "signUpFormDescription": "Tento formulář slouží k vytvoření uživatelského profilu, který vám umožní začít využívat aplikaci pro vyhledávání lokální produkce a prodejců."
 }

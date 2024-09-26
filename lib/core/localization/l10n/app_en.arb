@@ -40,5 +40,6 @@
   "bussinessName": "Business name",
   "bussinessNamePlaceholder": "John's garden",
   "bussinessEmail": "Business email",
-  "bussinessEmailPlaceholder": "info@johns.garden.com"
+  "bussinessEmailPlaceholder": "info@johns.garden.com",
+  "signUpFormDescription": "This form is used to create a user profile, which allows you to start using the app to search for local products and vendors."
 }
