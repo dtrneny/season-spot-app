@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:season_spot/core/helpers/index.dart';
 import 'package:season_spot/shared/repositories/firestore/firestore_repository.dart';
 
-abstract class FirestoreRepositoryImpl<T extends FirestoreSerializable>
+class FirestoreRepositoryImpl<T extends FirestoreSerializable>
     implements FirestoreRepository<T> {
   final FirebaseFirestore firestore;
   final String _collectionPath;
