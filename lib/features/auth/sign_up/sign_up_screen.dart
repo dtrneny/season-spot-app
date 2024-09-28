@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:season_spot/core/error_handling/index.dart';
-import 'package:season_spot/core/helpers/index.dart';
 import 'package:season_spot/core/localization/localization.dart';
+import 'package:season_spot/core/screen_handling/index.dart';
 import 'package:season_spot/core/theming/index.dart';
 import 'package:season_spot/core/validation/index.dart';
 import 'package:season_spot/features/auth/sign_up/sign_up_controller.dart';
 import 'package:season_spot/shared/models/index.dart';
-import 'package:season_spot/shared/toast/toast_type_enum.dart';
+import 'package:season_spot/shared/toast/index.dart';
 import 'package:season_spot/shared/widgets/index.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -18,9 +18,10 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  final SignUpController _signUpController = SignUpController();
+  final SignUpController _controller = SignUpController();
 
   final _formKey = GlobalKey<FormState>();
+  static const _singUpKey = 'signUp';
 
   final _firstnameController = TextEditingController();
   final _lastnameController = TextEditingController();
@@ -28,60 +29,65 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _passwordController = TextEditingController();
   final _confPasswordController = TextEditingController();
 
-  String? _emailErrorMessage;
-  bool _shouldSkipValidation = false;
-  bool _signingUp = false;
+  bool _validated = false;
 
   Future<void> _signUp() async {
-    setState(() => _signingUp = true);
-    if (_emailErrorMessage != null) {
-      setState(() {
-        _emailErrorMessage = null;
-        _shouldSkipValidation = true;
-      });
-    }
-    if (!_shouldSkipValidation && !_formKey.currentState!.validate()) {
-      setState(() => _signingUp = false);
-      return;
+    if (!_validated) {
+      setState(() => _validated = true);
     }
 
-    _shouldSkipValidation = false;
-
-    final result = await _signUpController.signUp(
-      UserAccount(
+    final result = await _controller.signUp(
+      key: _singUpKey,
+      data: UserAccount(
         firstname: _firstnameController.text,
         lastname: _lastnameController.text,
         email: _emailController.text,
       ),
-      _passwordController.text,
+      password: _passwordController.text,
     );
 
-    final _ = switch (result) {
-      Success() => _handleSignUpSuccess(),
-      Failure(:final exception) => _handleSignUpFailure(exception),
-    };
-
-    setState(() => _signingUp = false);
+    if (result && mounted) {
+      context.pop();
+    }
   }
 
-  void _handleSignUpSuccess() {
-    context.pop();
-  }
-
-  void _handleSignUpFailure(AppError error) {
-    if (error is EmailInUseError) {
-      setState(() => _emailErrorMessage = error.getLocalizedMessage(context));
+  void _clearEmailInUseErrorOnChange() {
+    if (_controller.currentState is! ErrorState) {
       return;
     }
+    _controller.clearState();
+  }
 
-    _signUpController.toast.showToast(
-      error.getLocalizedMessage(context),
-      type: ToastType.error,
-    );
+  String? _getEmailErrorMessage() {
+    final state = _controller.currentState;
+    if (state is! ErrorState || state.error is! EmailInUseError) {
+      return null;
+    }
+    return state.error.getLocalizedMessage(context);
   }
 
   @override
   Widget build(BuildContext context) {
+    return StreamBuilder<ScreenState>(
+      stream: _controller.stateStream,
+      initialData: _controller.currentState,
+      builder: (context, snapshot) {
+        final state = snapshot.data;
+
+        if (state is ErrorState &&
+            state.error.presentation == ErrorPresentation.toast) {
+          _controller.toast.showToast(
+            state.error.getLocalizedMessage(context),
+            type: ToastType.error,
+          );
+        }
+
+        return _buildContent();
+      },
+    );
+  }
+
+  Widget _buildContent() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       mainAxisSize: MainAxisSize.max,
@@ -109,6 +115,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget _buildForm() {
     return Form(
       key: _formKey,
+      autovalidateMode: _validated
+          ? AutovalidateMode.onUserInteraction
+          : AutovalidateMode.disabled,
       child: Column(
         children: [
           FormItem(
@@ -138,10 +147,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: TextInput(
               controller: _emailController,
               hint: context.translate.emailPlaceholder,
+              onChanged: (_) => _clearEmailInUseErrorOnChange(),
               rules: [
                 RequiredValidationRule(),
                 EmailValidationRule(),
-                ErrorMessageRule(message: _emailErrorMessage),
+                ErrorMessageRule(message: _getEmailErrorMessage()),
               ],
             ),
           ),
@@ -179,7 +189,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget _buildActions() {
     return BaseButton(
       onPressed: _signUp,
-      child: _signingUp
+      child: _controller.loadingByKey(_singUpKey)
           ? const ButtonSpinner()
           : Text(context.translate.createAnAccount),
     );
