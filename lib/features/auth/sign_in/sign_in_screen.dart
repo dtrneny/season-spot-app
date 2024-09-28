@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:season_spot/core/error_handling/index.dart';
-import 'package:season_spot/core/helpers/index.dart';
+import 'package:season_spot/core/screen_handling/index.dart';
 import 'package:season_spot/shared/toast/index.dart';
 import 'package:season_spot/core/validation/index.dart';
 import 'package:season_spot/shared/widgets/index.dart';
@@ -18,66 +19,69 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  final SignInController _signInController = SignInController();
+  final SignInController _controller = SignInController();
 
   final _formKey = GlobalKey<FormState>();
+  static const _singInKey = 'signIn';
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  String? _emailErrorMessage;
-  bool _shouldSkipValidation = false;
-  bool _signingIn = false;
+  bool _validated = false;
 
   Future<void> _signIn() async {
-    setState(() => _signingIn = true);
-    if (_emailErrorMessage != null) {
-      setState(() {
-        _emailErrorMessage = null;
-        _shouldSkipValidation = true;
-      });
-    }
-    if (!_shouldSkipValidation && !_formKey.currentState!.validate()) {
-      setState(() => _signingIn = false);
-      return;
+    if (!_validated) {
+      setState(() => _validated = true);
     }
 
-    _shouldSkipValidation = false;
+    final result = await _controller.signIn(
+      key: _singInKey,
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
 
-    final result = await _signInController.signIn(
-        _emailController.text, _passwordController.text);
-
-    final _ = switch (result) {
-      Success() => _handleSignInSuccess(),
-      Failure(:final exception) => _handleSignInFailure(exception),
-    };
-
-    setState(() => _signingIn = false);
+    if (result && mounted) {
+      context.go('/dashboard');
+    }
   }
 
-  void _handleSignInSuccess() {
-    context.go('/dashboard');
-  }
-
-  void _handleSignInFailure(AppError error) {
-    if (error is InvalidCredentialsError) {
-      setState(() => _emailErrorMessage = error.getLocalizedMessage(context));
+  void _clearInvalidCredentialsErrorOnChange() {
+    if (_controller.currentState is! ErrorState) {
       return;
     }
-
-    _signInController.toast
-        .showToast(error.getLocalizedMessage(context), type: ToastType.error);
+    _controller.clearState();
   }
 
-  void _clearSignInErrorOnChange() {
-    if (_emailErrorMessage == null) {
-      return;
+  String? _getEmailErrorMessage() {
+    final state = _controller.currentState;
+    if (state is! ErrorState || state.error is! InvalidCredentialsError) {
+      return null;
     }
-    setState(() => _emailErrorMessage = null);
+    return state.error.getLocalizedMessage(context);
   }
 
   @override
   Widget build(BuildContext context) {
+    return StreamBuilder<ScreenState>(
+      stream: _controller.stateStream,
+      initialData: _controller.currentState,
+      builder: (context, snapshot) {
+        final state = snapshot.data;
+
+        if (state is ErrorState &&
+            state.error.presentation == ErrorPresentation.toast) {
+          _controller.toast.showToast(
+            state.error.getLocalizedMessage(context),
+            type: ToastType.error,
+          );
+        }
+
+        return _buildContent();
+      },
+    );
+  }
+
+  Widget _buildContent() {
     return BaseScreen(
       child: Center(
         child: SingleChildScrollView(
@@ -89,7 +93,7 @@ class _SignInScreenState extends State<SignInScreen> {
               const SizedBox(height: AppPadding.p40),
               _buildForm(),
               const SizedBox(height: 10.0),
-              _buildActions(context),
+              _buildActions(),
             ],
           ),
         ),
@@ -138,12 +142,15 @@ class _SignInScreenState extends State<SignInScreen> {
             label: context.translate.email,
             child: TextInput(
               controller: _emailController,
-              onChanged: (_) => _clearSignInErrorOnChange(),
+              onChanged: (_) => _clearInvalidCredentialsErrorOnChange(),
               hint: context.translate.enterAnEmail,
+              validationMode: _validated
+                  ? AutovalidateMode.onUserInteraction
+                  : AutovalidateMode.disabled,
               rules: [
                 RequiredValidationRule(),
                 EmailValidationRule(),
-                ErrorMessageRule(message: _emailErrorMessage),
+                ErrorMessageRule(message: _getEmailErrorMessage()),
               ],
             ),
           ),
@@ -163,18 +170,20 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  Widget _buildActions(BuildContext context) {
+  Widget _buildActions() {
     return Column(
       children: [
         Container(
           alignment: Alignment.centerRight,
           child: ClickableText(
-              text: context.translate.forgotPassword, onPressed: () {}),
+            text: context.translate.forgotPassword,
+            onPressed: () {},
+          ),
         ),
         const SizedBox(height: AppPadding.p40),
         BaseButton(
           onPressed: _signIn,
-          child: _signingIn
+          child: _controller.loadingByKey(_singInKey)
               ? const ButtonSpinner()
               : Text(context.translate.signIn),
         ),
@@ -185,13 +194,15 @@ class _SignInScreenState extends State<SignInScreen> {
             Text(
               context.translate.dontHaveAnAccount,
               style: TextStyle(
-                  fontSize: AppTypographySizing.small,
-                  color: context.theme.base.neutral600),
+                fontSize: AppTypographySizing.small,
+                color: context.theme.base.neutral600,
+              ),
             ),
             const SizedBox(width: 3.0),
             ClickableText(
-                text: context.translate.signUpYourself,
-                onPressed: () => context.push('/sign-up'))
+              text: context.translate.signUpYourself,
+              onPressed: () => context.push('/sign-up'),
+            )
           ],
         )
       ],

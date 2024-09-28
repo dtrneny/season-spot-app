@@ -16,9 +16,8 @@ class UserAccount
     required String email,
   }) = _UserAccount;
 
-  factory UserAccount.fromJson(Map<String, dynamic> json) {
-    return _$UserAccountFromJson(json);
-  }
+  factory UserAccount.fromJson(Map<String, dynamic> json) =>
+      _$UserAccountFromJson(json);
 
   factory UserAccount.fromDoc(Map<String, dynamic> data, String id) {
     return UserAccount.fromJson(data).copyWith(id: id);

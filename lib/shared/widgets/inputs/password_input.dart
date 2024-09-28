@@ -53,6 +53,8 @@ class _PasswordInputState extends State<PasswordInput> {
       controller: widget.controller,
       style: _getTextStyle(context.theme.base.secondaryColor),
       obscureText: !_isTextObscured,
+      enableSuggestions: false,
+      autocorrect: false,
       decoration: InputDecoration(
         hintText: widget.hint,
         filled: true,

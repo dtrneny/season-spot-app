@@ -1,0 +1,1 @@
+enum LoadingType { overlay, ui }

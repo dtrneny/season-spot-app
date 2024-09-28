@@ -1,0 +1,1 @@
+enum ErrorPresentation { toast, ui }
