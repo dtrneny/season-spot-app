@@ -26,6 +26,7 @@ if (flutterVersionName == null) {
     flutterVersionName = "1.0"
 }
 
+apply from: project(':flutter_config').projectDir.getPath() + "/dotenv.gradle"
 android {
     namespace = "com.app.dtrneny.season_spot"
     compileSdk = flutter.compileSdkVersion
@@ -42,7 +43,8 @@ android {
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion = localProperties.getProperty('flutter.minSdkVersion').toInteger()
-        targetSdk = flutter.targetSdkVersion
+        targetSdk = localProperties.getProperty('flutter.targetSdk').toInteger()
+        compileSdk = localProperties.getProperty('flutter.compileSdk').toInteger()
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
     }

@@ -50,4 +50,6 @@ firepit-log.txt
 
 # Freezed
 *.freezed.dart
-*.g.dart 
+*.g.dart
+
+.env

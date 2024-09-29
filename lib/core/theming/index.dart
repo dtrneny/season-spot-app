@@ -1,3 +1,5 @@
+export 'map/map_dark.dart';
+export 'map/map_light.dart';
 export 'themes/dark_theme.dart';
 export 'themes/light_theme.dart';
 export 'utils/app_colors.dart';

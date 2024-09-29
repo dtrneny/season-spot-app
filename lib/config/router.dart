@@ -5,6 +5,7 @@ import 'package:season_spot/core/localization/localization.dart';
 import 'package:season_spot/features/auth/sign_in/sign_in_screen.dart';
 import 'package:season_spot/features/auth/sign_up/sign_up_screen.dart';
 import 'package:season_spot/features/home/dashboard/dashboard_screen.dart';
+import 'package:season_spot/features/products/product_map/product_map_screen.dart';
 import 'package:season_spot/features/vendoring/vendor_addition/vendor_addition_screen.dart';
 import 'package:season_spot/shared/services/auth/auth_service.dart';
 import 'package:season_spot/shared/widgets/index.dart';
@@ -58,14 +59,6 @@ class AppRouter {
             ),
           ),
           GoRoute(
-            path: '/product-map',
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: Center(
-                child: Text('Product map'),
-              ),
-            ),
-          ),
-          GoRoute(
             path: '/community-places',
             pageBuilder: (context, state) => const NoTransitionPage(
               child: Center(
@@ -108,6 +101,12 @@ class AppRouter {
             ),
           );
         },
+      ),
+      GoRoute(
+        path: '/product-map',
+        pageBuilder: (context, state) => const NoTransitionPage(
+          child: ProductMapScreen(),
+        ),
       ),
     ];
   }
