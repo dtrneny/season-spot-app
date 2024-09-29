@@ -29,7 +29,7 @@ class SignUpController extends ScreenController {
           await _userAccountRepository.createWithDocId(data, user.id);
       stopLoading(key);
 
-      return result;
+      return result != null;
     } on Exception catch (e) {
       stopLoading(key);
       if (e is! FirebaseAuthException) {

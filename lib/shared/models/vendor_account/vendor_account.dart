@@ -12,7 +12,8 @@ class VendorAccount
   const factory VendorAccount({
     String? id,
     required String bussinessName,
-    required String bussinessEmail,
+    required String email,
+    required String phoneNumber,
   }) = _VendorAccount;
 
   factory VendorAccount.fromJson(Map<String, dynamic> json) =>

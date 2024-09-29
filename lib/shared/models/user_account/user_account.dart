@@ -14,6 +14,7 @@ class UserAccount
     required String firstname,
     required String lastname,
     required String email,
+    String? vendorAccountId,
   }) = _UserAccount;
 
   factory UserAccount.fromJson(Map<String, dynamic> json) =>

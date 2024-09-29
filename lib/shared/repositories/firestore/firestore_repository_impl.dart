@@ -16,19 +16,19 @@ class FirestoreRepositoryImpl<T extends FirestoreSerializable>
   );
 
   @override
-  Future<bool> create(T entity) async {
+  Future<String?> create(T entity) async {
     final data = entity.toJson();
     data.remove('id');
-    await firestore.collection(_collectionPath).add(data);
-    return true;
+    final result = await firestore.collection(_collectionPath).add(data);
+    return result.id;
   }
 
   @override
-  Future<bool> createWithDocId(T entity, String id) async {
+  Future<String?> createWithDocId(T entity, String id) async {
     final data = entity.toJson();
     data.remove('id');
     await firestore.collection(_collectionPath).doc(id).set(data);
-    return true;
+    return id;
   }
 
   @override
@@ -62,5 +62,10 @@ class FirestoreRepositoryImpl<T extends FirestoreSerializable>
         .where((entity) => entity != null)
         .map((entity) => entity!)
         .toList();
+  }
+
+  @override
+  Future<void> update(String id, Map<String, dynamic> data) async {
+    await firestore.collection(_collectionPath).doc(id).update(data);
   }
 }

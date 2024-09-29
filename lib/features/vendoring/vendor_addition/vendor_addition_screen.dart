@@ -24,14 +24,16 @@ class _VendorAdditionScreenState extends State<VendorAdditionScreen> {
   static const _createVendorAccountKey = 'createVendorAccount';
 
   final _businessNameController = TextEditingController();
-  final _businessEmailController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _phoneNumberController = TextEditingController();
 
   Future<void> _createAccount() async {
     final result = await _controller.createVendorAccount(
       key: _createVendorAccountKey,
       data: VendorAccount(
         bussinessName: _businessNameController.text,
-        bussinessEmail: _businessEmailController.text,
+        email: _emailController.text,
+        phoneNumber: _phoneNumberController.text,
       ),
     );
 
@@ -111,10 +113,21 @@ class _VendorAdditionScreenState extends State<VendorAdditionScreen> {
           FormItem(
             label: context.translate.bussinessEmail,
             child: TextInput(
-              controller: _businessEmailController,
+              controller: _emailController,
               hint: context.translate.bussinessEmailPlaceholder,
               rules: [
                 ErrorMessageRule(message: _getEmailErrorMessage()),
+              ],
+            ),
+          ),
+          const SizedBox(height: AppPadding.p20),
+          FormItem(
+            label: context.translate.phoneNumber,
+            child: TextInput(
+              controller: _phoneNumberController,
+              hint: context.translate.phoneNumberPlaceholder,
+              rules: [
+                PhoneNumberValidationRule(),
               ],
             ),
           ),
