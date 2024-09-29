@@ -4,6 +4,7 @@ import 'package:season_spot/core/error_handling/index.dart';
 import 'package:season_spot/core/localization/localization.dart';
 import 'package:season_spot/core/screen_handling/index.dart';
 import 'package:season_spot/core/theming/index.dart';
+import 'package:season_spot/core/validation/index.dart';
 import 'package:season_spot/features/vendoring/vendor_addition/vendor_addition_controller.dart';
 import 'package:season_spot/shared/models/index.dart';
 import 'package:season_spot/shared/toast/index.dart';
@@ -38,6 +39,14 @@ class _VendorAdditionScreenState extends State<VendorAdditionScreen> {
       // FIXME: later replace to detail
       context.go('/dashboard');
     }
+  }
+
+  String? _getEmailErrorMessage() {
+    final state = _controller.currentState;
+    if (state is! ErrorState || state.error is! EmailInUseError) {
+      return null;
+    }
+    return state.error.getLocalizedMessage(context);
   }
 
   @override
@@ -104,6 +113,9 @@ class _VendorAdditionScreenState extends State<VendorAdditionScreen> {
             child: TextInput(
               controller: _businessEmailController,
               hint: context.translate.bussinessEmailPlaceholder,
+              rules: [
+                ErrorMessageRule(message: _getEmailErrorMessage()),
+              ],
             ),
           ),
         ],
