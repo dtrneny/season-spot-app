@@ -22,4 +22,5 @@ export 'misc/screen_content.dart';
 export 'misc/toast_wrapper.dart';
 
 export 'typography/heading_1.dart';
+export 'typography/introduction_text.dart';
 export 'typography/screen_title.dart';

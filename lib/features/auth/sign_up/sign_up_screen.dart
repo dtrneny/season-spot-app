@@ -92,23 +92,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
       mainAxisAlignment: MainAxisAlignment.start,
       mainAxisSize: MainAxisSize.max,
       children: [
-        _buildIntroductionText(),
+        IntroductionText(text: context.translate.signUpFormDescription),
         const SizedBox(height: AppPadding.p20),
         _buildForm(),
         const SizedBox(height: AppPadding.p60),
         _buildActions(),
         const SizedBox(height: AppPadding.p60),
       ],
-    );
-  }
-
-  Widget _buildIntroductionText() {
-    return Text(
-      context.translate.signUpFormDescription,
-      style: TextStyle(
-        fontSize: AppTypographySizing.base,
-        color: context.theme.base.neutral600,
-      ),
     );
   }
 
@@ -122,6 +112,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         children: [
           FormItem(
             label: context.translate.firstname,
+            required: true,
             child: TextInput(
               controller: _firstnameController,
               hint: context.translate.firstnamePlaceholder,
@@ -133,6 +124,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           const SizedBox(height: AppPadding.p20),
           FormItem(
             label: context.translate.lastname,
+            required: true,
             child: TextInput(
               controller: _lastnameController,
               hint: context.translate.lastnamePlaceholder,
@@ -144,6 +136,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           const SizedBox(height: AppPadding.p20),
           FormItem(
             label: context.translate.email,
+            required: true,
             child: TextInput(
               controller: _emailController,
               hint: context.translate.emailPlaceholder,
@@ -158,6 +151,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           const SizedBox(height: AppPadding.p20),
           FormItem(
             label: context.translate.password,
+            required: true,
             child: PasswordInput(
               controller: _passwordController,
               hint: context.translate.enterAPassword,
@@ -169,6 +163,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           const SizedBox(height: AppPadding.p20),
           FormItem(
             label: context.translate.confirmationPassword,
+            required: true,
             child: PasswordInput(
               controller: _confPasswordController,
               hint: context.translate.confirmPassword,

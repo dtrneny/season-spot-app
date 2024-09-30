@@ -77,23 +77,13 @@ class _VendorAdditionScreenState extends State<VendorAdditionScreen> {
       mainAxisAlignment: MainAxisAlignment.start,
       mainAxisSize: MainAxisSize.max,
       children: [
-        _buildIntroductionText(),
+        IntroductionText(text: context.translate.vendorAdditionFormDescription),
         const SizedBox(height: AppPadding.p20),
         _buildForm(),
         const SizedBox(height: AppPadding.p60),
         _buildActions(),
         const SizedBox(height: AppPadding.p60),
       ],
-    );
-  }
-
-  Widget _buildIntroductionText() {
-    return Text(
-      context.translate.vendorAdditionFormDescription,
-      style: TextStyle(
-        fontSize: AppTypographySizing.base,
-        color: context.theme.base.neutral600,
-      ),
     );
   }
 
@@ -104,6 +94,7 @@ class _VendorAdditionScreenState extends State<VendorAdditionScreen> {
         children: [
           FormItem(
             label: context.translate.bussinessName,
+            required: true,
             child: TextInput(
               controller: _businessNameController,
               hint: context.translate.bussinessNamePlaceholder,
@@ -112,6 +103,7 @@ class _VendorAdditionScreenState extends State<VendorAdditionScreen> {
           const SizedBox(height: AppPadding.p20),
           FormItem(
             label: context.translate.bussinessEmail,
+            required: true,
             child: TextInput(
               controller: _emailController,
               hint: context.translate.bussinessEmailPlaceholder,
@@ -123,6 +115,7 @@ class _VendorAdditionScreenState extends State<VendorAdditionScreen> {
           const SizedBox(height: AppPadding.p20),
           FormItem(
             label: context.translate.phoneNumber,
+            required: true,
             child: TextInput(
               controller: _phoneNumberController,
               hint: context.translate.phoneNumberPlaceholder,

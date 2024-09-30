@@ -118,16 +118,10 @@ class _SignInScreenState extends State<SignInScreen> {
             style: TextStyle(
                 color: context.theme.base.secondaryColor,
                 fontWeight: FontWeight.w500,
-                fontSize: 24.0),
+                fontSize: AppTypographySizing.extraLarge),
           ),
           const SizedBox(height: 5.0),
-          Text(
-            context.translate.signInToYourAccount,
-            style: TextStyle(
-                color: context.theme.base.neutral600,
-                fontWeight: FontWeight.w400,
-                fontSize: 16.0),
-          ),
+          IntroductionText(text: context.translate.signInToYourAccount),
         ],
       ),
     );
@@ -140,6 +134,7 @@ class _SignInScreenState extends State<SignInScreen> {
         children: [
           FormItem(
             label: context.translate.email,
+            required: true,
             child: TextInput(
               controller: _emailController,
               onChanged: (_) => _clearInvalidCredentialsErrorOnChange(),
@@ -156,6 +151,7 @@ class _SignInScreenState extends State<SignInScreen> {
           ),
           const SizedBox(height: AppPadding.p20),
           FormItem(
+            required: true,
             label: context.translate.password,
             child: PasswordInput(
               controller: _passwordController,

@@ -4,11 +4,13 @@ import 'package:season_spot/core/theming/index.dart';
 class FormItem extends StatelessWidget {
   final String label;
   final Widget child;
+  final bool required;
 
   const FormItem({
     super.key,
     required this.label,
     required this.child,
+    this.required = false,
   });
 
   @override
@@ -17,7 +19,7 @@ class FormItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          label,
+          label + (required ? '*' : ''),
           style: TextStyle(
             color: context.theme.base.primaryColor,
             fontSize: AppTypographySizing.base,
