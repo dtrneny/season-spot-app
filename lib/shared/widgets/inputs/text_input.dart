@@ -8,6 +8,7 @@ class TextInput extends StatelessWidget {
   final AutovalidateMode? validationMode;
   final List<ValidationRule<String>>? rules;
   final void Function(String)? onChanged;
+  final Widget? prefixIcon;
 
   const TextInput({
     super.key,
@@ -16,6 +17,7 @@ class TextInput extends StatelessWidget {
     this.validationMode = AutovalidateMode.onUserInteraction,
     this.rules,
     this.onChanged,
+    this.prefixIcon,
   });
 
   OutlineInputBorder _getBorder(Color color) {
@@ -58,6 +60,7 @@ class TextInput extends StatelessWidget {
         focusedErrorBorder: _getBorder(context.theme.base.error600),
         errorStyle: _getErrorTextStyle(context.theme.base.error600),
         errorMaxLines: 2,
+        prefixIcon: prefixIcon,
       ),
       autovalidateMode: validationMode,
       validator: Validation.apply(context, rules ?? []),

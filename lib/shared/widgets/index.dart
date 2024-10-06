@@ -4,6 +4,7 @@ export 'inputs/clickable_text.dart';
 export 'inputs/password_input.dart';
 export 'inputs/text_input.dart';
 
+export 'layouts/full_screen_overlay/full_screen_overlay.dart';
 export 'layouts/root_layout/root_layout.dart';
 export 'layouts/page_form_layout/page_form_layout.dart';
 

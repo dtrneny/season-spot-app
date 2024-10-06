@@ -44,5 +44,9 @@
   "signUpFormDescription": "Tento formulář slouží k vytvoření uživatelského profilu, který vám umožní začít využívat aplikaci pro vyhledávání lokální produkce a prodejců.",
   "pleaseEnterAValidPhoneNumber": "Prosím, zadejte platné telefonní číslo.",
   "phoneNumber": "Telefonní číslo",
-  "phoneNumberPlaceholder": "+919367788755"
+  "phoneNumberPlaceholder": "+919367788755",
+  "pickALocation": "Vyberte lokaci",
+  "search": "Hledat",
+  "noLocationsFound": "Nebyly nalezeny žádné lokace",
+  "location": "Lokace"
 }

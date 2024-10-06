@@ -44,5 +44,9 @@
   "signUpFormDescription": "This form is used to create a user profile, which allows you to start using the app to search for local products and vendors.",
   "pleaseEnterAValidPhoneNumber": "Please enter a valid phone number.",
   "phoneNumber": "Phone number",
-  "phoneNumberPlaceholder": "+919367788755"
+  "phoneNumberPlaceholder": "+919367788755",
+  "pickALocation": "Pick a location",
+  "search": "Search",
+  "noLocationsFound": "No locations found",
+  "location": "Location"
 }

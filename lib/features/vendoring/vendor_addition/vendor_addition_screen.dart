@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:season_spot/core/error_handling/index.dart';
 import 'package:season_spot/core/localization/localization.dart';
@@ -7,8 +8,10 @@ import 'package:season_spot/core/theming/index.dart';
 import 'package:season_spot/core/validation/index.dart';
 import 'package:season_spot/features/vendoring/vendor_addition/vendor_addition_controller.dart';
 import 'package:season_spot/shared/models/index.dart';
+import 'package:season_spot/shared/services/google_places_service/models/autocomplete_prediction/autocomplete_prediction.dart';
 import 'package:season_spot/shared/toast/index.dart';
 import 'package:season_spot/shared/widgets/index.dart';
+import 'package:season_spot/shared/widgets/inputs/location_picker_overlay/location_picker_overlay.dart';
 
 class VendorAdditionScreen extends StatefulWidget {
   const VendorAdditionScreen({super.key});
@@ -26,6 +29,9 @@ class _VendorAdditionScreenState extends State<VendorAdditionScreen> {
   final _businessNameController = TextEditingController();
   final _emailController = TextEditingController();
   final _phoneNumberController = TextEditingController();
+  final _overlayController = OverlayPortalController();
+
+  AutocompletePrediction? _location;
 
   Future<void> _createAccount() async {
     final result = await _controller.createVendorAccount(
@@ -49,6 +55,11 @@ class _VendorAdditionScreenState extends State<VendorAdditionScreen> {
       return null;
     }
     return state.error.getLocalizedMessage(context);
+  }
+
+  void _onLocationSelect(AutocompletePrediction prediction) {
+    _overlayController.toggle();
+    setState(() => _location = prediction);
   }
 
   @override
@@ -77,7 +88,7 @@ class _VendorAdditionScreenState extends State<VendorAdditionScreen> {
       mainAxisAlignment: MainAxisAlignment.start,
       mainAxisSize: MainAxisSize.max,
       children: [
-        IntroductionText(text: context.translate.vendorAdditionFormDescription),
+        IntroductionText(text: context.translate.signUpFormDescription),
         const SizedBox(height: AppPadding.p20),
         _buildForm(),
         const SizedBox(height: AppPadding.p60),
@@ -91,6 +102,7 @@ class _VendorAdditionScreenState extends State<VendorAdditionScreen> {
     return Form(
       key: _formKey,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           FormItem(
             label: context.translate.bussinessName,
@@ -124,6 +136,87 @@ class _VendorAdditionScreenState extends State<VendorAdditionScreen> {
               ],
             ),
           ),
+          const SizedBox(height: AppPadding.p20),
+          FormItem(
+            label: context.translate.location,
+            required: true,
+            child: _buildLocationField(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLocationField() {
+    return Container(
+      alignment: Alignment.center,
+      child: InkWell(
+        borderRadius: const BorderRadius.all(Radius.circular(AppRounding.base)),
+        onTap: _overlayController.toggle,
+        child: _buildLocationOverlay(),
+      ),
+    );
+  }
+
+  Widget _buildLocationOverlay() {
+    return OverlayPortal(
+      controller: _overlayController,
+      overlayChildBuilder: (_) => FullScreenOverlay(
+        onBackButtonTap: () => _overlayController.toggle(),
+        child: LocationPickerOverlay(onLocationSelect: _onLocationSelect),
+      ),
+      child: _location != null
+          ? _buildSelectedLocation()
+          : _buildLocationInkWellContent(),
+    );
+  }
+
+  Widget _buildSelectedLocation() {
+    return Container(
+      padding: const EdgeInsets.all(6),
+      decoration: BoxDecoration(
+        color: context.theme.base.neutral200,
+        borderRadius: BorderRadius.circular(
+            AppRounding.base), // Adjust the radius as needed
+      ),
+      child: Row(
+        children: [
+          IconButton(
+            icon: BaseIcon(
+              icon: AppIcons.flag,
+              color: context.theme.base.primaryColor,
+            ),
+            onPressed: () {},
+          ),
+          Expanded(
+            child: Text(
+              _location!.description,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLocationInkWellContent() {
+    return Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: Column(
+        children: [
+          IconButton(
+            icon: BaseIcon(
+              icon: AppIcons.flag,
+              color: context.theme.base.neutral600,
+              width: 30,
+            ),
+            onPressed: null,
+          ),
+          Text(
+            context.translate.pickALocation,
+            style: TextStyle(color: context.theme.base.primaryColor),
+          )
         ],
       ),
     );

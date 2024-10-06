@@ -20,6 +20,7 @@ class BaseIcon extends StatelessWidget {
       icon.path,
       colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
       width: width,
+      height: width,
     );
   }
 }
