@@ -207,6 +207,7 @@ class _VendorAdditionScreenState extends State<VendorAdditionScreen> {
             icon: AppIcons.flag,
             color: context.theme.base.neutral600,
           ),
+          const SizedBox(height: 8.0),
           Text(
             context.translate.pickALocation,
             style: TextStyle(color: context.theme.base.primaryColor),

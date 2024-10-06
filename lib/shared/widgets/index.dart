@@ -7,9 +7,9 @@ export 'inputs/text_input.dart';
 export 'layouts/full_screen_overlay/full_screen_overlay.dart';
 export 'layouts/root_layout/root_layout.dart';
 export 'layouts/page_form_layout/page_form_layout.dart';
+export 'layouts/base_app_bar.dart';
+export 'layouts/base_screen.dart';
 
-export 'misc/base_app_bar.dart';
-export 'misc/base_screen.dart';
 export 'misc/base_chip.dart';
 export 'misc/base_divider.dart';
 export 'misc/base_icon.dart';
