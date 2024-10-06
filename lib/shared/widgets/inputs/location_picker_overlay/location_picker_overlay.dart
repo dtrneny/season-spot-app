@@ -110,12 +110,10 @@ class _LocationPickerOverlayState extends State<LocationPickerOverlay> {
     return TextInput(
       controller: _queryController,
       hint: context.translate.search,
-      prefixIcon: IconButton(
-        icon: BaseIcon(
-          icon: AppIcons.search,
-          color: context.theme.base.neutral600,
-        ),
-        onPressed: null,
+      prefixIcon: BaseIcon(
+        icon: AppIcons.search,
+        color: context.theme.base.neutral600,
+        size: 20.0,
       ),
     );
   }

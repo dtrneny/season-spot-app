@@ -5,22 +5,25 @@ import 'package:season_spot/core/theming/index.dart';
 class BaseIcon extends StatelessWidget {
   final AppIcons icon;
   final Color color;
-  final double? width;
+  final double? size;
 
   const BaseIcon({
     super.key,
     required this.icon,
     required this.color,
-    this.width,
+    this.size,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SvgPicture.asset(
-      icon.path,
-      colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
-      width: width,
-      height: width,
+    return FittedBox(
+      fit: BoxFit.scaleDown,
+      child: SvgPicture.asset(
+        icon.path,
+        colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
+        width: size,
+        height: size,
+      ),
     );
   }
 }

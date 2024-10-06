@@ -40,7 +40,7 @@ class BaseSidebarLink extends StatelessWidget {
                   color: isActive != null && isActive!
                       ? context.theme.base.primaryColor
                       : context.theme.base.secondaryColor,
-                  width: 20.0,
+                  size: 20.0,
                 ),
                 const SizedBox(width: AppPadding.p16),
                 Text(

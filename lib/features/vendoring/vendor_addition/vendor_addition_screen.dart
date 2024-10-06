@@ -173,21 +173,20 @@ class _VendorAdditionScreenState extends State<VendorAdditionScreen> {
 
   Widget _buildSelectedLocation() {
     return Container(
-      padding: const EdgeInsets.all(6),
+      padding: const EdgeInsets.all(AppPadding.p20),
       decoration: BoxDecoration(
         color: context.theme.base.neutral200,
         borderRadius: BorderRadius.circular(
-            AppRounding.base), // Adjust the radius as needed
+          AppRounding.base,
+        ), // Adjust the radius as needed
       ),
       child: Row(
         children: [
-          IconButton(
-            icon: BaseIcon(
-              icon: AppIcons.flag,
-              color: context.theme.base.primaryColor,
-            ),
-            onPressed: () {},
+          BaseIcon(
+            icon: AppIcons.flag,
+            color: context.theme.base.primaryColor,
           ),
+          const SizedBox(width: 8.0),
           Expanded(
             child: Text(
               _location!.description,
@@ -205,13 +204,9 @@ class _VendorAdditionScreenState extends State<VendorAdditionScreen> {
       padding: const EdgeInsets.all(12.0),
       child: Column(
         children: [
-          IconButton(
-            icon: BaseIcon(
-              icon: AppIcons.flag,
-              color: context.theme.base.neutral600,
-              width: 30,
-            ),
-            onPressed: null,
+          BaseIcon(
+            icon: AppIcons.flag,
+            color: context.theme.base.neutral600,
           ),
           Text(
             context.translate.pickALocation,
