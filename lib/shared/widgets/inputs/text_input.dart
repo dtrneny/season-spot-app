@@ -5,7 +5,7 @@ import 'package:season_spot/core/theming/index.dart';
 class TextInput extends StatelessWidget {
   final TextEditingController controller;
   final String? hint;
-  final AutovalidateMode? validationMode;
+  final AutovalidateMode validationMode;
   final List<ValidationRule<String>>? rules;
   final void Function(String)? onChanged;
   final Widget? prefixIcon;

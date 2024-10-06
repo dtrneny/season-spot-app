@@ -6,7 +6,7 @@ import 'package:season_spot/shared/widgets/index.dart';
 class PasswordInput extends StatefulWidget {
   final TextEditingController controller;
   final String? hint;
-  final AutovalidateMode? validationMode;
+  final AutovalidateMode validationMode;
   final List<ValidationRule<String>>? rules;
 
   const PasswordInput({
