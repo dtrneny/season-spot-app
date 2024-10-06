@@ -89,8 +89,9 @@ class _LocationPickerOverlayState extends State<LocationPickerOverlay> {
     return Padding(
       padding: const EdgeInsets.only(top: AppPadding.p16),
       child: Align(
-        child:
-            CircularProgressIndicator(color: context.theme.base.primaryColor),
+        child: CircularProgressIndicator(
+          color: context.theme.base.primaryColor,
+        ),
       ),
     );
   }

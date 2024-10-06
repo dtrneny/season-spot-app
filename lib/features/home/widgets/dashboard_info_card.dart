@@ -22,11 +22,12 @@ class DashboardInfoCard extends StatelessWidget {
           AppRounding.medium,
         ),
         child: InkWell(
-            borderRadius: BorderRadius.circular(
-              AppRounding.medium,
-            ),
-            onTap: onPressed,
-            child: _buildCardContent(context)),
+          borderRadius: BorderRadius.circular(
+            AppRounding.medium,
+          ),
+          onTap: onPressed,
+          child: _buildCardContent(context),
+        ),
       ),
     );
   }

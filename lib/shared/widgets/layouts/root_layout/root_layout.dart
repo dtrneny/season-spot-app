@@ -116,7 +116,9 @@ class _RootLayoutState extends State<RootLayout> {
         ),
         trailingAction: IconButton(
           icon: BaseIcon(
-              icon: AppIcons.bell, color: context.theme.base.secondaryColor),
+            icon: AppIcons.bell,
+            color: context.theme.base.secondaryColor,
+          ),
           onPressed: () {},
         ),
       ),

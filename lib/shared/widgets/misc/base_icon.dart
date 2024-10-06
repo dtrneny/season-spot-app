@@ -11,7 +11,7 @@ class BaseIcon extends StatelessWidget {
     super.key,
     required this.icon,
     required this.color,
-    this.size,
+    this.size = 20,
   });
 
   @override

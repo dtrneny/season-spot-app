@@ -116,9 +116,10 @@ class _SignInScreenState extends State<SignInScreen> {
           Text(
             context.translate.welcomeToSeasonSpot,
             style: TextStyle(
-                color: context.theme.base.secondaryColor,
-                fontWeight: FontWeight.w500,
-                fontSize: AppTypographySizing.extraLarge),
+              color: context.theme.base.secondaryColor,
+              fontWeight: FontWeight.w500,
+              fontSize: AppTypographySizing.extraLarge,
+            ),
           ),
           const SizedBox(height: 5.0),
           IntroductionText(text: context.translate.signInToYourAccount),

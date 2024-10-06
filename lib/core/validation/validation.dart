@@ -9,14 +9,9 @@ class Validation {
     List<ValidationRule<T>> rules,
   ) {
     return (T? value) {
-      for (final rule in rules) {
-        final result = rule.validate(context, value);
-        if (result != null) {
-          return result;
-        }
-      }
-
-      return null;
+      return rules
+          .map((rule) => rule.validate(context, value))
+          .firstWhere((result) => result != null, orElse: () => null);
     };
   }
 }

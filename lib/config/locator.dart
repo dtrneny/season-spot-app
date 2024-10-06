@@ -25,5 +25,7 @@ void initGetIt() {
   getIt.registerSingleton<FirestoreRepositoryImpl<VendorAccount>>(
     VendorAccountRepository(firestore),
   );
-  getIt.registerSingleton<GooglePlacesService>(GooglePlacesServiceImpl());
+  getIt.registerSingleton<GooglePlacesService>(
+    GooglePlacesServiceImpl(),
+  );
 }

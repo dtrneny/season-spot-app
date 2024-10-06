@@ -34,9 +34,10 @@ class PageFromLayout extends StatelessWidget {
             Text(
               title,
               style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: AppTypographySizing.medium,
-                  color: context.theme.base.primaryColor),
+                fontWeight: FontWeight.w500,
+                fontSize: AppTypographySizing.medium,
+                color: context.theme.base.primaryColor,
+              ),
             ),
             const SizedBox(height: AppPadding.p20),
             child,

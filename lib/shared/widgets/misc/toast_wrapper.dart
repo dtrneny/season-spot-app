@@ -58,12 +58,7 @@ class _ToastWrapperState extends State<ToastWrapper> {
           borderRadius: BorderRadius.circular(AppRounding.base),
           color: colors.$1,
         ),
-        child: Text(
-          toast.message,
-          style: TextStyle(
-            color: colors.$2,
-          ),
-        ),
+        child: Text(toast.message, style: TextStyle(color: colors.$2)),
       ),
       behavior: SnackBarBehavior.floating,
       dismissDirection: DismissDirection.up,

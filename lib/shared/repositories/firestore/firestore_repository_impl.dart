@@ -58,11 +58,9 @@ class FirestoreRepositoryImpl<T extends FirestoreSerializable>
     return querySnapshot.docs
         .map((doc) {
           final data = doc.data() as Map<String, dynamic>?;
-
           return data != null ? fromDoc(data, doc.id) : null;
         })
-        .where((entity) => entity != null)
-        .map((entity) => entity!)
+        .whereType<T>()
         .toList();
   }
 

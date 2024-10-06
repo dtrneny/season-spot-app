@@ -50,7 +50,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        BaseIcon(icon: AppIcons.calendar, color: context.theme.base.neutral600),
+        BaseIcon(
+          icon: AppIcons.calendar,
+          color: context.theme.base.neutral600,
+        ),
         const SizedBox(width: 8.0),
         Text(
           _getFormattedDate(),
@@ -101,6 +104,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               BaseIcon(
                 icon: AppIcons.arrowRight,
                 color: context.theme.base.complementaryColor,
+                size: 12,
               ),
             ],
           ),
@@ -123,7 +127,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(child: Heading1(title: context.translate.recommendations)),
+            Expanded(
+              child: Heading1(title: context.translate.recommendations),
+            ),
             const SizedBox(width: AppPadding.p40),
             IndicatorDots(
               dotsCount: _productMock.length,
