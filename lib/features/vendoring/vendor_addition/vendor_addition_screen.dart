@@ -33,13 +33,31 @@ class _VendorAdditionScreenState extends State<VendorAdditionScreen> {
   AutocompletePrediction? _location;
 
   Future<void> _createAccount() async {
+    if (_location == null) {
+      return;
+    }
+
+    AutocompletePrediction location = _location!;
+
+    final googlePlace =
+        await _controller.googlePlacesService.getGooglePlace(location.placeId);
+
+    if (googlePlace == null) {
+      return;
+    }
+
     final result = await _controller.createVendorAccount(
       key: _createVendorAccountKey,
       data: VendorAccount(
-        bussinessName: _businessNameController.text,
-        email: _emailController.text,
-        phoneNumber: _phoneNumberController.text,
-      ),
+          bussinessName: _businessNameController.text,
+          email: _emailController.text,
+          phoneNumber: _phoneNumberController.text,
+          location: Location(
+            id: googlePlace.placeId,
+            latitude: googlePlace.geometry.location.lat,
+            longitude: googlePlace.geometry.location.lng,
+            address: googlePlace.address,
+          )),
     );
 
     if (result && mounted) {

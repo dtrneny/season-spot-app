@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:season_spot/core/helpers/firestore_serializable.dart';
+import 'package:season_spot/shared/models/location/location.dart';
 
 part 'vendor_account.freezed.dart';
 part 'vendor_account.g.dart';
@@ -14,6 +15,7 @@ class VendorAccount
     required String bussinessName,
     required String email,
     required String phoneNumber,
+    required Location location,
   }) = _VendorAccount;
 
   factory VendorAccount.fromJson(Map<String, dynamic> json) =>

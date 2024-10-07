@@ -19,8 +19,10 @@ class FirestoreRepositoryImpl<T extends FirestoreSerializable>
 
   @override
   Future<String?> create(T entity) async {
+    print(entity);
     final data = entity.toJson();
     data.remove('id');
+    print(data);
     final result = await _firestore.collection(_collectionPath).add(data);
     return result.id;
   }

@@ -36,6 +36,11 @@ class _LocationPickerOverlayState extends State<LocationPickerOverlay> {
       key: _fetchPredictionsKey,
       query: _queryController.text,
     );
+
+    if (!mounted) {
+      return;
+    }
+
     setState(() => _predictions = predictions);
   }
 

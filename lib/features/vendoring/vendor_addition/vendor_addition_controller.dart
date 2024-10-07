@@ -5,6 +5,7 @@ import 'package:season_spot/core/screen_handling/index.dart';
 import 'package:season_spot/shared/models/index.dart';
 import 'package:season_spot/shared/repositories/firestore/firestore_repository_impl.dart';
 import 'package:season_spot/shared/services/auth/auth_service.dart';
+import 'package:season_spot/shared/services/google_places_service/google_places_service.dart';
 import 'package:season_spot/shared/toast/index.dart';
 
 class VendorAdditionController extends ScreenController {
@@ -14,6 +15,7 @@ class VendorAdditionController extends ScreenController {
   final _vendorAccountRepository =
       getIt.get<FirestoreRepositoryImpl<VendorAccount>>();
   final toast = getIt.get<ToastController>();
+  final googlePlacesService = getIt.get<GooglePlacesService>();
 
   Future<bool> createVendorAccount({
     String key = 'createVendorAccount',
