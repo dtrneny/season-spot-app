@@ -3,12 +3,12 @@ import 'package:season_spot/core/theming/index.dart';
 import 'package:season_spot/shared/widgets/index.dart';
 
 class FullScreenOverlay extends StatelessWidget {
-  final VoidCallback onBackButtonTap;
+  final VoidCallback onBackTap;
   final Widget child;
 
   const FullScreenOverlay({
     super.key,
-    required this.onBackButtonTap,
+    required this.onBackTap,
     required this.child,
   });
 
@@ -49,7 +49,7 @@ class FullScreenOverlay extends StatelessWidget {
           icon: AppIcons.arrowLeft,
           color: context.theme.base.secondaryColor,
         ),
-        onPressed: onBackButtonTap,
+        onPressed: onBackTap,
       ),
     );
   }

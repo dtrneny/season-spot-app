@@ -29,7 +29,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _passwordController = TextEditingController();
   final _confPasswordController = TextEditingController();
 
-  bool _validated = false;
+  var _validated = false;
 
   Future<void> _signUp() async {
     if (!_validated) {

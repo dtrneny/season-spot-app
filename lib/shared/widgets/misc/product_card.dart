@@ -7,7 +7,7 @@ class ProductCard extends StatelessWidget {
   final String title;
   final String description;
   final String category;
-  final VoidCallback onPressed;
+  final VoidCallback onTap;
 
   const ProductCard({
     super.key,
@@ -15,13 +15,13 @@ class ProductCard extends StatelessWidget {
     required this.title,
     required this.description,
     required this.category,
-    required this.onPressed,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onPressed, // Add onPressed action here
+      onTap: onTap,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(AppRounding.medium),
         child: Stack(

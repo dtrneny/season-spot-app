@@ -8,11 +8,11 @@ import 'package:season_spot/shared/widgets/index.dart';
 import 'package:season_spot/shared/widgets/inputs/location_picker_overlay/location_picker_overlay_controller.dart';
 
 class LocationPickerOverlay extends StatefulWidget {
-  final Function(AutocompletePrediction prediction) onLocationSelect;
+  final ValueChanged<AutocompletePrediction> onSelect;
 
   const LocationPickerOverlay({
     super.key,
-    required this.onLocationSelect,
+    required this.onSelect,
   });
 
   @override
@@ -141,7 +141,7 @@ class _LocationPickerOverlayState extends State<LocationPickerOverlay> {
     return ListTile(
       title: Text(prediction.description),
       onTap: () {
-        widget.onLocationSelect(prediction);
+        widget.onSelect(prediction);
       },
     );
   }

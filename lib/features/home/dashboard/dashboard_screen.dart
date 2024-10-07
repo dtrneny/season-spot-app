@@ -17,7 +17,7 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   final List<DashboardProduct> _productMock = getDashboardProductMock();
-  int _activeProductIndex = 0;
+  var _activeProductIndex = 0;
 
   String _getFormattedDate() {
     final DateTime now = DateTime.now();
@@ -165,7 +165,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         title: product.title,
         description: product.description,
         category: product.category,
-        onPressed: () => context.push("/product/$index"),
+        onTap: () => context.push("/product/$index"),
       ),
     );
   }

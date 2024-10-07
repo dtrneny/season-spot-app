@@ -22,7 +22,7 @@ class PasswordInput extends StatefulWidget {
 }
 
 class _PasswordInputState extends State<PasswordInput> {
-  bool _isTextObscured = false;
+  var _isTextObscured = false;
 
   OutlineInputBorder _getBorder(Color color) {
     return OutlineInputBorder(
@@ -31,17 +31,9 @@ class _PasswordInputState extends State<PasswordInput> {
     );
   }
 
-  TextStyle _getTextStyle(Color color) {
+  TextStyle _getTextStyle(Color color, double size) {
     return TextStyle(
-      fontSize: AppTypographySizing.base,
-      color: color,
-      fontWeight: FontWeight.w400,
-    );
-  }
-
-  TextStyle _getErrorTextStyle(Color color) {
-    return TextStyle(
-      fontSize: AppTypographySizing.small,
+      fontSize: size,
       color: color,
       fontWeight: FontWeight.w400,
     );
@@ -51,7 +43,10 @@ class _PasswordInputState extends State<PasswordInput> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
-      style: _getTextStyle(context.theme.base.secondaryColor),
+      style: _getTextStyle(
+        context.theme.base.secondaryColor,
+        AppTypographySizing.base,
+      ),
       obscureText: !_isTextObscured,
       enableSuggestions: false,
       autocorrect: false,
@@ -59,12 +54,18 @@ class _PasswordInputState extends State<PasswordInput> {
         hintText: widget.hint,
         filled: true,
         fillColor: context.theme.base.neutral200,
-        hintStyle: _getTextStyle(context.theme.base.neutral600),
+        hintStyle: _getTextStyle(
+          context.theme.base.neutral600,
+          AppTypographySizing.base,
+        ),
         enabledBorder: _getBorder(context.theme.base.neutral200),
         focusedBorder: _getBorder(context.theme.base.neutral250),
         errorBorder: _getBorder(context.theme.base.error600),
         focusedErrorBorder: _getBorder(context.theme.base.error600),
-        errorStyle: _getErrorTextStyle(context.theme.base.error600),
+        errorStyle: _getTextStyle(
+          context.theme.base.error600,
+          AppTypographySizing.small,
+        ),
         suffixIcon: IconButton(
           icon: BaseIcon(
               icon: _isTextObscured ? AppIcons.eyeSlash : AppIcons.eye,

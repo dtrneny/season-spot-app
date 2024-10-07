@@ -10,7 +10,6 @@ import 'package:season_spot/shared/models/index.dart';
 import 'package:season_spot/shared/services/google_places_service/models/autocomplete_prediction/autocomplete_prediction.dart';
 import 'package:season_spot/shared/toast/index.dart';
 import 'package:season_spot/shared/widgets/index.dart';
-import 'package:season_spot/shared/widgets/inputs/location_picker_overlay/location_picker_overlay.dart';
 
 class VendorAdditionScreen extends StatefulWidget {
   const VendorAdditionScreen({super.key});
@@ -49,19 +48,19 @@ class _VendorAdditionScreenState extends State<VendorAdditionScreen> {
     final result = await _controller.createVendorAccount(
       key: _createVendorAccountKey,
       data: VendorAccount(
-          bussinessName: _businessNameController.text,
-          email: _emailController.text,
-          phoneNumber: _phoneNumberController.text,
-          location: Location(
-            id: googlePlace.placeId,
-            latitude: googlePlace.geometry.location.lat,
-            longitude: googlePlace.geometry.location.lng,
-            address: googlePlace.address,
-          )),
+        bussinessName: _businessNameController.text,
+        email: _emailController.text,
+        phoneNumber: _phoneNumberController.text,
+        location: Location(
+          id: googlePlace.placeId,
+          latitude: googlePlace.geometry.location.lat,
+          longitude: googlePlace.geometry.location.lng,
+          address: googlePlace.address,
+        ),
+      ),
     );
 
     if (result && mounted) {
-      // FIXME: later replace to detail
       context.go('/dashboard');
     }
   }
@@ -179,8 +178,8 @@ class _VendorAdditionScreenState extends State<VendorAdditionScreen> {
     return OverlayPortal(
       controller: _overlayController,
       overlayChildBuilder: (_) => FullScreenOverlay(
-        onBackButtonTap: () => _overlayController.toggle(),
-        child: LocationPickerOverlay(onLocationSelect: _onLocationSelect),
+        onBackTap: () => _overlayController.toggle(),
+        child: LocationPickerOverlay(onSelect: _onLocationSelect),
       ),
       child: _location != null
           ? _buildSelectedLocation()

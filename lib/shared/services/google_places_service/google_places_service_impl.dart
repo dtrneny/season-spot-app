@@ -1,11 +1,7 @@
 import 'package:flutter_config/flutter_config.dart';
 import 'package:season_spot/core/api_client/api_client.dart';
 import 'package:season_spot/core/api_client/api_client_impl.dart';
-import 'package:season_spot/shared/services/google_places_service/models/autocomplete_prediction/autocomplete_prediction.dart';
-import 'package:season_spot/shared/services/google_places_service/google_places_service.dart';
-import 'package:season_spot/shared/services/google_places_service/models/google_place/google_place.dart';
-import 'package:season_spot/shared/services/google_places_service/responses/get_google_place_response/get_google_place_response.dart';
-import 'package:season_spot/shared/services/google_places_service/responses/get_predictions_response/get_predictions_response.dart';
+import 'package:season_spot/shared/services/google_places_service/index.dart';
 
 class GooglePlacesServiceImpl implements GooglePlacesService {
   final ApiClient<GetPredictionsResponse> _predictionApiClient =

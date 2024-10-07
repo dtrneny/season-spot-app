@@ -7,7 +7,7 @@ class TextInput extends StatelessWidget {
   final String? hint;
   final AutovalidateMode validationMode;
   final List<ValidationRule<String>>? rules;
-  final void Function(String)? onChanged;
+  final ValueChanged<String>? onChanged;
   final Widget? prefixIcon;
 
   const TextInput({

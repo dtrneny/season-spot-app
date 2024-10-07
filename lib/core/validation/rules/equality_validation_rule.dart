@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:season_spot/core/validation/validation_rule.dart';
 
 class EqualityValidationRule extends ValidationRule<String> {
-  final String Function()? comparedValueBuilder;
+  final ValueGetter<String>? comparedValueBuilder;
   final String customMessage;
 
   EqualityValidationRule({

@@ -27,7 +27,7 @@ class _SignInScreenState extends State<SignInScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  bool _validated = false;
+  var _validated = false;
 
   Future<void> _signIn() async {
     if (!_validated) {

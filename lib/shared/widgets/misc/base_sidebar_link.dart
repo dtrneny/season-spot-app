@@ -5,14 +5,14 @@ import 'package:season_spot/shared/widgets/index.dart';
 class BaseSidebarLink extends StatelessWidget {
   final AppIcons icon;
   final String label;
-  final VoidCallback onPressed;
+  final VoidCallback onTap;
   final bool? isActive;
 
   const BaseSidebarLink({
     super.key,
     required this.icon,
     required this.label,
-    required this.onPressed,
+    required this.onTap,
     this.isActive = false,
   });
 
@@ -23,7 +23,7 @@ class BaseSidebarLink extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: onPressed,
+          onTap: onTap,
           splashColor: context.theme.base.secondaryColor.withOpacity(0.2),
           child: Padding(
             padding: const EdgeInsets.only(

@@ -155,7 +155,7 @@ class _RootLayoutState extends State<RootLayout> {
               (link) => BaseSidebarLink(
                 icon: link.icon,
                 label: link.label,
-                onPressed: () => _navigate(link.route),
+                onTap: () => _navigate(link.route),
                 isActive:
                     GoRouterState.of(context).uri.toString() == link.route,
               ),
@@ -166,7 +166,7 @@ class _RootLayoutState extends State<RootLayout> {
             BaseSidebarLink(
               icon: AppIcons.signOut,
               label: context.translate.signOut,
-              onPressed: _signOut,
+              onTap: _signOut,
             ),
           ],
         ),
