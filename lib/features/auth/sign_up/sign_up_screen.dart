@@ -36,6 +36,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
       setState(() => _validated = true);
     }
 
+    if (_formKey.currentState!.validate()) {
+      return;
+    }
+
     final result = await _controller.signUp(
       key: _singUpKey,
       data: UserAccount(

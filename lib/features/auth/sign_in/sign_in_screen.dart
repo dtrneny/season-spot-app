@@ -34,6 +34,10 @@ class _SignInScreenState extends State<SignInScreen> {
       setState(() => _validated = true);
     }
 
+    if (_formKey.currentState!.validate()) {
+      return;
+    }
+
     final result = await _controller.signIn(
       key: _singInKey,
       email: _emailController.text,
