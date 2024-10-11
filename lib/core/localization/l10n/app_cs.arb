@@ -48,5 +48,8 @@
   "pickALocation": "Vyberte lokaci",
   "search": "Hledat",
   "noLocationsFound": "Nebyly nalezeny žádné lokace",
-  "location": "Lokace"
+  "location": "Lokace",
+  "pleaseEnterAtLeastXCharacters": "{x, plural, one {Prosím, zadejte alespoň jeden znak.} few {Prosím, zadejte alespoň {x} znaky.} other {Prosím, zadejte alespoň {x} znaků.}}",
+  "pleaseEnterNoMoreThanXCharacters": "{x, plural, one {Prosím, nezadávejte více než jeden znak.} few {Prosím, nezadávejte více než {x} znaky.} other {Prosím, nezadávejte více než {x} znaků.}}",
+  "pleasePickALocation": "Prosím, vyberte místo."
 }

@@ -48,5 +48,8 @@
   "pickALocation": "Pick a location",
   "search": "Search",
   "noLocationsFound": "No locations found",
-  "location": "Location"
+  "location": "Location",
+  "pleaseEnterAtLeastXCharacters": "{x, plural, one {Please enter at least one character.} other {Please enter at least {x} characters.}}",
+  "pleaseEnterNoMoreThanXCharacters": "{x, plural, one {Please enter no more than one character.} other {Please enter no more than {x} characters.}}",
+  "pleasePickALocation": "Please pick a location."
 }

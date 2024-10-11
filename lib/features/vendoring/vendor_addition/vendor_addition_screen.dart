@@ -5,11 +5,14 @@ import 'package:season_spot/core/localization/localization.dart';
 import 'package:season_spot/core/screen_handling/index.dart';
 import 'package:season_spot/core/theming/index.dart';
 import 'package:season_spot/core/validation/index.dart';
+import 'package:season_spot/core/validation/rules/max_length_rule.dart';
+import 'package:season_spot/core/validation/rules/min_length_rule.dart';
 import 'package:season_spot/features/vendoring/vendor_addition/vendor_addition_controller.dart';
 import 'package:season_spot/shared/models/index.dart';
 import 'package:season_spot/shared/services/google_places_service/models/autocomplete_prediction/autocomplete_prediction.dart';
 import 'package:season_spot/shared/toast/index.dart';
 import 'package:season_spot/shared/widgets/index.dart';
+import 'package:season_spot/shared/widgets/typography/error_message.dart';
 
 class VendorAdditionScreen extends StatefulWidget {
   const VendorAdditionScreen({super.key});
@@ -30,16 +33,28 @@ class _VendorAdditionScreenState extends State<VendorAdditionScreen> {
   final _overlayController = OverlayPortalController();
 
   AutocompletePrediction? _location;
+  String? _locationErrorMessage;
+  bool _validated = false;
 
   Future<void> _createAccount() async {
-    if (_location == null) {
+    setState(() => _locationErrorMessage = null);
+    if (!_validated) {
+      setState(() => _validated = true);
+    }
+
+    if (_formKey.currentState!.validate()) {
       return;
     }
 
-    AutocompletePrediction location = _location!;
+    if (_location == null) {
+      setState(
+          () => _locationErrorMessage = context.translate.pleasePickALocation);
+      return;
+    }
 
-    final googlePlace =
-        await _controller.googlePlacesService.getGooglePlace(location.placeId);
+    final googlePlace = await _controller.googlePlacesService.getGooglePlace(
+      _location!.placeId,
+    );
 
     if (googlePlace == null) {
       return;
@@ -117,6 +132,9 @@ class _VendorAdditionScreenState extends State<VendorAdditionScreen> {
   Widget _buildForm() {
     return Form(
       key: _formKey,
+      autovalidateMode: _validated
+          ? AutovalidateMode.onUserInteraction
+          : AutovalidateMode.disabled,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -126,6 +144,11 @@ class _VendorAdditionScreenState extends State<VendorAdditionScreen> {
             child: TextInput(
               controller: _businessNameController,
               hint: context.translate.bussinessNamePlaceholder,
+              rules: [
+                RequiredValidationRule(),
+                MinLengthRule(min: 4),
+                MaxLengthRule(max: 25),
+              ],
             ),
           ),
           const SizedBox(height: AppPadding.p20),
@@ -136,6 +159,7 @@ class _VendorAdditionScreenState extends State<VendorAdditionScreen> {
               controller: _emailController,
               hint: context.translate.bussinessEmailPlaceholder,
               rules: [
+                EmailValidationRule(),
                 ErrorMessageRule(message: _getEmailErrorMessage()),
               ],
             ),
@@ -164,13 +188,20 @@ class _VendorAdditionScreenState extends State<VendorAdditionScreen> {
   }
 
   Widget _buildLocationField() {
-    return Container(
-      alignment: Alignment.center,
-      child: InkWell(
-        borderRadius: const BorderRadius.all(Radius.circular(AppRounding.base)),
-        onTap: _overlayController.toggle,
-        child: _buildLocationOverlay(),
-      ),
+    return Column(
+      children: [
+        Center(
+          child: InkWell(
+            borderRadius: const BorderRadius.all(
+              Radius.circular(AppRounding.base),
+            ),
+            onTap: _overlayController.toggle,
+            child: _buildLocationOverlay(),
+          ),
+        ),
+        if (_locationErrorMessage != null)
+          ErrorMessage(error: _locationErrorMessage!),
+      ],
     );
   }
 
