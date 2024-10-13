@@ -1,5 +1,6 @@
 import 'package:rxdart/rxdart.dart';
 import 'package:season_spot/core/error_handling/index.dart';
+import 'package:season_spot/core/helpers/presentation_type.dart';
 import 'package:season_spot/core/screen_handling/index.dart';
 
 class ScreenController {
@@ -12,8 +13,8 @@ class ScreenController {
 
   ScreenState get currentState => _stateSubject.value;
 
-  void startLoading(String key, LoadingType loadingType) {
-    _loadingPool[key] = LoadingState(loadingType);
+  void startLoading(String key, PresentationType presentation) {
+    _loadingPool[key] = LoadingState(presentation);
     _emitOverallState();
   }
 
@@ -25,8 +26,9 @@ class ScreenController {
   void _emitOverallState() {
     if (_loadingPool.isNotEmpty) {
       final isOverlay = _loadingPool.values
-          .any((state) => state.loadingType == LoadingType.overlay);
-      final loadingType = isOverlay ? LoadingType.overlay : LoadingType.ui;
+          .any((state) => state.presentationType == PresentationType.overlay);
+      final loadingType =
+          isOverlay ? PresentationType.overlay : PresentationType.ui;
       _stateSubject.add(LoadingState(loadingType));
     } else {
       _stateSubject.add(IdleState());
@@ -46,9 +48,9 @@ class ScreenController {
     return _loadingPool.containsKey(key);
   }
 
-  bool isLoading({LoadingType? type}) {
+  bool isLoading({PresentationType? type}) {
     return type != null
-        ? _loadingPool.values.any((state) => state.loadingType == type)
+        ? _loadingPool.values.any((state) => state.presentationType == type)
         : _loadingPool.isNotEmpty;
   }
 

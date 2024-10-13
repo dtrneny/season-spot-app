@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:season_spot/core/error_handling/error_presentation.dart';
+import 'package:season_spot/core/helpers/index.dart';
 import 'package:season_spot/core/localization/localization.dart';
 
 class AppError implements Exception {
-  final ErrorPresentation presentation;
+  final PresentationType presentation;
 
-  AppError({this.presentation = ErrorPresentation.toast});
+  AppError({this.presentation = PresentationType.toast});
 
   String getLocalizedMessage(BuildContext context) {
     return context.translate.anErrorOccurredPleaseTryAgainLater;

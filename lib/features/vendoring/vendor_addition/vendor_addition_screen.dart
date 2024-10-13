@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:season_spot/core/error_handling/index.dart';
+import 'package:season_spot/core/helpers/index.dart';
 import 'package:season_spot/core/localization/localization.dart';
 import 'package:season_spot/core/screen_handling/index.dart';
 import 'package:season_spot/core/theming/index.dart';
@@ -45,7 +46,7 @@ class _VendorAdditionScreenState extends State<VendorAdditionScreen> {
         final state = snapshot.data;
 
         if (state is ErrorState &&
-            state.error.presentation == ErrorPresentation.toast) {
+            state.error.presentation == PresentationType.toast) {
           _controller.toast.showToast(
             state.error.getLocalizedMessage(context),
             type: ToastType.error,

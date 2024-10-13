@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:season_spot/config/locator.dart';
 import 'package:season_spot/core/error_handling/index.dart';
+import 'package:season_spot/core/helpers/index.dart';
 import 'package:season_spot/core/screen_handling/index.dart';
 import 'package:season_spot/shared/services/auth/auth_service.dart';
 import 'package:season_spot/shared/toast/index.dart';
@@ -15,7 +16,7 @@ class SignInController extends ScreenController {
     required String password,
   }) async {
     try {
-      startLoading(key, LoadingType.ui);
+      startLoading(key, PresentationType.ui);
       final user = await _auth.signIn(email, password);
       stopLoading(key);
 

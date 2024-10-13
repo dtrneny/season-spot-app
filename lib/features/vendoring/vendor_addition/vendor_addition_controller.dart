@@ -1,5 +1,6 @@
 import 'package:season_spot/config/locator.dart';
 import 'package:season_spot/core/error_handling/index.dart';
+import 'package:season_spot/core/helpers/index.dart';
 import 'package:season_spot/core/query_predicate/index.dart';
 import 'package:season_spot/core/screen_handling/index.dart';
 import 'package:season_spot/shared/models/index.dart';
@@ -28,7 +29,7 @@ class VendorAdditionController extends ScreenController {
     }
 
     try {
-      startLoading(key, LoadingType.ui);
+      startLoading(key, PresentationType.ui);
 
       final userId = _auth.getCurrentUser()?.id;
       if (userId == null) {

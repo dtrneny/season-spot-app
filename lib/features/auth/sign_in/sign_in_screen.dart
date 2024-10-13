@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:season_spot/core/error_handling/index.dart';
+import 'package:season_spot/core/helpers/index.dart';
 import 'package:season_spot/core/screen_handling/index.dart';
 import 'package:season_spot/shared/toast/index.dart';
 import 'package:season_spot/core/validation/index.dart';
@@ -38,7 +39,7 @@ class _SignInScreenState extends State<SignInScreen> {
         final state = snapshot.data;
 
         if (state is ErrorState &&
-            state.error.presentation == ErrorPresentation.toast) {
+            state.error.presentation == PresentationType.toast) {
           _controller.toast.showToast(
             state.error.getLocalizedMessage(context),
             type: ToastType.error,
