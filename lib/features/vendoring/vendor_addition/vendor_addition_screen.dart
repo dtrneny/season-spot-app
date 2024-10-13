@@ -36,6 +36,27 @@ class _VendorAdditionScreenState extends State<VendorAdditionScreen> {
   String? _locationErrorMessage;
   bool _validated = false;
 
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<ScreenState>(
+      stream: _controller.stateStream,
+      initialData: _controller.currentState,
+      builder: (context, snapshot) {
+        final state = snapshot.data;
+
+        if (state is ErrorState &&
+            state.error.presentation == ErrorPresentation.toast) {
+          _controller.toast.showToast(
+            state.error.getLocalizedMessage(context),
+            type: ToastType.error,
+          );
+        }
+
+        return _buildContent();
+      },
+    );
+  }
+
   Future<void> _createAccount() async {
     setState(() => _locationErrorMessage = null);
     if (!_validated) {
@@ -91,27 +112,6 @@ class _VendorAdditionScreenState extends State<VendorAdditionScreen> {
   void _onLocationSelect(AutocompletePrediction prediction) {
     _overlayController.toggle();
     setState(() => _location = prediction);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<ScreenState>(
-      stream: _controller.stateStream,
-      initialData: _controller.currentState,
-      builder: (context, snapshot) {
-        final state = snapshot.data;
-
-        if (state is ErrorState &&
-            state.error.presentation == ErrorPresentation.toast) {
-          _controller.toast.showToast(
-            state.error.getLocalizedMessage(context),
-            type: ToastType.error,
-          );
-        }
-
-        return _buildContent();
-      },
-    );
   }
 
   Widget _buildContent() {

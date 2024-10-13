@@ -31,6 +31,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   var _validated = false;
 
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<ScreenState>(
+      stream: _controller.stateStream,
+      initialData: _controller.currentState,
+      builder: (context, snapshot) {
+        final state = snapshot.data;
+
+        if (state is ErrorState &&
+            state.error.presentation == ErrorPresentation.toast) {
+          _controller.toast.showToast(
+            state.error.getLocalizedMessage(context),
+            type: ToastType.error,
+          );
+        }
+
+        return _buildContent();
+      },
+    );
+  }
+
   Future<void> _signUp() async {
     if (!_validated) {
       setState(() => _validated = true);
@@ -68,27 +89,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
       return null;
     }
     return state.error.getLocalizedMessage(context);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<ScreenState>(
-      stream: _controller.stateStream,
-      initialData: _controller.currentState,
-      builder: (context, snapshot) {
-        final state = snapshot.data;
-
-        if (state is ErrorState &&
-            state.error.presentation == ErrorPresentation.toast) {
-          _controller.toast.showToast(
-            state.error.getLocalizedMessage(context),
-            type: ToastType.error,
-          );
-        }
-
-        return _buildContent();
-      },
-    );
   }
 
   Widget _buildContent() {

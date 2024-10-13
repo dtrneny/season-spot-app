@@ -19,12 +19,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
   final List<DashboardProduct> _productMock = getDashboardProductMock();
   var _activeProductIndex = 0;
 
-  String _getFormattedDate() {
-    final DateTime now = DateTime.now();
-    String localeCode = Localizations.localeOf(context).languageCode;
-    return DateFormat.yMMMMd(localeCode).format(now);
-  }
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -44,6 +38,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ],
       ),
     );
+  }
+
+  String _getFormattedDate() {
+    final DateTime now = DateTime.now();
+    String localeCode = Localizations.localeOf(context).languageCode;
+    return DateFormat.yMMMMd(localeCode).format(now);
   }
 
   Widget _buildDateInformation() {

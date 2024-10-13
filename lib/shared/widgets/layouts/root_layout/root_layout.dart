@@ -26,6 +26,38 @@ class _RootLayoutState extends State<RootLayout> {
 
   UserAccount? _userAccount;
 
+  @override
+  void initState() {
+    super.initState();
+    _getCurrentUserAccount();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BaseScreen(
+      appBar: BaseAppBar(
+        leadingAction: Center(
+          child: IconButton(
+            icon: BaseIcon(
+                icon: AppIcons.burger,
+                color: context.theme.base.secondaryColor),
+            onPressed: () => _scaffoldKey.currentState?.openDrawer(),
+          ),
+        ),
+        trailingAction: IconButton(
+          icon: BaseIcon(
+            icon: AppIcons.bell,
+            color: context.theme.base.secondaryColor,
+          ),
+          onPressed: () {},
+        ),
+      ),
+      drawer: _rootDrawer(),
+      scaffoldKey: _scaffoldKey,
+      child: widget.child,
+    );
+  }
+
   List<LinkItem> _getLinks() {
     return [
       LinkItem(
@@ -94,38 +126,6 @@ class _RootLayoutState extends State<RootLayout> {
       return;
     }
     _navigate('/sign-in');
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _getCurrentUserAccount();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return BaseScreen(
-      appBar: BaseAppBar(
-        leadingAction: Center(
-          child: IconButton(
-            icon: BaseIcon(
-                icon: AppIcons.burger,
-                color: context.theme.base.secondaryColor),
-            onPressed: () => _scaffoldKey.currentState?.openDrawer(),
-          ),
-        ),
-        trailingAction: IconButton(
-          icon: BaseIcon(
-            icon: AppIcons.bell,
-            color: context.theme.base.secondaryColor,
-          ),
-          onPressed: () {},
-        ),
-      ),
-      drawer: _rootDrawer(),
-      scaffoldKey: _scaffoldKey,
-      child: widget.child,
-    );
   }
 
   Drawer _rootDrawer() {

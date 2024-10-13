@@ -20,21 +20,6 @@ class TextInput extends StatelessWidget {
     this.prefixIcon,
   });
 
-  OutlineInputBorder _getBorder(Color color) {
-    return OutlineInputBorder(
-      borderSide: BorderSide(color: color, width: 1),
-      borderRadius: BorderRadius.circular(AppRounding.base),
-    );
-  }
-
-  TextStyle _getTextStyle(Color color) {
-    return TextStyle(
-      fontSize: AppTypographySizing.base,
-      color: color,
-      fontWeight: FontWeight.w400,
-    );
-  }
-
   TextStyle _getErrorTextStyle(Color color) {
     return TextStyle(
       fontSize: AppTypographySizing.small,
@@ -64,6 +49,21 @@ class TextInput extends StatelessWidget {
       ),
       autovalidateMode: validationMode,
       validator: Validation.apply(context, rules ?? []),
+    );
+  }
+
+  OutlineInputBorder _getBorder(Color color) {
+    return OutlineInputBorder(
+      borderSide: BorderSide(color: color, width: 1),
+      borderRadius: BorderRadius.circular(AppRounding.base),
+    );
+  }
+
+  TextStyle _getTextStyle(Color color) {
+    return TextStyle(
+      fontSize: AppTypographySizing.base,
+      color: color,
+      fontWeight: FontWeight.w400,
     );
   }
 }

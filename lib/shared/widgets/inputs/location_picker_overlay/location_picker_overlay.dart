@@ -27,23 +27,6 @@ class _LocationPickerOverlayState extends State<LocationPickerOverlay> {
 
   List<AutocompletePrediction> _predictions = [];
 
-  void _onQueryChanged() async {
-    if (_queryController.text.isEmpty) {
-      return;
-    }
-
-    final predictions = await _controller.fetchPredictions(
-      key: _fetchPredictionsKey,
-      query: _queryController.text,
-    );
-
-    if (!mounted) {
-      return;
-    }
-
-    setState(() => _predictions = predictions);
-  }
-
   @override
   void initState() {
     super.initState();
@@ -69,6 +52,23 @@ class _LocationPickerOverlayState extends State<LocationPickerOverlay> {
       initialData: _controller.currentState,
       builder: (context, snapshot) => _buildContent(),
     );
+  }
+
+  void _onQueryChanged() async {
+    if (_queryController.text.isEmpty) {
+      return;
+    }
+
+    final predictions = await _controller.fetchPredictions(
+      key: _fetchPredictionsKey,
+      query: _queryController.text,
+    );
+
+    if (!mounted) {
+      return;
+    }
+
+    setState(() => _predictions = predictions);
   }
 
   Widget _buildContent() {

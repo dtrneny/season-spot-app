@@ -24,21 +24,6 @@ class PasswordInput extends StatefulWidget {
 class _PasswordInputState extends State<PasswordInput> {
   var _isTextObscured = false;
 
-  OutlineInputBorder _getBorder(Color color) {
-    return OutlineInputBorder(
-      borderSide: BorderSide(color: color, width: 1),
-      borderRadius: BorderRadius.circular(AppRounding.base),
-    );
-  }
-
-  TextStyle _getTextStyle(Color color, double size) {
-    return TextStyle(
-      fontSize: size,
-      color: color,
-      fontWeight: FontWeight.w400,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -76,6 +61,21 @@ class _PasswordInputState extends State<PasswordInput> {
       ),
       autovalidateMode: widget.validationMode,
       validator: Validation.apply(context, widget.rules ?? []),
+    );
+  }
+
+  OutlineInputBorder _getBorder(Color color) {
+    return OutlineInputBorder(
+      borderSide: BorderSide(color: color, width: 1),
+      borderRadius: BorderRadius.circular(AppRounding.base),
+    );
+  }
+
+  TextStyle _getTextStyle(Color color, double size) {
+    return TextStyle(
+      fontSize: size,
+      color: color,
+      fontWeight: FontWeight.w400,
     );
   }
 }

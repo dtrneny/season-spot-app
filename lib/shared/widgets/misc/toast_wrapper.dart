@@ -39,8 +39,8 @@ class _ToastWrapperState extends State<ToastWrapper> {
     return widget.child;
   }
 
-  SnackBar _getSnackBar(ToastMessage toast) {
-    final (Color, Color) colors = switch (toast.type) {
+  (Color, Color) _getColorsBasedOnToastType(ToastType type) {
+    return switch (type) {
       ToastType.info => (context.theme.base.info600, Colors.white),
       ToastType.warning => (context.theme.base.warning600, Colors.white),
       ToastType.error => (context.theme.base.error600, Colors.white),
@@ -50,6 +50,10 @@ class _ToastWrapperState extends State<ToastWrapper> {
           context.theme.base.secondaryColor
         ),
     };
+  }
+
+  SnackBar _getSnackBar(ToastMessage toast) {
+    final colors = _getColorsBasedOnToastType(toast.type);
 
     return SnackBar(
       content: Container(
