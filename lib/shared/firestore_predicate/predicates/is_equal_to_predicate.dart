@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:season_spot/core/query_predicate/index.dart';
+import 'package:season_spot/shared/firestore_predicate/index.dart';
 
-class IsEqualToPredicate extends QueryPredicate {
+class IsEqualToPredicate extends FirestorePredicate {
   final Object? isEqualTo;
 
   IsEqualToPredicate(

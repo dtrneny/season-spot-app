@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:season_spot/core/helpers/index.dart';
-import 'package:season_spot/core/query_predicate/index.dart';
+import 'package:season_spot/shared/firestore_predicate/index.dart';
 import 'package:season_spot/shared/repositories/firestore/firestore_repository.dart';
 
 class FirestoreRepositoryImpl<T extends FirestoreSerializable>
@@ -46,11 +46,13 @@ class FirestoreRepositoryImpl<T extends FirestoreSerializable>
   }
 
   @override
-  Future<List<T>> getAll([List<QueryPredicate> predicates = const []]) async {
+  Future<List<T>> getAll([
+    List<FirestorePredicate> predicates = const [],
+  ]) async {
     CollectionReference collection = _firestore.collection(_collectionPath);
     Query query = collection;
 
-    for (QueryPredicate predicate in predicates) {
+    for (FirestorePredicate predicate in predicates) {
       query = predicate.apply(query);
     }
     QuerySnapshot querySnapshot = await query.get();

@@ -1,7 +1,7 @@
 import 'package:season_spot/config/locator.dart';
 import 'package:season_spot/core/error_handling/index.dart';
+import 'package:season_spot/shared/firestore_predicate/predicates/is_equal_to_predicate.dart';
 import 'package:season_spot/core/helpers/index.dart';
-import 'package:season_spot/core/query_predicate/index.dart';
 import 'package:season_spot/core/screen_handling/index.dart';
 import 'package:season_spot/shared/models/index.dart';
 import 'package:season_spot/shared/repositories/firestore/firestore_repository_impl.dart';

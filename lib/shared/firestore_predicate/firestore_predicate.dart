@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-abstract class QueryPredicate {
+abstract class FirestorePredicate {
   final String field;
 
-  QueryPredicate({required this.field});
+  FirestorePredicate({required this.field});
 
   Query apply(Query query);
 }
