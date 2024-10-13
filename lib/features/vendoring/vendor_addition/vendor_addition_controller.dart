@@ -19,7 +19,7 @@ class VendorAdditionController extends ScreenController {
   final googlePlacesService = getIt.get<GooglePlacesService>();
 
   Future<bool> createVendorAccount({
-    String key = 'createVendorAccount',
+    required key,
     required VendorAccount data,
   }) async {
     bool finishWithError(AppError error) {

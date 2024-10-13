@@ -6,6 +6,7 @@ import 'package:season_spot/core/theming/index.dart';
 import 'package:season_spot/shared/services/google_places_service/models/autocomplete_prediction/autocomplete_prediction.dart';
 import 'package:season_spot/shared/widgets/index.dart';
 import 'package:season_spot/shared/widgets/inputs/location_picker_overlay/location_picker_overlay_controller.dart';
+import 'package:uuid/uuid.dart';
 
 class LocationPickerOverlay extends StatefulWidget {
   final ValueChanged<AutocompletePrediction> onSelect;
@@ -22,8 +23,7 @@ class LocationPickerOverlay extends StatefulWidget {
 class _LocationPickerOverlayState extends State<LocationPickerOverlay> {
   final _controller = LocationPickerOverlayController();
   final _queryController = TextEditingController();
-
-  static const _fetchPredictionsKey = 'fetchPredictions';
+  final _fetchPredictionsKey = const Uuid().v4();
 
   List<AutocompletePrediction> _predictions = [];
 

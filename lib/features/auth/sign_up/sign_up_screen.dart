@@ -10,6 +10,7 @@ import 'package:season_spot/features/auth/sign_up/sign_up_controller.dart';
 import 'package:season_spot/shared/models/index.dart';
 import 'package:season_spot/shared/toast/index.dart';
 import 'package:season_spot/shared/widgets/index.dart';
+import 'package:uuid/uuid.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -22,7 +23,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final SignUpController _controller = SignUpController();
 
   final _formKey = GlobalKey<FormState>();
-  static const _singUpKey = 'signUp';
+  final _singUpKey = const Uuid().v4();
 
   final _firstnameController = TextEditingController();
   final _lastnameController = TextEditingController();

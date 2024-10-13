@@ -11,6 +11,7 @@ import 'package:season_spot/shared/widgets/index.dart';
 import 'package:season_spot/features/auth/sign_in/sign_in_controller.dart';
 import 'package:season_spot/core/localization/localization.dart';
 import 'package:season_spot/core/theming/index.dart';
+import 'package:uuid/uuid.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -23,7 +24,7 @@ class _SignInScreenState extends State<SignInScreen> {
   final SignInController _controller = SignInController();
 
   final _formKey = GlobalKey<FormState>();
-  static const _singInKey = 'signIn';
+  final _singInKey = const Uuid().v4();
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();

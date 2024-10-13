@@ -14,6 +14,7 @@ import 'package:season_spot/shared/services/google_places_service/models/autocom
 import 'package:season_spot/shared/toast/index.dart';
 import 'package:season_spot/shared/widgets/index.dart';
 import 'package:season_spot/shared/widgets/typography/error_message.dart';
+import 'package:uuid/uuid.dart';
 
 class VendorAdditionScreen extends StatefulWidget {
   const VendorAdditionScreen({super.key});
@@ -26,7 +27,7 @@ class _VendorAdditionScreenState extends State<VendorAdditionScreen> {
   final VendorAdditionController _controller = VendorAdditionController();
 
   final _formKey = GlobalKey<FormState>();
-  static const _createVendorAccountKey = 'createVendorAccount';
+  final _createVendorAccountKey = const Uuid().v4();
 
   final _businessNameController = TextEditingController();
   final _emailController = TextEditingController();

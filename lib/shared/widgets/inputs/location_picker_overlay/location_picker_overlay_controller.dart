@@ -8,7 +8,7 @@ class LocationPickerOverlayController extends ScreenController {
   final _googlePlacesService = getIt.get<GooglePlacesService>();
 
   Future<List<AutocompletePrediction>> fetchPredictions({
-    String key = 'fetchPredictions',
+    required String key,
     required String query,
   }) async {
     try {

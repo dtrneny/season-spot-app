@@ -15,7 +15,7 @@ class SignUpController extends ScreenController {
   final toast = getIt.get<ToastController>();
 
   Future<bool> signUp({
-    String key = 'signUp',
+    required String key,
     required UserAccount data,
     required String password,
   }) async {
